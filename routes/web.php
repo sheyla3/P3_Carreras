@@ -14,8 +14,11 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });
 */
-
 Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/hola', function () {
     //echo date('d-m-y');
     $titulo = '<h3>La data actual es: </h3>';
     return view('mostrarData', array('titulo' => $titulo) );

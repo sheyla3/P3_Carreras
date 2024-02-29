@@ -9,6 +9,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     </head>
     <body>
-        
+        <h1>Home</h1>
+        <a href="{{ route('loginAdmin') }}">Admin</a>
     </body>
 </html>

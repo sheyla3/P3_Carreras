@@ -14,16 +14,22 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });
 */
+
 Route::get('/', function () {
     return view('index');
-});
+})->name('/');;
 
 Route::get('/hola', function () {
     //echo date('d-m-y');
     $titulo = '<h3>La data actual es: </h3>';
-    return view('mostrarData', array('titulo' => $titulo) );
+    return view('mostrarData', array('titulo' => $titulo));
 });
 
 Route::get('/peliculas/{titulo}', function ($titulo) {
-    return view('peliculas', array('titulo' => $titulo) );
+    return view('peliculas', array('titulo' => $titulo));
 });
+
+Route::get('/loginAdmin', function () {
+    return view('loginAdmin');
+})->name('loginAdmin');
+

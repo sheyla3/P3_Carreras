@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('caballo', function (Blueprint $table) {
             $table->id('id_caballo');
+            $table->unsignedBigInteger('id_jinete');
             $table->foreign('id_jinete')->references('id_jinete')->on('jinetes');
             $table->string('nombre');
             $table->enum('raza', ['Pura Sangre Inglés','Hannoveriano','Holsteiner','Mustang']);

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('fotos', function (Blueprint $table) {
             $table->id('id_foto');
+            $table->unsignedBigInteger('id_carrera');
             $table->foreign('id_carrera')->references('id_carrera')->on('carreras');
             $table->string('foto');
             $table->rememberToken();

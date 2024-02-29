@@ -16,6 +16,16 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->enum('tipo', ['plano','vallas','campo a traves','trote y arnes','parejeras']);
+            $table->string('lugar_foto');
+            $table->integer('max_participantes')->default(10);
+            $table->integer('aforo')->default(200);
+            $table->integer('km');
+            $table->dateTime('fechaHora');
+            $table->string('cartel');
+            $table->integer('patrocinio');
+            $table->integer('precio');
+            $table->string('qr');
+            $table->boolean('activo')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

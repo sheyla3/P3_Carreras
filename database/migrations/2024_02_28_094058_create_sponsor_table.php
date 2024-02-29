@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('logo');
             $table->string('calle');
             $table->string('destacado');
-            $table->boolean('activo');
+            $table->boolean('activo')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

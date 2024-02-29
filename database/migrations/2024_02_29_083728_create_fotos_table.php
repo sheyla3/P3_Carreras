@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('aseguradoras', function (Blueprint $table) {
-            $table->id();
-            $table->string('CIF')->unique();
-            $table->string('nombre');
-            $table->string('calle');
-            $table->integer('precio');
-            $table->boolean('activo')->default(true);
+        Schema::create('fotos', function (Blueprint $table) {
+            $table->id('id_foto');
+            $table->foreign('id_carrera')->references('id_carrera')->on('carreras');
+            $table->string('foto');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('aseguradoras');
+        Schema::dropIfExists('fotos');
     }
 };

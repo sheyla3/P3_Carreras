@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('aseguradoras', function (Blueprint $table) {
-            $table->id();
-            $table->string('CIF')->unique();
+        Schema::create('jinetes', function (Blueprint $table) {
+            $table->id('id_jiniete');
             $table->string('nombre');
+            $table->string('apellido');
+            $table->string('correo')->unique();
+            $table->string('contrasena');
+            $table->integer('telf');
             $table->string('calle');
-            $table->integer('precio');
+            $table->integer('num_federat')->unique();
+            $table->date('edad');
             $table->boolean('activo')->default(true);
             $table->rememberToken();
             $table->timestamps();
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('aseguradoras');
+        Schema::dropIfExists('jinetes');
     }
 };

@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('aseguradoras', function (Blueprint $table) {
-            $table->id();
-            $table->string('CIF')->unique();
+        Schema::create('caballo', function (Blueprint $table) {
+            $table->id('id_caballo');
+            $table->foreign('id_jinete')->references('id_jinete')->on('jinetes');
             $table->string('nombre');
-            $table->string('calle');
-            $table->integer('precio');
-            $table->boolean('activo')->default(true);
+            $table->enum('raza', ['Pura Sangre Inglés','Hannoveriano','Holsteiner','Mustang']);
+            $table->enum('color', ['negro','blanco','gris','rubio']);
+            $table->date('edad');
+            $table->date('años_participando');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('aseguradoras');
+        Schema::dropIfExists('caballo');
     }
 };

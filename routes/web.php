@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\JineteController;
-
+use App\Http\Controllers\SponsorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,16 +38,22 @@ Route::get('/loginAdmin', function () {
     return view('Admin.loginAdmin');
 })->name('loginAdmin');
 
-Route::get('/NuevoJinete', function () {
-    return view('Admin.Formularios.NuevoJinete');
-})->name('NuevoJinete');
-
 Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
 
 Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->name('Admin_panel');
 
+//jinetes
+Route::get('/NuevoJinete', function () {
+    return view('Admin.Formularios.NuevoJinete');
+})->name('NuevoJinete');
 Route::post('/jinete-nuevo', [JineteController::class, 'nuevo'])->name('jinete.nuevo');
-
 Route::get('/AdminJinetes', [JineteController::class, 'mostrarJinetes'])->name('AdminJinetes');
+
+//sponsors
+Route::get('/NuevoSponsor', function () {
+    return view('Admin.Formularios.NuevoSponsor');
+})->name('NuevoSponsor');
+Route::get('/AdminSponsors', [SponsorController::class, 'mostrarSponsors'])->name('AdminSponsors');
+Route::post('/sponsor-nuevo', [SponsorController::class, 'nuevo'])->name('sponsor.nuevo');
 
 // USUARIO

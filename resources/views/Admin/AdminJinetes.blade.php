@@ -67,6 +67,7 @@ use App\Http\Controllers\JineteController;
                 @endforeach
             </tbody>
         </table>
+        <a href="{{ route('AdminSponsors') }}">Sponsor</a>
     </div>
 </body>
 

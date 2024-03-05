@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Jinete;
 use Illuminate\Http\Request;
 

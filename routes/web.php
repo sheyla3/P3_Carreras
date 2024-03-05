@@ -39,7 +39,7 @@ Route::get('/loginAdmin', function () {
 
 Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
 
-Route::get('/otra-pagina', 'OtraPaginaController@index')->name('otra.pagina');
+Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->name('Admin_panel');
 
 
 // USUARIO

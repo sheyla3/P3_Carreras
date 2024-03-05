@@ -27,5 +27,17 @@ class AdminController extends Controller
         if (!$confUsu) {
             return redirect()->back()->withErrors(['usuario' => 'El usuario no existe']);
         }
+
+        if ($contra === $confUsu->contrasena) {
+            // Contraseña correcta, redirigir a otra página
+            return redirect()->route('Admin_panel');
+        } else {
+            // Contraseña incorrecta
+            return redirect()->back()->withErrors(['contra' => 'La contraseña es incorrecta']);
+        }
+    }
+
+    public function Admin_panelCarreras(Request $request) {
+        return view('');
     }
 }

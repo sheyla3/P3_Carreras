@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\JineteController;
 use App\Http\Controllers\CarrerasController; // Agrega esta línea
 
 /*
@@ -47,5 +48,5 @@ Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->nam
 Route::get('/carreras/create', [CarrerasController::class, 'create'])->name('carreras.create');
 Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras.store');
 Route::get('/admin/carreras', [CarrerasController::class, 'carreras'])->name('admin.carreras');
-
+Route::get('/AdminJinetes', [JineteController::class, 'mostrarJinetes'])->name('AdminJinetes');
 // USUARIO

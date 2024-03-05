@@ -30,7 +30,7 @@ Route::get('/peliculas/{titulo}', function ($titulo) {
 // INICIO
 Route::get('/', function () {
     return view('index');
-})->name('/');;
+})->name('/');
 
 // ADMIN
 Route::get('/loginAdmin', function () {

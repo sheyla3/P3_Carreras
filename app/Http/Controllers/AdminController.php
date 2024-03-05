@@ -38,6 +38,6 @@ class AdminController extends Controller
     }
 
     public function Admin_panelCarreras(Request $request) {
-        return view('');
+        return view('Admin.AdminCarreras');
     }
 }

@@ -1,5 +1,18 @@
-h1 {
-    background-color: red;
+#navbar {
+    background: #1C1C1C;
+    height: 40px;
+}
+
+#navbar2 {
+    background: #745B5B;
+}
+
+#navbar3 {
+    background: #977C7C;
+}
+
+nav a {
+    color: white;
 }
 
 .FondoAdmin {

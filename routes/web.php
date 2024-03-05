@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\JineteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +38,16 @@ Route::get('/loginAdmin', function () {
     return view('Admin.loginAdmin');
 })->name('loginAdmin');
 
+Route::get('/NuevoJinete', function () {
+    return view('Admin.Formularios.NuevoJinete');
+})->name('NuevoJinete');
+
 Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
 
 Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->name('Admin_panel');
 
+Route::post('/jinete-nuevo', [JineteController::class, 'nuevo'])->name('jinete.nuevo');
+
+Route::get('/AdminJinetes', [JineteController::class, 'mostrarJinetes'])->name('AdminJinetes');
 
 // USUARIO

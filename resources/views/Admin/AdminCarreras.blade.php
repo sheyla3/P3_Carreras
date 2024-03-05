@@ -5,5 +5,6 @@ use App\Http\Controllers\AdminController;
     <div>
         <h1>Carreras</h1>
         
+        <a href="{{ route('AdminJinetes') }}">Jinetes</a>
     </div>
 </body>

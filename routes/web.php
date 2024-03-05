@@ -15,12 +15,17 @@ use Illuminate\Support\Facades\Route;
 });
 */
 
+// INICIO
 Route::get('/', function () {
-    //echo date('d-m-y');
-    $titulo = '<h3>La data actual es: </h3>';
-    return view('mostrarData', array('titulo' => $titulo) );
-});
+    return view('index');
+})->name('/');;
 
-Route::get('/peliculas/{titulo}', function ($titulo) {
-    return view('peliculas', array('titulo' => $titulo) );
-});
+// ADMIN
+Route::get('/loginAdmin', function () {
+    return view('Admin.loginAdmin');
+})->name('loginAdmin');
+
+Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
+
+Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->name('Admin_panel');
+

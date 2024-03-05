@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CarrerasController; // Agrega esta línea
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +39,9 @@ Route::get('/loginAdmin', function () {
 })->name('loginAdmin');
 
 Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
-
 Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->name('Admin_panel');
-
+Route::get('/carreras/create', [CarrerasController::class, 'create'])->name('carreras.create');
+Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras.store');
+Route::get('/admin/carreras', [CarrerasController::class, 'carreras'])->name('admin.carreras');
 
 // USUARIO

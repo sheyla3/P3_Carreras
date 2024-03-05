@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use App\Models\Carrera;
 
 class AdminController extends Controller
 {
@@ -38,6 +39,8 @@ class AdminController extends Controller
     }
 
     public function Admin_panelCarreras(Request $request) {
-        return view('Admin.AdminCarreras');
+
+    $carreras = Carrera::all();
+    return view('admin/admincarreras', compact('carreras'));
     }
 }

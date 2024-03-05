@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\JineteController;
 use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\CarrerasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,7 +40,6 @@ Route::get('/loginAdmin', function () {
 })->name('loginAdmin');
 
 Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
-
 Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->name('Admin_panel');
 
 //jinetes
@@ -56,4 +56,9 @@ Route::get('/NuevoSponsor', function () {
 Route::get('/AdminSponsors', [SponsorController::class, 'mostrarSponsors'])->name('AdminSponsors');
 Route::post('/sponsor-nuevo', [SponsorController::class, 'nuevo'])->name('sponsor.nuevo');
 
+
+Route::get('/carreras/create', [CarrerasController::class, 'create'])->name('carreras.create');
+Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras.store');
+Route::get('/admin/carreras', [CarrerasController::class, 'carreras'])->name('admin.carreras');
+Route::get('/AdminJinetes', [JineteController::class, 'mostrarJinetes'])->name('AdminJinetes');
 // USUARIO

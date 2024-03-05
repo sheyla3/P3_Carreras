@@ -19,6 +19,6 @@
     
         <h1>Home</h1>
         <a class="linkAdminLogin" href="{{ route('loginAdmin') }}"> Panel Administrador</a>
-        @include('pie')
+        
     </body>
 </html>

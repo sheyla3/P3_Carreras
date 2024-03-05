@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,6 @@ use Illuminate\Support\Facades\Route;
 |Route::get('/', function () {
     return view('welcome');
 });
-*/
-
-Route::get('/', function () {
-    return view('index');
-})->name('/');;
 
 Route::get('/hola', function () {
     //echo date('d-m-y');
@@ -29,7 +25,21 @@ Route::get('/peliculas/{titulo}', function ($titulo) {
     return view('peliculas', array('titulo' => $titulo));
 });
 
+*/
+
+// INICIO
+Route::get('/', function () {
+    return view('index');
+})->name('/');;
+
+// ADMIN
 Route::get('/loginAdmin', function () {
-    return view('loginAdmin');
+    return view('Admin.loginAdmin');
 })->name('loginAdmin');
 
+Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
+
+Route::get('/otra-pagina', 'OtraPaginaController@index')->name('otra.pagina');
+
+
+// USUARIO

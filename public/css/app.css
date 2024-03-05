@@ -1,0 +1,66 @@
+header {
+    display: flex;
+    padding: 0;
+    margin-top: 0;
+    justify-content: right; /* Empujar la imagen hacia la izquierda */
+    align-items: end;
+    height: 80px;
+}
+
+header a {
+    display: flex;
+    margin: 20px;
+    color: white;
+    align-items: end;
+
+}
+
+header a:hover {
+    width: 70px;
+    height: 70px;
+    background: #1C1C1C;
+}
+
+
+.subheader {
+    display: flex;
+    justify-content: space-between; /* Distribuir los elementos a los extremos */
+    align-items: center;
+    background: #1C1C1C;
+    color: white;
+    width: 100%;
+}
+
+.subheader a {
+    color: white;
+}
+
+.subheader img {
+    max-width: 100px;
+    margin-right: auto; /* Empujar la imagen hacia la izquierda */
+}
+
+#banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1; /* Asegura que el banner esté detrás del contenido */
+}
+
+#banner img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    transition: opacity 1s ease-in-out;
+}
+
+.first-info {
+    margin-top: 16%;
+    margin-left: 35px;
+}
+
+.first-info button {
+    padding: 1em;
+    width: 170px;
+}

@@ -38,6 +38,10 @@ Route::get('/loginAdmin', function () {
     return view('Admin.loginAdmin');
 })->name('loginAdmin');
 
+Route::get('/NuevoJinete', function () {
+    return view('Admin.Formularios.NuevoJinete');
+})->name('NuevoJinete');
+
 Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
 Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->name('Admin_panel');
 Route::get('/carreras/create', [CarrerasController::class, 'create'])->name('carreras.create');

@@ -43,22 +43,19 @@ Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('a
 Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->name('Admin_panel');
 
 //jinetes
-Route::get('/NuevoJinete', function () {
-    return view('Admin.Formularios.NuevoJinete');
-})->name('NuevoJinete');
+Route::get('/formularioJinete', [JineteController::class, 'formularioJinete'])->name('formularioJinete');
 Route::post('/jinete-nuevo', [JineteController::class, 'nuevo'])->name('jinete.nuevo');
-Route::get('/AdminJinetes', [JineteController::class, 'mostrarJinetes'])->name('AdminJinetes');
+Route::get('/adminJinetes', [JineteController::class, 'mostrarJinetes'])->name('adminJinetes');
 
 //sponsors
-Route::get('/NuevoSponsor', function () {
-    return view('Admin.Formularios.NuevoSponsor');
-})->name('NuevoSponsor');
-Route::get('/AdminSponsors', [SponsorController::class, 'mostrarSponsors'])->name('AdminSponsors');
+Route::get('/formularioSponsor', [SponsorController::class, 'formularioSponsor'])->name('formularioSponsor');
+Route::get('/adminSponsors', [SponsorController::class, 'mostrarSponsors'])->name('adminSponsors');
 Route::post('/sponsor-nuevo', [SponsorController::class, 'nuevo'])->name('sponsor.nuevo');
 
 
 Route::get('/carreras/create', [CarrerasController::class, 'create'])->name('carreras.create');
 Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras.store');
 Route::get('/admin/carreras', [CarrerasController::class, 'carreras'])->name('admin.carreras');
-Route::get('/AdminJinetes', [JineteController::class, 'mostrarJinetes'])->name('AdminJinetes');
+
 // USUARIO
+

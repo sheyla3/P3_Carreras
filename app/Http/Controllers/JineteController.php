@@ -32,12 +32,16 @@ class JineteController extends Controller
 
         $nuevoJinete->save();
 
-        return redirect()->route('jinete.nuevo');
+        return redirect()->route('formularioJinete');
     }
 
     public function mostrarJinetes()
     {
         $jinetes = Jinete::all();
-        return view('admin.AdminJinetes', compact('jinetes'));
+        return view('admin.adminJinetes', compact('jinetes'));
+    }
+
+    public function formularioJinete(){
+        return view('Admin.Formularios.NuevoJinete');
     }
 }

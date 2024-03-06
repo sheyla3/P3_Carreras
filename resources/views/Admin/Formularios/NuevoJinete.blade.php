@@ -48,7 +48,7 @@ use App\Http\Controllers\JineteController;
             {!! $errors->first('edad', '<small>:message</small>') !!}<br><br>
             <input type="submit" value="Guardar">
         </form>
-        <a href="{{ route('AdminJinetes') }}">Atras</a>
+        <a href="{{ route('adminJinetes') }}">Atras</a>
     </div>    
 </body>
 

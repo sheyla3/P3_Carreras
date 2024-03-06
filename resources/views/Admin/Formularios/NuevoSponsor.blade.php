@@ -40,7 +40,7 @@ use App\Http\Controllers\SponsorController;
             <br><br>
             <input type="submit" value="Guardar">
         </form>
-        <a href="{{ route('AdminSponsors') }}">Atrás</a>
+        <a href="{{ route('adminSponsors') }}">Atrás</a>
     </div>
 </body>
 

@@ -56,6 +56,6 @@ class CarrerasController extends Controller
         $carrera->save();
 
         // Redirigir a alguna vista después de guardar la carrera
-        return redirect()->route('carreras.create');
+        return redirect()->route('carreras.create')->with('Guardado', 'Carrera agregada exitosamente');
     }
 }

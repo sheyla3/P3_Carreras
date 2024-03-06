@@ -10,8 +10,6 @@ class SponsorController extends Controller
 {
     public function nuevo(Request $request)
     {
-
-        echo "Llego al controller";
         $request->validate([
             'cif' => 'required',
             'nombre' => 'required',
@@ -34,7 +32,7 @@ class SponsorController extends Controller
 
         $nuevoSponsor->save();
 
-        return redirect()->route('formularioSponsor');
+        return redirect()->route('formularioSponsor')->with('Guardado', 'Sponsor agregado exitosamente');
     }
 
     public function formularioSponsor(){

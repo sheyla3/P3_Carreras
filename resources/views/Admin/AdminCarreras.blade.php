@@ -9,28 +9,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar bg-body-tertiary" id="navbar">
-    <div class="container-fluid">
-        <img src="{{ asset('img/logoCaballo.png') }}" alt="">
-    </div>
-</nav>
-
-<nav class="navbar bg-body-tertiary" id="navbar2">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Carreras</a>
-    <a class="navbar-brand" href="#">Sponsors</a>
-    <a class="navbar-brand" href="#">Aseguradoras</a>
-  </div>
-</nav>
-
-<nav class="navbar bg-body-tertiary" id="navbar3">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{ route('adminJinetes') }}">Jinetes</a>
-    <a class="navbar-brand" href="#">Socios</a>
-    <a class="navbar-brand" href="#">Fotos</a>
-  </div>
-</nav>
-
+    @include('layouts.cabAdmin')
     <div class="container">
         <h1>Carreras</h1>
         <!-- Utiliza un formulario para enviar una solicitud POST al crear una carrera -->

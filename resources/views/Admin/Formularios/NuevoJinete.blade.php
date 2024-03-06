@@ -3,6 +3,7 @@ use App\Http\Controllers\JineteController;
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,30 +16,9 @@ use App\Http\Controllers\JineteController;
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
 </head>
+
 <body class="FondoAdmin">
-
-<nav class="navbar bg-body-tertiary" id="navbar">
-    <div class="container-fluid">
-        <img src="{{ asset('img/logoCaballo.png') }}" alt="">
-    </div>
-</nav>
-
-<nav class="navbar bg-body-tertiary" id="navbar2">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Carreras</a>
-    <a class="navbar-brand" href="#">Sponsors</a>
-    <a class="navbar-brand" href="#">Aseguradoras</a>
-  </div>
-</nav>
-
-<nav class="navbar bg-body-tertiary" id="navbar3">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{ route('AdminJinetes') }}">Jinetes</a>
-    <a class="navbar-brand" href="#">Socios</a>
-    <a class="navbar-brand" href="#">Fotos</a>
-  </div>
-</nav>
-
+    @include('layouts.cabAdmin')
     <div class="container">
         <h1>Añadir Jinete</h1>
         <form action="{{ route('jinete.nuevo') }}" method="POST" class="mb-4">
@@ -87,9 +67,36 @@ use App\Http\Controllers\JineteController;
         </form>
         <a href="{{ route('AdminJinetes') }}" class="btn btn-secondary">Atrás</a>
     </div>
+    @if (session('Guardado'))
+        <div class="modal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{ session('Guardado') }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $('#successModal').modal('show');
+            });
+        </script>
+    @endif
     <!-- Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

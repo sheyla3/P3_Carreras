@@ -6,6 +6,19 @@ body {
 #navbar {
     background: #1C1C1C;
     height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 2em;
+}
+
+.right-links {
+    margin-left: auto; /* Coloca los enlaces a la derecha */
 }
 
 #navbar2 {
@@ -45,4 +58,103 @@ header::before {
     height: 60vh;
     background-color: rgba(0, 0, 0, 0.906); /* Color negro con 50% de opacidad */
     z-index: 1; /* Asegura que el pseudo-elemento esté por encima de la imagen de fondo */
+}
+
+#listaHeader {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+    height: 80px;
+}
+
+#listaHeader a {
+    display: flex;
+    padding: 25px;
+    align-items: flex-end; /* Alinear los elementos en la parte inferior */
+}
+
+#listaHeader a:hover {
+    background: #1C1C1C;
+}
+
+header button {
+    margin-top: 300px;
+    margin-left: 40px;
+    background: #1F323F;
+    width: 150px;
+    height: 40px;
+    font-size: large;
+}
+
+.container-1 {
+    display: flex;
+    margin-left: 6vh;
+    margin-top: 8vh;
+}
+
+.container-1 img {
+    width: 750px;
+}
+
+.container-2 {
+    background: rgb(255, 255, 255);
+    width: 750px;
+    height: 495px;
+    display: flex;
+    flex-direction: column;
+    margin-left: -6vh;
+    margin-top: 12.5vh;
+}
+
+.Maestro-1 {
+    display: flex;
+    flex-direction: row;
+}
+
+#Lugares {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #13212B;
+    margin-top: 8vh;
+    color: white;
+    height: 60px;
+    font-size: 26px;
+}
+
+.Maestro-2 {
+    height: 70vh;
+    background: #1F323F;
+    margin-bottom: 10.5vh;
+    margin-top: -17px;
+}
+
+.Maestro-3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-3 img {
+    width: 800px;
+    height: auto;
+    margin-left: 5px;
+    margin-right: 3em;
+}
+
+.container-4 {
+    width: 650px;
+    height: auto;
+    margin-right: 5px;
+    margin-left: 3em;
+
+}
+
+.container-4 h1 {
+    font-size: 64px;
+}
+
+.container-4 a {
+    font-size: 48px;
 }

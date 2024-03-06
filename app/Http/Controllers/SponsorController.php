@@ -10,6 +10,8 @@ class SponsorController extends Controller
 {
     public function nuevo(Request $request)
     {
+
+        echo "Llego al controller";
         $request->validate([
             'cif' => 'required',
             'nombre' => 'required',
@@ -19,7 +21,7 @@ class SponsorController extends Controller
         ]);
 
         $rutaArchivo = $request->file('logo')->store('public/img/sponsors');
-        $nombreArchivo = basename($rutaArchivo);
+       $nombreArchivo = basename($rutaArchivo);
 
         $nuevoSponsor = new Sponsor([
             'CIF' => $request->input('cif'),
@@ -32,12 +34,17 @@ class SponsorController extends Controller
 
         $nuevoSponsor->save();
 
-        return redirect()->route('sponsor.nuevo');
+        return redirect()->route('formularioSponsor');
     }
+
+    public function formularioSponsor(){
+        return view('Admin.Formularios.NuevoSponsor');
+    }
+
 
     public function mostrarSponsors()
     {
         $sponsors = Sponsor::all();
-        return view('admin.AdminSponsors', compact('sponsors'));
+        return view('admin.adminSponsors', compact('sponsors'));
     }
 }

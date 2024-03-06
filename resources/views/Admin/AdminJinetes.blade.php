@@ -50,7 +50,7 @@ use App\Http\Controllers\JineteController;
             <input type="text" id="buscar" name="buscar" placeholder="Buscar" class="form-control"><br>
             {!! $errors->first('buscar', '<small class="text-danger">:message</small>') !!}
         </form>
-        <a href="{{ route('NuevoJinete') }}" class="btn btn-success">Añadir</a>
+        <a href="{{ route('formularioJinete') }}">Añadir</a>
         <br>
         <hr>
         <br>
@@ -88,7 +88,7 @@ use App\Http\Controllers\JineteController;
                 @endforeach
             </tbody>
         </table>
-        <a href="{{ route('AdminSponsors') }}" class="btn btn-info">Sponsor</a>
+        <a href="{{ route('adminSponsors') }}">Sponsor</a>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

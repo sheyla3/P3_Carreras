@@ -32,7 +32,7 @@ class JineteController extends Controller
 
         $nuevoJinete->save();
 
-        return redirect()->route('formularioJinete');
+        return redirect()->route('formularioJinete')->with('Guardado', 'Jinete agregado exitosamente');
     }
 
     public function mostrarJinetes()

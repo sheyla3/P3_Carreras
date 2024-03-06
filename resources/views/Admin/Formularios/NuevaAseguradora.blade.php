@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\JineteController;
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -7,7 +7,7 @@ use App\Http\Controllers\SponsorController;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Añadir Sponsor</title>
+    <title>Añadir Aseguradora</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
@@ -20,37 +20,32 @@ use App\Http\Controllers\SponsorController;
 <body class="FondoAdmin">
     @include('layouts.cabAdmin')
     <div class="container">
-        <h1>Añadir Sponsor</h1>
-        <form action="{{ route('sponsor.nuevo') }}" method="POST" enctype="multipart/form-data" class="mb-4">
+        <h1>Añadir Aseguradora</h1>
+        <form action="{{ route('aseguradora.nuevo') }}" method="POST" class="mb-4">
             @csrf
             <div class="mb-3">
                 <label for="cif" class="form-label">CIF:</label>
                 <input type="text" id="cif" name="cif" value="{{ old('cif') }}" class="form-control">
-                {!! $errors->first('cif', '<small>:message</small>') !!}
+                {!! $errors->first('cif', '<small class="text-danger">:message</small>') !!}
             </div>
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}" class="form-control">
-                {!! $errors->first('nombre', '<small>:message</small>') !!}
-            </div>
-            <div class="mb-3">
-                <label for="logo" class="form-label">Logo:</label>
-                <input type="file" id="logo" name="logo" accept="image/*" class="form-control">
-                {!! $errors->first('logo', '<small>:message</small>') !!}
+                {!! $errors->first('nombre', '<small class="text-danger">:message</small>') !!}
             </div>
             <div class="mb-3">
                 <label for="calle" class="form-label">Calle:</label>
                 <input type="text" id="calle" name="calle" value="{{ old('calle') }}" class="form-control">
-                {!! $errors->first('calle', '<small>:message</small>') !!}
+                {!! $errors->first('calle', '<small class="text-danger">:message</small>') !!}
             </div>
             <div class="mb-3">
-                <label for="destacado" class="form-label">Destacado:</label>
-                <input type="checkbox" id="destacado" name="destacado" value="1"
-                    {{ old('destacado') ? 'checked' : '' }} class="form-control">
+                <label for="precio" class="form-label">Precio:</label>
+                <input type="text" id="precio" name="precio" value="{{ old('precio') }}" class="form-control">
+                {!! $errors->first('precio', '<small class="text-danger">:message</small>') !!}
             </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
-        <a href="{{ route('adminSponsors') }}" class="btn btn-secondary">Atrás</a>
+        <a href="{{ route('adminAseguradoras') }}" class="btn btn-secondary">Atrás</a>
     </div>
     @if (session('Guardado'))
         <div class="modal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"

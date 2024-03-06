@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\JineteController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\CarrerasController;
+use App\Http\Controllers\AseguradoraController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,10 +53,15 @@ Route::get('/formularioSponsor', [SponsorController::class, 'formularioSponsor']
 Route::get('/adminSponsors', [SponsorController::class, 'mostrarSponsors'])->name('adminSponsors');
 Route::post('/sponsor-nuevo', [SponsorController::class, 'nuevo'])->name('sponsor.nuevo');
 
-
+//carreras
 Route::get('/carreras/create', [CarrerasController::class, 'create'])->name('carreras.create');
 Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras.store');
 Route::get('/admin/carreras', [CarrerasController::class, 'carreras'])->name('admin.carreras');
 Route::get('/AdminCarreras', [CarrerasController::class, 'mostrarCarreras'])->name('AdminCarreras');
+
+//aseguradoras
+Route::get('/formularioAseguradora', [AseguradoraController::class, 'formularioAseguradora'])->name('formularioAseguradora');
+Route::get('/adminAseguradoras', [AseguradoraController::class, 'mostrarAseguradoras'])->name('adminAseguradoras');
+Route::post('/aseguradora-nuevo', [AseguradoraController::class, 'nuevo'])->name('aseguradora.nuevo');
 
 // USUARIO

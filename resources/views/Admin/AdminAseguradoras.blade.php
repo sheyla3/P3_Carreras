@@ -1,8 +1,8 @@
 <?php
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\sponsorController;
+use App\Http\Controllers\AseguradoraController;
 
-//<td><a href="{{ route('editar.sponsor', $sponsor->id_sponsor) }}">Editar</a></td>
+//<td><a href="{{ route('editar.aseguradora', $aseguradora->id_aseguradora) }}">Editar</a></td>
 
 ?>
 <!DOCTYPE html>
@@ -24,14 +24,14 @@ use App\Http\Controllers\sponsorController;
 <body>
     @include('layouts.cabAdmin')
     <div>
-        <h1>sponsors</h1>
+        <h1>Aseguradoras</h1>
         <form>
             @csrf
             <input type="submit" value="Buscar">
             <input type="text" id="buscar" name="buscar" placeholder="Buscar"><br>
             {!! $errors->first('buscar', '<small>:message</small>') !!}
         </form>
-        <a href="{{ route('formularioSponsor') }}">Añadir</a>
+        <a href="{{ route('formularioAseguradora') }}">Añadir</a>
         <br>
         <hr>
         <br>
@@ -41,29 +41,21 @@ use App\Http\Controllers\sponsorController;
                     <th>Id</th>
                     <th>CIF</th>
                     <th>nombre</th>
-                    <th>logo</th>
                     <th>calle</th>
-                    <th>destacado</th>
+                    <th>precio</th>
                     <th>activo</th>
                     <th>Ediar</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($sponsors as $sponsor)
+                @foreach ($aseguradoras as $aseguradora)
                     <tr>
-                        <td>{{ $sponsor->id_sponsor }}</td>
-                        <td>{{ $sponsor->CIF }}</td>
-                        <td>{{ $sponsor->nombre }}</td>
-                        <td>
-                            @if ($sponsor->logo)
-                            <img src="{{ storage_path('storage\app\public\img\sponsors' . $sponsor->logo) }}" alt="{{ $sponsor->nombre }}">
-                            @else
-                                Sin logo
-                            @endif
-                        </td>
-                        <td>{{ $sponsor->calle }}</td>
-                        <td>{{ $sponsor->destacado ? 'Sí' : 'No' }}</td>
-                        <td>{{ $sponsor->activo ? 'Sí' : 'No' }}</td>
+                        <td>{{ $aseguradora->id }}</td>
+                        <td>{{ $aseguradora->CIF }}</td>
+                        <td>{{ $aseguradora->nombre }}</td>
+                        <td>{{ $aseguradora->calle }}</td>
+                        <td>{{ $aseguradora->precio }}€</td>
+                        <td>{{ $aseguradora->activo ? 'Sí' : 'No' }}</td>
                         <td>Editar</td>
                     </tr>
                 @endforeach
@@ -71,5 +63,4 @@ use App\Http\Controllers\sponsorController;
         </table>
     </div>
 </body>
-
 </html>

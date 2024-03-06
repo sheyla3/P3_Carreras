@@ -13,8 +13,22 @@
 
     </head>
     <body>
+    <nav class="navbar bg-body-tertiary" id="navbar">
+        <div class="container-fluid">
+            <img src="{{ asset('img/logoCaballo.png') }}" alt="">
+        </div>
+    </nav>
+
     <header>
-        aa
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">HOME</a>
+                <a class="navbar-brand" href="#">CARRITO</a>
+                <a class="navbar-brand" href="#">RECORD</a>
+                <a class="navbar-brand" href="#">TICKETS</a>
+
+            </div>
+        </nav>
     </header>
     
         <h1>Home</h1>

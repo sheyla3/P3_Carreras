@@ -13,6 +13,12 @@ class CarrerasController extends Controller
 
     }
 
+    public function mostrarCarreras()
+    {
+        $carreras = Carrera::all();
+        return view('admin.AdminCarreras', compact('carreras'));
+    }
+
     // Método para mostrar el formulario de creación de carreras
     public function create()
     {

@@ -4,10 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Carrera</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
     <!-- Agrega los enlaces a los archivos CSS de Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+
+<nav class="navbar bg-body-tertiary" id="navbar">
+    <div class="container-fluid">
+        <img src="{{ asset('img/logoCaballo.png') }}" alt="">
+    </div>
+</nav>
+
+<nav class="navbar bg-body-tertiary" id="navbar2">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Carreras</a>
+    <a class="navbar-brand" href="#">Sponsors</a>
+    <a class="navbar-brand" href="#">Aseguradoras</a>
+  </div>
+</nav>
+
+<nav class="navbar bg-body-tertiary" id="navbar3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ route('AdminJinetes') }}">Jinetes</a>
+    <a class="navbar-brand" href="#">Socios</a>
+    <a class="navbar-brand" href="#">Fotos</a>
+  </div>
+</nav>
+
     <div class="container">
         <h1>Crear Carrera</h1>
 

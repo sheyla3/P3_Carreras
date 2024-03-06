@@ -61,4 +61,6 @@ Route::get('/carreras/create', [CarrerasController::class, 'create'])->name('car
 Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras.store');
 Route::get('/admin/carreras', [CarrerasController::class, 'carreras'])->name('admin.carreras');
 Route::get('/AdminJinetes', [JineteController::class, 'mostrarJinetes'])->name('AdminJinetes');
+Route::get('/AdminCarreras', [CarrerasController::class, 'mostrarCarreras'])->name('AdminCarreras');
+
 // USUARIO

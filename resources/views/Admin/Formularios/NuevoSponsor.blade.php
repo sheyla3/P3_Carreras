@@ -18,6 +18,29 @@ use App\Http\Controllers\SponsorController;
 </head>
 
 <body class="FondoAdmin">
+
+<nav class="navbar bg-body-tertiary" id="navbar">
+    <div class="container-fluid">
+        <img src="{{ asset('img/logoCaballo.png') }}" alt="">
+    </div>
+</nav>
+
+<nav class="navbar bg-body-tertiary" id="navbar2">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Carreras</a>
+    <a class="navbar-brand" href="#">Sponsors</a>
+    <a class="navbar-brand" href="#">Aseguradoras</a>
+  </div>
+</nav>
+
+<nav class="navbar bg-body-tertiary" id="navbar3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ route('AdminJinetes') }}">Jinetes</a>
+    <a class="navbar-brand" href="#">Socios</a>
+    <a class="navbar-brand" href="#">Fotos</a>
+  </div>
+</nav>
+
     <div>
         <h1>Añadir Sponsor</h1>
         <form action="{{ route('sponsor.nuevo') }}" method="POST" enctype="multipart/form-data">

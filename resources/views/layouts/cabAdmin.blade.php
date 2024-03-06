@@ -16,7 +16,7 @@
 
 <nav class="navbar bg-body-tertiary" id="navbar">
     <div class="container-fluid">
-        <img src="{{ asset('img/logoCaballo.png') }}" alt="">
+        <img src="{{ asset('img/logoCaballo.png') }}" alt="caballo">
     </div>
 </nav>
 

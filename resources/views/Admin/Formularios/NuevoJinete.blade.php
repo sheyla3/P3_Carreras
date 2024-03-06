@@ -65,7 +65,7 @@ use App\Http\Controllers\JineteController;
             </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
-        <a href="{{ route('AdminJinetes') }}" class="btn btn-secondary">Atrás</a>
+        <a href="{{ route('adminJinetes') }}" class="btn btn-secondary">Atrás</a>
     </div>
     @if (session('Guardado'))
         <div class="modal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"

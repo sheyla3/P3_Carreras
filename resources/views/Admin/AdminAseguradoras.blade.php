@@ -23,20 +23,35 @@ use App\Http\Controllers\AseguradoraController;
 
 <body>
     @include('layouts.cabAdmin')
-    <div>
-        <h1>Aseguradoras</h1>
-        <form>
-            @csrf
-            <input type="submit" value="Buscar">
-            <input type="text" id="buscar" name="buscar" placeholder="Buscar"><br>
-            {!! $errors->first('buscar', '<small>:message</small>') !!}
-        </form>
-        <a href="{{ route('formularioAseguradora') }}">Añadir</a>
-        <br>
-        <hr>
-        <br>
-        <table>
-            <thead>
+    <div class="container">
+        <ul class="mt-3 list-unstyled">
+            <li>
+                <h1>Aseguradoras</h1>
+            </li>
+            <li class="float-right ml-4">
+                <form action="{{ route('formularioAseguradora') }}" method="GET">
+                    @csrf
+                    <button type="submit" class="d-inline p-2 btn btn-primary">Añadir Jinete</button>
+                </form>
+            </li>
+            <li class="float-right">
+                <form>
+                    @csrf
+                    <div class="form-group row">
+                        <button type="submit" class="col-sm-2 btn btn-white">
+                            <img src="{{ asset('img/lupa.svg') }}" alt="Buscar" width="20" height="20">
+                        </button>
+                        <div>
+                            <input type="text" id="buscar" name="buscar" placeholder="Buscar"
+                                class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </li>
+        </ul>
+        <br><br>
+        <table class="table table-responsive-md">
+            <thead class="thead-dark">
                 <tr>
                     <th>Id</th>
                     <th>CIF</th>
@@ -63,4 +78,5 @@ use App\Http\Controllers\AseguradoraController;
         </table>
     </div>
 </body>
+
 </html>

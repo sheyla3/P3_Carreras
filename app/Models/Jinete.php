@@ -70,4 +70,9 @@ class Jinete extends Model
 	{
 		return $this->hasMany(Participante::class, 'id_jinete');
 	}
+
+	public function getFormattedEdadAttribute()
+	{
+		return $this->edad ? $this->edad->format('d/m/Y') : '';
+	}
 }

@@ -76,9 +76,9 @@ use App\Http\Controllers\JineteController;
                         <td>{{ $jinete->telf }}</td>
                         <td>{{ $jinete->calle }}</td>
                         <td>{{ $jinete->num_federat }}</td>
-                        <td>{{ $jinete->edad }}</td>
+                        <td>{{ $jinete->formatted_edad }}</td>
                         <td>{{ $jinete->activo ? 'Sí' : 'No' }}</td>
-                        <td>Editar</td>
+                        <td><a href="{{ route('editarJinete', $jinete->id_jinete) }}" >Editar</a></td>
                     </tr>
                 @endforeach
             </tbody>

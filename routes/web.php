@@ -46,6 +46,8 @@ Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->nam
 //jinetes
 Route::get('/formularioJinete', [JineteController::class, 'formularioJinete'])->name('formularioJinete');
 Route::post('/jinete-nuevo', [JineteController::class, 'nuevo'])->name('jinete.nuevo');
+Route::get('/editarJinete/{id}', [JineteController::class, 'editarJinete'])->name('editarJinete');
+Route::post('/jinete-editar/{id}', [JineteController::class, 'editar'])->name('jinete.editar');
 Route::get('/adminJinetes', [JineteController::class, 'mostrarJinetes'])->name('adminJinetes');
 
 //sponsors

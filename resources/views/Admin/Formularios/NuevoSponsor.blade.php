@@ -21,7 +21,7 @@ use App\Http\Controllers\SponsorController;
     @include('layouts.cabAdmin')
     <div class="container">
         <h1>Añadir Sponsor</h1>
-        <form action="{{ route('sponsor.nuevo') }}" method="POST" enctype="multipart/form-data" class="mb-4">
+        <form action="{{ route('sponsor.nuevo') }}" method="POST" enctype="multipart/form-data" class="mb-4 needs-validation">
             @csrf
             <div class="mb-3">
                 <label for="cif" class="form-label">CIF:</label>

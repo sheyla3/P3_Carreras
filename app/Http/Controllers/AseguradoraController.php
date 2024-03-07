@@ -16,7 +16,7 @@ class AseguradoraController extends Controller
             'precio' => 'required',
         ]);
 
-        $nuevoSponsor = new Aseguradora([
+        $nuevoaseguradora = new Aseguradora([
             'CIF' => $request->input('cif'),
             'nombre' => $request->input('nombre'),
             'calle' => $request->input('calle'),
@@ -24,7 +24,7 @@ class AseguradoraController extends Controller
             'activo' => true,
         ]);
 
-        $nuevoSponsor->save();
+        $nuevoaseguradora->save();
 
         return redirect()->route('formularioAseguradora')->with('Guardado', 'Aseguradora agregada exitosamente');
     }
@@ -74,6 +74,6 @@ class AseguradoraController extends Controller
         $aseguradora->activo = !$aseguradora->activo;
         $aseguradora->save();
 
-        return redirect()->back()->with('Estado', 'Estado cambiado exitosamente');
+        return response()->json(['activo' => $aseguradora->activo]);
     }
 }

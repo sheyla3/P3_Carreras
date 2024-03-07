@@ -81,4 +81,13 @@ class JineteController extends Controller
 
         return redirect()->route('editarJinete', $id)->with('Editado', 'Jinete editado exitosamente');
     }
+
+    public function cambiarActivo($id)
+    {
+        $jinete = Jinete::findOrFail($id);
+        $jinete->activo = !$jinete->activo;
+        $jinete->save();
+
+        return response()->json(['activo' => $jinete->activo]);
+    }
 }

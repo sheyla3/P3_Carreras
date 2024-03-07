@@ -38,9 +38,11 @@ Route::get('/', function () {
 })->name('/');
 
 // ADMIN
-Route::get('/loginAdmin', function () {
-    return view('Admin.loginAdmin');
-})->name('loginAdmin');
+Route::get('/loginAdmin', function () {return view('Admin.loginAdmin');})->name('loginAdmin');
+
+//TICKETS
+Route::get('/tickets', function () {return view('Enlaces.tickets');})->name('tickets');
+
 
 Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
 Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->name('Admin_panel');
@@ -81,4 +83,6 @@ Route::post('/cambiar-activo/{id}', [AseguradoraController::class, 'cambiarActiv
 
 // USUARIO
 
+//mostrar tickets:
+Route::get('/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');
 

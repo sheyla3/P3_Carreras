@@ -77,6 +77,7 @@ Route::post('/aseguradora-nuevo', [AseguradoraController::class, 'nuevo'])->name
 Route::get('/adminAseguradoras', [AseguradoraController::class, 'mostrarAseguradoras'])->name('adminAseguradoras');
 Route::get('/editarAseguradora/{id}', [AseguradoraController::class, 'editarAseguradora'])->name('editarAseguradora');
 Route::post('/aseguradora-editar/{id}', [AseguradoraController::class, 'editar'])->name('aseguradora.editar');
+Route::post('/cambiar-activo/{id}', [AseguradoraController::class, 'cambiarActivo'])->name('cambiarActivo');
 
 // USUARIO
 

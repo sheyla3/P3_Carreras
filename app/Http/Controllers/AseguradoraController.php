@@ -15,13 +15,13 @@ class AseguradoraController extends Controller
             'calle' => 'required',
             'precio' => 'required',
         ]);
-        
+
         $nuevoSponsor = new Aseguradora([
             'CIF' => $request->input('cif'),
             'nombre' => $request->input('nombre'),
             'calle' => $request->input('calle'),
             'precio' => $request->input('precio'),
-            'activo' => true, 
+            'activo' => true,
         ]);
 
         $nuevoSponsor->save();
@@ -29,7 +29,8 @@ class AseguradoraController extends Controller
         return redirect()->route('formularioAseguradora')->with('Guardado', 'Aseguradora agregada exitosamente');
     }
 
-    public function formularioAseguradora(){
+    public function formularioAseguradora()
+    {
         return view('Admin.Formularios.NuevaAseguradora');
     }
 
@@ -55,15 +56,24 @@ class AseguradoraController extends Controller
             'calle' => 'required',
             'precio' => 'required',
         ]);
-        
+
         $aseguradora->update([
             'CIF' => $request->input('cif'),
             'nombre' => $request->input('nombre'),
             'calle' => $request->input('calle'),
             'precio' => $request->input('precio'),
-            'activo' => true, 
+            'activo' => true,
         ]);
 
         return redirect()->route('editarAseguradora', $id)->with('Editado', 'Aseguradora editada exitosamente');
+    }
+
+    public function cambiarActivo($id)
+    {
+        $aseguradora = Aseguradora::findOrFail($id);
+        $aseguradora->activo = !$aseguradora->activo;
+        $aseguradora->save();
+
+        return redirect()->back()->with('Estado', 'Estado cambiado exitosamente');
     }
 }

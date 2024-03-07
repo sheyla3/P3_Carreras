@@ -68,8 +68,7 @@ use App\Http\Controllers\sponsorController;
                         <td>{{ $sponsor->nombre }}</td>
                         <td>
                             @if ($sponsor->logo)
-                                <img src="{{ storage_path('storage\app\public\img\sponsors' . $sponsor->logo) }}"
-                                    alt="Logo de {{ $sponsor->nombre }}">
+                                <img src="{{ asset('storage/' . $sponsor->logo) }}" width="60" height="40">
                             @else
                                 Sin logo
                             @endif
@@ -83,7 +82,8 @@ use App\Http\Controllers\sponsorController;
                                 {{ $sponsor->activo ? 'Sí' : 'No' }}
                             </button>
                         </td>
-                        <td><a class="btn btn-dark" href="{{ route('editarSponsor', $sponsor->id_sponsor) }}">Editar</a></td>
+                        <td><a class="btn btn-dark"
+                                href="{{ route('editarSponsor', $sponsor->id_sponsor) }}">Editar</a></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -111,4 +111,5 @@ use App\Http\Controllers\sponsorController;
             .catch(error => console.error('Error:', error));
     }
 </script>
+
 </html>

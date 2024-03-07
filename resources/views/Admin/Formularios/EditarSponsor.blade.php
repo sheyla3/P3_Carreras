@@ -21,7 +21,7 @@ use App\Http\Controllers\SponsorController;
     @include('layouts.cabAdmin')
     <div class="container">
         <h1>Editar Sponsor</h1>
-        <form action="{{ route('sponsor.editar', $sponsor->id_sponsor) }}" method="POST" enctype="multipart/form-data" class="mb-4">
+        <form action="{{ route('sponsor.editar', $sponsor->id_sponsor) }}" method="POST" enctype="multipart/form-data" class="mb-4 needs-validation">
             @csrf
             <div class="mb-3">
                 <label for="cif" class="form-label">CIF:</label>
@@ -38,7 +38,7 @@ use App\Http\Controllers\SponsorController;
             <div class="mb-3">
                 <label for="logo" class="form-label">Logo Actual:</label><br>
                 @if (isset($sponsor->logo))
-                    <img src="{{ asset('public/img/sponsors/' . $sponsor->logo) }}" alt="Logo Actual"
+                    <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="Logo Actual"
                         style="max-width: 200px; max-height: 200px;">
                 @else
                     <p>No hay logo disponible</p>
@@ -46,7 +46,7 @@ use App\Http\Controllers\SponsorController;
             </div>
             <div class="mb-3">
                 <label for="logo" class="form-label">Nuevo Logo:</label>
-                <input type="file" id="logo" name="logo" accept="image/*" class="form-control">
+                <input type="file" id="logo" name="logo" class="form-control" value="{{ asset($sponsor->logo) }}">
                 {!! $errors->first('logo', '<small>:message</small>') !!}
             </div>
             <div class="mb-3">

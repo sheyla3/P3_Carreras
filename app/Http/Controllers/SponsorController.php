@@ -13,17 +13,18 @@ class SponsorController extends Controller
         $request->validate([
             'cif' => 'required',
             'nombre' => 'required',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'calle' => 'required',
         ]);
 
-        $rutaArchivo = $request->file('logo');
-        $nombreArchivo = basename($rutaArchivo);
+        if ($request->hasFile('logo')) {
+            $rutaArchivo = $request->file('logo')->store('Logos', 'public');
+        }
 
         $nuevoSponsor = new Sponsor([
             'CIF' => $request->input('cif'),
             'nombre' => $request->input('nombre'),
-            'logo' => $nombreArchivo,
+            'logo' => $rutaArchivo,
             'calle' => $request->input('calle'),
             'destacado' => $request->has('destacado'),
             'activo' => true,
@@ -58,19 +59,20 @@ class SponsorController extends Controller
         $request->validate([
             'cif' => 'required',
             'nombre' => 'required',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'calle' => 'required',
         ]);
-        // Verificar si se proporcionó una nueva imagen
+
         if ($request->hasFile('logo')) {
-            $rutaArchivo = $request->file('logo')->store('public/img/sponsors');
-            $nombreArchivo = basename($rutaArchivo);
-            $sponsor->logo = $nombreArchivo;
-        }
+            $rutaArchivo = $request->file('logo')->store('Logos', 'public');
+        } else {
+            $rutaArchivo = $sponsor->logo;
+        }        
+
         $sponsor->CIF = $request->input('cif');
         $sponsor->nombre = $request->input('nombre');
+        $sponsor->logo = $rutaArchivo;
         $sponsor->calle = $request->input('calle');
-        // Verificar si se seleccionó destacado
         $sponsor->destacado = $request->has('destacado');
         $sponsor->activo = true;
 

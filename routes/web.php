@@ -57,7 +57,7 @@ Route::post('/jinete-nuevo', [JineteController::class, 'nuevo'])->name('jinete.n
 Route::get('/editarJinete/{id}', [JineteController::class, 'editarJinete'])->name('editarJinete');
 Route::post('/jinete-editar/{id}', [JineteController::class, 'editar'])->name('jinete.editar');
 Route::get('/adminJinetes', [JineteController::class, 'mostrarJinetes'])->name('adminJinetes');
-Route::post('/cambiar-activo/{id}', [JineteController::class, 'cambiarActivo'])->name('cambiarActivo');
+Route::put('/cambiarActivo/{id}', [JineteController::class, 'cambiarActivo'])->name('cambiarActivo');
 
 //sponsors
 Route::get('/formularioSponsor', [SponsorController::class, 'formularioSponsor'])->name('formularioSponsor');
@@ -79,7 +79,7 @@ Route::post('/aseguradora-nuevo', [AseguradoraController::class, 'nuevo'])->name
 Route::get('/adminAseguradoras', [AseguradoraController::class, 'mostrarAseguradoras'])->name('adminAseguradoras');
 Route::get('/editarAseguradora/{id}', [AseguradoraController::class, 'editarAseguradora'])->name('editarAseguradora');
 Route::post('/aseguradora-editar/{id}', [AseguradoraController::class, 'editar'])->name('aseguradora.editar');
-Route::post('/cambiar-activo/{id}', [AseguradoraController::class, 'cambiarActivo'])->name('cambiarActivo');
+Route::put('/cambiarActivo/{id}', [AseguradoraController::class, 'cambiarActivo'])->name('cambiarActivo');
 
 // USUARIO
 

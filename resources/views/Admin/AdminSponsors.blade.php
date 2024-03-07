@@ -111,5 +111,4 @@ use App\Http\Controllers\sponsorController;
             .catch(error => console.error('Error:', error));
     }
 </script>
-
 </html>

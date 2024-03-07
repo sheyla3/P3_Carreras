@@ -71,12 +71,11 @@ use App\Http\Controllers\AseguradoraController;
                         <td>{{ $aseguradora->calle }}</td>
                         <td>{{ $aseguradora->precio }}€</td>
                         <td>
-                            <form action="{{ route('cambiarActivo', $aseguradora->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-info">
-                                    {{ $aseguradora->activo ? 'Sí' : 'No' }}
-                                </button>
-                            </form>
+                            <button class="btn {{ $aseguradora->activo ? 'btn-success' : 'btn-danger' }}"
+                                onclick="cambiarEstado({{ $aseguradora->id }}, '{{ route('cambiarActivo', $aseguradora->id) }}')"
+                                data-id="{{ $aseguradora->id }}">
+                                {{ $aseguradora->activo ? 'Sí' : 'No' }}
+                            </button>
                         </td>
                         <td><a class="btn btn-dark" href="{{ route('editarAseguradora', $aseguradora->id) }}" >Editar</a></td>
                     </tr>
@@ -115,21 +114,21 @@ use App\Http\Controllers\AseguradoraController;
     function cambiarEstado(id, url) {
         // Realizar una solicitud AJAX para cambiar el estado activo
         fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Cambiar el texto y la clase del botón en consecuencia
-            const button = document.querySelector(`button[data-id="${id}"]`);
-            button.innerText = data.activo ? 'Sí' : 'No';
-            button.classList.remove('btn-success', 'btn-danger');
-            button.classList.add(`btn-${data.activo ? 'success' : 'danger'}`);
-        })
-        .catch(error => console.error('Error:', error));
+                method: 'PUT', // Cambiar a PUT
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Cambiar el texto y la clase del botón en consecuencia
+                const button = document.querySelector(`button[data-id="${id}"]`);
+                button.innerText = data.activo ? 'Sí' : 'No';
+                button.classList.remove('btn-success', 'btn-danger');
+                button.classList.add(`btn-${data.activo ? 'success' : 'danger'}`);
+            })
+            .catch(error => console.error('Error:', error));
     }
 </script>
 </html>

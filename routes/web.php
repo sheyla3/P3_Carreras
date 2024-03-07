@@ -57,6 +57,7 @@ Route::post('/jinete-nuevo', [JineteController::class, 'nuevo'])->name('jinete.n
 Route::get('/editarJinete/{id}', [JineteController::class, 'editarJinete'])->name('editarJinete');
 Route::post('/jinete-editar/{id}', [JineteController::class, 'editar'])->name('jinete.editar');
 Route::get('/adminJinetes', [JineteController::class, 'mostrarJinetes'])->name('adminJinetes');
+Route::post('/cambiar-activo/{id}', [JineteController::class, 'cambiarActivo'])->name('cambiarActivo');
 
 //sponsors
 Route::get('/formularioSponsor', [SponsorController::class, 'formularioSponsor'])->name('formularioSponsor');
@@ -64,6 +65,7 @@ Route::get('/adminSponsors', [SponsorController::class, 'mostrarSponsors'])->nam
 Route::post('/sponsor-nuevo', [SponsorController::class, 'nuevo'])->name('sponsor.nuevo');
 Route::get('/editarSponsor/{id}', [SponsorController::class, 'editarSponsor'])->name('editarSponsor');
 Route::post('/sponsor-editar/{id}', [SponsorController::class, 'editar'])->name('sponsor.editar');
+Route::put('/cambiarActivo/{id}', [SponsorController::class, 'cambiarActivo'])->name('cambiarActivo');
 
 //carreras
 Route::get('/carreras/create', [CarrerasController::class, 'create'])->name('carreras.create');

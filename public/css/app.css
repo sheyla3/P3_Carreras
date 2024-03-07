@@ -163,3 +163,9 @@ header button {
     width: 61px;
     margin-top: -4px;
 }
+
+thead th {
+    position: sticky;
+    top: 0; /* Se fija en la parte superior de la tabla */
+    z-index: 2; /* Asegura que esté por encima del contenido de la tabla */
+}

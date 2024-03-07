@@ -78,4 +78,13 @@ class SponsorController extends Controller
 
         return redirect()->route('editarSponsor', $id)->with('Editado', 'Sponsor editado exitosamente');
     }
+
+    public function cambiarActivo($id)
+    {
+        $sponsor = Sponsor::findOrFail($id);
+        $sponsor->activo = !$sponsor->activo;
+        $sponsor->save();
+
+        return response()->json(['activo' => $sponsor->activo]);
+    }
 }

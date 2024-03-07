@@ -38,19 +38,37 @@ class JineteController extends Controller
 
     public function mostrarJinetes()
     {
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
         $jinetes = Jinete::all();
-        return view('admin.adminJinetes', compact('jinetes'));
+        return view('admin.adminJinetes', compact('jinetes','adminId', 'adminName'));
     }
 
     public function formularioJinete()
     {
-        return view('Admin.Formularios.NuevoJinete');
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
+        return view('Admin.Formularios.NuevoJinete', compact('adminId', 'adminName'));
     }
 
     public function editarJinete($id)
     {
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
         $jinete = Jinete::findOrFail($id);  // Obtener el jinete por su ID
-        return view('Admin.Formularios.editarJinete', compact('jinete'));
+        return view('Admin.Formularios.editarJinete', compact('jinete','adminId', 'adminName'));
     }
 
     public function editar(Request $request, $id)

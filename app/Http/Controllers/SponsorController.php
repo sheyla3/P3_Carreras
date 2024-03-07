@@ -37,20 +37,38 @@ class SponsorController extends Controller
 
     public function formularioSponsor()
     {
-        return view('Admin.Formularios.NuevoSponsor');
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
+        return view('Admin.Formularios.NuevoSponsor',  compact('adminId', 'adminName'));
     }
 
 
     public function mostrarSponsors()
     {
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
         $sponsors = Sponsor::all();
-        return view('admin.adminSponsors', compact('sponsors'));
+        return view('admin.adminSponsors', compact('sponsors','adminId', 'adminName'));
     }
 
     public function editarSponsor($id)
     {
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
         $sponsor = Sponsor::findOrFail($id);  // Obtener el sponsor por su ID
-        return view('Admin.Formularios.editarSponsor', compact('sponsor'));
+        return view('Admin.Formularios.editarSponsor', compact('sponsor','adminId', 'adminName'));
     }
 
     public function editar(Request $request, $id)

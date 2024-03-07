@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Models\Carrera;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -30,17 +31,27 @@ class AdminController extends Controller
         }
 
         if ($contra === $confUsu->contrasena) {
-            // Contraseña correcta, redirigir a otra página
+            // Guardar información del usuario en la sesión
+            session(['admin_id' => $confUsu->id_admin, 'admin_name' => $confUsu->usuario]);
+
             return redirect()->route('Admin_panel');
         } else {
-            // Contraseña incorrecta
             return redirect()->back()->withErrors(['contra' => 'La contraseña es incorrecta']);
         }
     }
 
-    public function Admin_panelCarreras(Request $request) {
+    public function CerrarSesion(Request $request)
+    {
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('loginAdmin');
+    }
 
-    $carreras = Carrera::all();
-    return view('admin/admincarreras', compact('carreras'));
+
+    public function Admin_panelCarreras(Request $request)
+    {
+        $carreras = Carrera::all();
+        return view('admin/admincarreras', compact('carreras'));
     }
 }

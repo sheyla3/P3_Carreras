@@ -31,20 +31,40 @@ class AseguradoraController extends Controller
 
     public function formularioAseguradora()
     {
-        return view('Admin.Formularios.NuevaAseguradora');
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
+
+        return view('Admin.Formularios.NuevaAseguradora', compact('adminId', 'adminName'));
     }
 
 
     public function mostrarAseguradoras()
     {
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
+
         $aseguradoras = Aseguradora::all();
-        return view('admin.adminAseguradoras', compact('aseguradoras'));
+        return view('admin.adminAseguradoras', compact('aseguradoras','adminId', 'adminName'));
     }
 
     public function editarAseguradora($id)
     {
-        $aseguradora = Aseguradora::findOrFail($id);  // Obtener el jinete por su ID
-        return view('Admin.Formularios.EditarAseguradora', compact('aseguradora'));
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
+        $aseguradora = Aseguradora::findOrFail($id);  // Obtener la aseguradora por su ID
+        return view('Admin.Formularios.EditarAseguradora', compact('aseguradora','adminId', 'adminName'));
     }
 
     public function editar(Request $request, $id)

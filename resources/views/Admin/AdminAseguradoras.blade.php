@@ -71,7 +71,7 @@ use App\Http\Controllers\AseguradoraController;
                         <td>{{ $aseguradora->calle }}</td>
                         <td>{{ $aseguradora->precio }}€</td>
                         <td>{{ $aseguradora->activo ? 'Sí' : 'No' }}</td>
-                        <td>Editar</td>
+                        <td><a href="{{ route('editarAseguradora', $aseguradora->id) }}" >Editar</a></td>
                     </tr>
                 @endforeach
             </tbody>

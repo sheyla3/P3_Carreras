@@ -1,9 +1,6 @@
 <?php
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\sponsorController;
-
-//<td><a href="{{ route('editar.sponsor', $sponsor->id_sponsor) }}">Editar</a></td>
-
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -71,7 +68,7 @@ use App\Http\Controllers\sponsorController;
                         <td>{{ $sponsor->nombre }}</td>
                         <td>
                             @if ($sponsor->logo)
-                            <img src="{{ storage_path('storage\app\public\img\sponsors' . $sponsor->logo) }}" alt="{{ $sponsor->nombre }}">
+                            <img src="{{ storage_path('storage\app\public\img\sponsors' . $sponsor->logo) }}" alt="Logo de {{ $sponsor->nombre }}">
                             @else
                                 Sin logo
                             @endif
@@ -79,7 +76,7 @@ use App\Http\Controllers\sponsorController;
                         <td>{{ $sponsor->calle }}</td>
                         <td>{{ $sponsor->destacado ? 'Sí' : 'No' }}</td>
                         <td>{{ $sponsor->activo ? 'Sí' : 'No' }}</td>
-                        <td>Editar</td>
+                        <td><a href="{{ route('editarSponsor', $sponsor->id_sponsor) }}">Editar</a></td>
                     </tr>
                 @endforeach
             </tbody>

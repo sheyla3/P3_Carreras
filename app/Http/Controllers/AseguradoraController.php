@@ -39,4 +39,31 @@ class AseguradoraController extends Controller
         $aseguradoras = Aseguradora::all();
         return view('admin.adminAseguradoras', compact('aseguradoras'));
     }
+
+    public function editarAseguradora($id)
+    {
+        $aseguradora = Aseguradora::findOrFail($id);  // Obtener el jinete por su ID
+        return view('Admin.Formularios.EditarAseguradora', compact('aseguradora'));
+    }
+
+    public function editar(Request $request, $id)
+    {
+        $aseguradora = Aseguradora::find($id);
+        $request->validate([
+            'cif' => 'required',
+            'nombre' => 'required',
+            'calle' => 'required',
+            'precio' => 'required',
+        ]);
+        
+        $aseguradora->update([
+            'CIF' => $request->input('cif'),
+            'nombre' => $request->input('nombre'),
+            'calle' => $request->input('calle'),
+            'precio' => $request->input('precio'),
+            'activo' => true, 
+        ]);
+
+        return redirect()->route('editarAseguradora', $id)->with('Editado', 'Aseguradora editada exitosamente');
+    }
 }

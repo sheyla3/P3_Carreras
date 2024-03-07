@@ -16,7 +16,7 @@
 
 <nav class="navbar bg-body-tertiary" id="navbar">
     <div class="container-fluid">
-        <img src="{{ asset('img/logoCaballo.png') }}" alt="caballo">
+        <img src="{{ asset('img/logoCaballo.png') }}" alt="caballo" id="caballoAdmin">
     </div>
 </nav>
 
@@ -31,7 +31,7 @@
 <nav class="navbar bg-body-tertiary" id="navbar3">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ route('adminJinetes') }}">Jinetes</a>
-    <a class="navbar-brand" href="#">Socios</a>
+    <a class="navbar-brand" href="{{ route('adminSocio') }}">Socios</a>
     <a class="navbar-brand" href="#">Fotos</a>
   </div>
 </nav>

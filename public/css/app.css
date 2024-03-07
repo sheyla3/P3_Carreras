@@ -158,3 +158,8 @@ header button {
 .container-4 a {
     font-size: 48px;
 }
+
+#caballoAdmin {
+    width: 61px;
+    margin-top: -4px;
+}

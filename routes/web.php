@@ -6,6 +6,8 @@ use App\Http\Controllers\JineteController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\CarrerasController;
 use App\Http\Controllers\AseguradoraController;
+use App\Http\Controllers\SocioController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +45,12 @@ Route::get('/loginAdmin', function () {
 Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
 Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->name('Admin_panel');
 
+// SOCIOS
+Route::get('/adminSocio', [SocioController::class, 'mostrarSocio'])->name('adminSocio');
+Route::get('/formularioSocio', [SocioController::class, 'formularioSocio'])->name('formularioSocio');
+Route::post('/guardarSocio', [SocioController::class, 'guardarSocio'])->name('guardar.socio');
+
+
 //jinetes
 Route::get('/formularioJinete', [JineteController::class, 'formularioJinete'])->name('formularioJinete');
 Route::post('/jinete-nuevo', [JineteController::class, 'nuevo'])->name('jinete.nuevo');
@@ -67,3 +75,5 @@ Route::get('/adminAseguradoras', [AseguradoraController::class, 'mostrarAsegurad
 Route::post('/aseguradora-nuevo', [AseguradoraController::class, 'nuevo'])->name('aseguradora.nuevo');
 
 // USUARIO
+
+

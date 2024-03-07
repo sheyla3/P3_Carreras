@@ -16,8 +16,8 @@
         <img src="{{ asset('img/logoCaballo.png') }}" alt="">
     </div>
     <div class="right-links">
-        <a href="{{ route('loginAdmin') }}">Iniciar Sesion</a>
-        <a href="{{ route('loginAdmin') }}">Registrarme</a>
+        <a href="{{ route('loginAdmin') }}" class="btn btn-primary">Iniciar Sesion</a>
+        <a href="{{ route('loginAdmin') }}" class="btn btn-primary">Registrarme</a>
     </div>
 </nav>
 
@@ -27,12 +27,12 @@
             <a class="navbar-brand" href="#">HOME</a>
             <a class="navbar-brand" href="#">CARRITO</a>
             <a class="navbar-brand" href="#">RECORD</a>
-            <a class="navbar-brand" href="#">TICKETS</a>
+            <a class="navbar-brand" href="{{ route('tickets') }}">TICKETS</a>
         </div>
     </nav>
 
-    <button type="button" style="background:white;">READ MORE</button>
-    <button type="button">GET A QUOTE</button>
+    <button type="button" class="btn btn-primary" style="background:white;">READ MORE</button>
+    <button type="button" class="btn btn-primary">GET A QUOTE</button>
 </header>
 <div class="Maestro-1">
     <div class="container-1">
@@ -44,7 +44,7 @@
             <rect width="94.2" height="25.7073" rx="12.8537" fill="#1F323F"/>
         </svg>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero exercitationem consequatur voluptatem soluta reprehenderit repudiandae eveniet explicabo reiciendis. Praesentium quia explicabo maiores accusamus nostrum ex fugiat quaerat! Suscipit maxime eaque adipisci reprehenderit quos natus!</p>
-        <button type="button" style="background:white;">READ MORE</button>
+        <button type="button" class="btn btn-primary" style="background:white;">READ MORE</button>
     </div>
 </div>
 

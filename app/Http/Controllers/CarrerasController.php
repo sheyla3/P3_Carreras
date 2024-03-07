@@ -19,6 +19,13 @@ class CarrerasController extends Controller
         return view('admin.AdminCarreras', compact('carreras'));
     }
 
+    public function mostrarCarrerasClientes()
+    {
+        $carreras = Carrera::all();
+        return view('enlaces.tickets', compact('carreras'));
+    }
+    
+
     // Método para mostrar el formulario de creación de carreras
     public function create()
     {

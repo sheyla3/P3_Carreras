@@ -21,7 +21,7 @@ use App\Http\Controllers\JineteController;
     @include('layouts.cabAdmin')
     <div class="container">
         <h1>Añadir Jinete</h1>
-        <form action="{{ route('jinete.nuevo') }}" method="POST" class="mb-4">
+        <form action="{{ route('jinete.nuevo') }}" method="POST" class="mb-4" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre:</label>
@@ -42,6 +42,11 @@ use App\Http\Controllers\JineteController;
                 <label for="contra" class="form-label">Contraseña:</label>
                 <input type="password" id="contra" name="contra" value="{{ old('contra') }}" class="form-control">
                 {!! $errors->first('contra', '<small class="text-danger">:message</small>') !!}
+            </div>
+            <div class="mb-3">
+                <label for="foto" class="form-label">Foto:</label>
+                <input type="file" id="foto" name="foto" class="form-control">
+                {!! $errors->first('foto', '<small>:message</small>') !!}
             </div>
             <div class="mb-3">
                 <label for="telf" class="form-label">Teléfono:</label>

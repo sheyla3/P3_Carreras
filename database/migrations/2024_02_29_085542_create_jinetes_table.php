@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('foto');
             $table->integer('telf');
             $table->string('calle');
-            $table->integer('num_federat')->unique();
+            $table->string('num_federat')->unique();
             $table->date('edad');
             $table->boolean('activo')->default(true);
             $table->rememberToken();

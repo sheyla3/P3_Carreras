@@ -31,7 +31,7 @@ use App\Http\Controllers\AseguradoraController;
             <li class="float-right ml-4">
                 <form action="{{ route('formularioAseguradora') }}" method="GET">
                     @csrf
-                    <button type="submit" class="d-inline p-2 btn btn-primary">Añadir Jinete</button>
+                    <button type="submit" class="d-inline p-2 btn btn-primary">Añadir Aseguradoras</button>
                 </form>
             </li>
             <li class="float-right">

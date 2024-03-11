@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_sponsorCarrera
  * @property int $id_carrera
  * @property int $id_sponsor
+ * @property int $patrocinio
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -31,7 +32,8 @@ class SponsorCarrera extends Model
 
 	protected $casts = [
 		'id_carrera' => 'int',
-		'id_sponsor' => 'int'
+		'id_sponsor' => 'int',
+		'patrocinio' => 'int'
 	];
 
 	protected $hidden = [
@@ -41,6 +43,7 @@ class SponsorCarrera extends Model
 	protected $fillable = [
 		'id_carrera',
 		'id_sponsor',
+		'patrocinio',
 		'remember_token'
 	];
 

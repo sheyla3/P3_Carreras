@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('apellido');
             $table->string('correo')->unique();
             $table->string('contrasena');
+            $table->string('foto');
             $table->integer('telf');
             $table->string('calle');
             $table->integer('num_federat')->unique();

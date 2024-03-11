@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('id_carrera')->references('id_carrera')->on('carreras');
             $table->unsignedBigInteger('id_sponsor');
             $table->foreign('id_sponsor')->references('id_sponsor')->on('sponsor');
+            $table->integer('patrocinio');
             $table->rememberToken();
             $table->timestamps();
         });

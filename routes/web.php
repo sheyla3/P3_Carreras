@@ -7,6 +7,9 @@ use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\CarrerasController;
 use App\Http\Controllers\AseguradoraController;
 use App\Http\Controllers\SocioController;
+use App\Http\Controllers\UsuarioController;
+
+
 
 
 
@@ -41,6 +44,7 @@ Route::get('/', function () {
 
 
 // USUARIO
+Route::post('/loginUser', [UsuarioController::class, 'loginUsuario'])->name('loginUser');
 
 //mostrar tickets
 Route::get('/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');

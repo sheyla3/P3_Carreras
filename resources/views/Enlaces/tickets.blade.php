@@ -39,15 +39,26 @@
             <div>
                 <img src="{{ asset('img/prueba.png') }}" alt="">
             </div>
-            <div>
+
+        <div class="datos">
+            <div id="datos-title">
                 <h3>{{ $carrera->nombre }}</h3>
             </div>
             <div>
-                <p>{{ $carrera->descripcion }}</p>
+                <p>Lugar: {{ $carrera->descripcion }}</p>
             </div>
             <div>
-                <p>Precio: ${{ $carrera->precio }}</p>
+                <p>{{ $carrera->precio }} €</p>
             </div>
+        </div>
+
+        <div class="jinetes">
+            <a href="">Jinetes</a>
+        </div>
+
+        <div class="clasificacion">
+            <button>Ver clasificacion</button>
+        </div>
         </div>
     @endforeach
 </div>

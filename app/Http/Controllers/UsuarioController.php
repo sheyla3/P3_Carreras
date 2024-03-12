@@ -16,20 +16,26 @@ class UsuarioController extends Controller
     public function loginUsuario(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'correo' => 'required|email',
             'password' => 'required',
         ]);
 
-        $email = $request->input("email");
+        $email = $request->input("correo");
         $password = $request->input("password");
 
-        // Intentar autenticar al usuario
-        if (Auth::attempt(['correo' => $email, 'contrasena' => $password])) {
-            // Si la autenticación es exitosa, redirigir al usuario a una página de inicio o a donde sea necesario
-            return redirect()->route('pagina_inicio');
+        $confUsu = Usuario::where('correo', $email)->first();
+
+        if (!$confUsu) {
+            return redirect()->back()->withErrors(['correo' => 'El correo no existe']);
+        }
+
+        if ($password === $confUsu->contrasena) {
+            // Guardar información del usuario en la sesión
+            session(['socio_id' => $confUsu->id_usuario, 'socio_name' => $confUsu->correo]);
+
+            return redirect()->route('Admin_panel');
         } else {
-            // Si la autenticación falla, redirigir de vuelta al formulario con un mensaje de error
-            return redirect()->back()->withErrors(['email' => 'Credenciales inválidas']);
+            return redirect()->back()->withErrors(['contra' => 'La contraseña es incorrecta']);
         }
     }
 

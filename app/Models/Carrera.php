@@ -24,7 +24,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $fechaHora
  * @property string $cartel
  * @property int $precio
- * @property string $qr
  * @property bool $activo
  * @property string|null $remember_token
  * @property Carbon|null $created_at
@@ -65,7 +64,6 @@ class Carrera extends Model
 		'fechaHora',
 		'cartel',
 		'precio',
-		'qr',
 		'activo',
 		'remember_token'
 	];

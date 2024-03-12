@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jinete;
 use Illuminate\Http\Request;
+
 class JineteController extends Controller
 {
     public function nuevo(Request $request)
@@ -23,22 +24,25 @@ class JineteController extends Controller
         if ($request->hasFile('foto')) {
             $rutaArchivo = $request->file('foto')->store('JinetesFoto', 'public');
         }
+        try {
+            $nuevoJinete = new Jinete();
+            $nuevoJinete->nombre = $request->input('nombre');
+            $nuevoJinete->apellido = $request->input('apellido');
+            $nuevoJinete->correo = $request->input('correo');
+            $nuevoJinete->contrasena = $request->input('contra');
+            $nuevoJinete->foto = $rutaArchivo;
+            $nuevoJinete->telf = $request->input('telf');
+            $nuevoJinete->calle = $request->input('calle');
+            $nuevoJinete->num_federat = $request->input('num_fede');
+            $nuevoJinete->edad = $request->input('edad');
+            $nuevoJinete->activo = true;
 
-        $nuevoJinete = new Jinete();
-        $nuevoJinete->nombre = $request->input('nombre');
-        $nuevoJinete->apellido = $request->input('apellido');
-        $nuevoJinete->correo = $request->input('correo');
-        $nuevoJinete->contrasena = $request->input('contra');
-        $nuevoJinete->foto = $rutaArchivo;
-        $nuevoJinete->telf = $request->input('telf');
-        $nuevoJinete->calle = $request->input('calle');
-        $nuevoJinete->num_federat = $request->input('num_fede');
-        $nuevoJinete->edad = $request->input('edad');
-        $nuevoJinete->activo = true;
+            $nuevoJinete->save();
 
-        $nuevoJinete->save();
-
-        return redirect()->route('formularioJinete')->with('Guardado', 'Jinete agregado exitosamente');
+            return redirect()->route('formularioJinete')->with('Guardado', 'Jinete agregado exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
+        }
     }
 
     public function mostrarJinetes()
@@ -91,18 +95,22 @@ class JineteController extends Controller
         ]);
 
         $fechaNacimiento = \DateTime::createFromFormat('d/m/Y', $request->input('edad'))->format('Y-m-d');
-        $jinete->update([
-            'nombre' => $request->input('nombre'),
-            'apellido' => $request->input('apellido'),
-            'correo' => $request->input('correo'),
-            'contrasena' => $request->input('contra'),
-            'telf' => $request->input('telf'),
-            'calle' => $request->input('calle'),
-            'num_federat' => $request->input('num_fede'),
-            'edad' => $fechaNacimiento,
-        ]);
+        try {
+            $jinete->update([
+                'nombre' => $request->input('nombre'),
+                'apellido' => $request->input('apellido'),
+                'correo' => $request->input('correo'),
+                'contrasena' => $request->input('contra'),
+                'telf' => $request->input('telf'),
+                'calle' => $request->input('calle'),
+                'num_federat' => $request->input('num_fede'),
+                'edad' => $fechaNacimiento,
+            ]);
 
-        return redirect()->route('editarJinete', $id)->with('Editado', 'Jinete editado exitosamente');
+            return redirect()->route('editarJinete', $id)->with('Editado', 'Jinete editado exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
+        }
     }
 
     public function cambiarActivo($id)

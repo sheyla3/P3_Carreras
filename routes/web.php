@@ -75,6 +75,9 @@ Route::get('/carreras/create', [CarrerasController::class, 'create'])->name('car
 Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras.store');
 Route::get('/admin/carreras', [CarrerasController::class, 'carreras'])->name('admin.carreras');
 Route::get('/AdminCarreras', [CarrerasController::class, 'mostrarCarreras'])->name('AdminCarreras');
+Route::get('/editarCarrera/{id}', [CarrerasController::class, 'editarCarrera'])->name('editarCarrera');
+Route::post('/carreras-editar/{id}', [CarrerasController::class, 'editar'])->name('carreras.editar');
+Route::put('/cambiarActivo/{id}', [CarrerasController::class, 'cambiarActivo'])->name('cambiarActivo');
 
 //aseguradoras
 Route::get('/formularioAseguradora', [AseguradoraController::class, 'formularioAseguradora'])->name('formularioAseguradora');

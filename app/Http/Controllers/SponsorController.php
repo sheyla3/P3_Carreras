@@ -21,18 +21,22 @@ class SponsorController extends Controller
             $rutaArchivo = $request->file('logo')->store('Logos', 'public');
         }
 
-        $nuevoSponsor = new Sponsor([
-            'CIF' => $request->input('cif'),
-            'nombre' => $request->input('nombre'),
-            'logo' => $rutaArchivo,
-            'calle' => $request->input('calle'),
-            'destacado' => $request->has('destacado'),
-            'activo' => true,
-        ]);
+        try {
+            $nuevoSponsor = new Sponsor([
+                'CIF' => $request->input('cif'),
+                'nombre' => $request->input('nombre'),
+                'logo' => $rutaArchivo,
+                'calle' => $request->input('calle'),
+                'destacado' => $request->has('destacado'),
+                'activo' => true,
+            ]);
 
-        $nuevoSponsor->save();
+            $nuevoSponsor->save();
 
-        return redirect()->route('formularioSponsor')->with('Guardado', 'Sponsor agregado exitosamente');
+            return redirect()->route('formularioSponsor')->with('Guardado', 'Sponsor agregado exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
+        }
     }
 
     public function formularioSponsor()
@@ -56,7 +60,7 @@ class SponsorController extends Controller
         $adminId = session('admin_id');
         $adminName = session('admin_name');
         $sponsors = Sponsor::all();
-        return view('admin.adminSponsors', compact('sponsors','adminId', 'adminName'));
+        return view('admin.adminSponsors', compact('sponsors', 'adminId', 'adminName'));
     }
 
     public function editarSponsor($id)
@@ -68,7 +72,7 @@ class SponsorController extends Controller
         $adminId = session('admin_id');
         $adminName = session('admin_name');
         $sponsor = Sponsor::findOrFail($id);  // Obtener el sponsor por su ID
-        return view('Admin.Formularios.editarSponsor', compact('sponsor','adminId', 'adminName'));
+        return view('Admin.Formularios.editarSponsor', compact('sponsor', 'adminId', 'adminName'));
     }
 
     public function editar(Request $request, $id)
@@ -85,18 +89,22 @@ class SponsorController extends Controller
             $rutaArchivo = $request->file('logo')->store('Logos', 'public');
         } else {
             $rutaArchivo = $sponsor->logo;
-        }        
+        }
+        
+        try {
+            $sponsor->CIF = $request->input('cif');
+            $sponsor->nombre = $request->input('nombre');
+            $sponsor->logo = $rutaArchivo;
+            $sponsor->calle = $request->input('calle');
+            $sponsor->destacado = $request->has('destacado');
+            $sponsor->activo = true;
 
-        $sponsor->CIF = $request->input('cif');
-        $sponsor->nombre = $request->input('nombre');
-        $sponsor->logo = $rutaArchivo;
-        $sponsor->calle = $request->input('calle');
-        $sponsor->destacado = $request->has('destacado');
-        $sponsor->activo = true;
+            $sponsor->save();
 
-        $sponsor->save();
-
-        return redirect()->route('editarSponsor', $id)->with('Editado', 'Sponsor editado exitosamente');
+            return redirect()->route('editarSponsor', $id)->with('Editado', 'Sponsor editado exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
+        }
     }
 
     public function cambiarActivo($id)

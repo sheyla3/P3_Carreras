@@ -39,7 +39,6 @@ class Jinete extends Model
 
 	protected $casts = [
 		'telf' => 'int',
-		'num_federat' => 'int',
 		'edad' => 'datetime',
 		'activo' => 'bool'
 	];

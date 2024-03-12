@@ -41,20 +41,21 @@
             <i class="uil uil-times form_close"></i>
             <!-- Login form -->
             <div class="form login_form">
-                <form action="{{ route('loginUser') }}">
-                    <h2>Login</h2>
-                    <div class="input_box">
-                        <!-- sera un email -->
-                        <input type="email" placeholder="Enter your email" required/>  
-                        <i class="uil uil-envelope-alt email"></i>
-                    </div>
-                    <div class="input_box">
-                        <input type="password" placeholder="Enter your password" required/>
-                        <i class="uil uil-lock password"></i>
-                        <i class="uil uil-eye-slash pw_hide"></i>
-                    </div>
-                    <input type="submit" value="Iniciar">
-                </form>
+            <form action="{{ route('loginUser') }}" method="POST">
+                @csrf
+                <h2>Login</h2>
+                <div class="input_box">
+                    <!-- será un email -->
+                    <input type="email" name="email" placeholder="Enter your email" required/>  
+                    <i class="uil uil-envelope-alt email"></i>
+                </div>
+                <div class="input_box">
+                    <input type="password" name="password" placeholder="Enter your password" required/>
+                    <i class="uil uil-lock password"></i>
+                    <i class="uil uil-eye-slash pw_hide"></i>
+                </div>
+                <input type="submit" value="Iniciar">
+            </form>
             </div>
         </div>
     </section>

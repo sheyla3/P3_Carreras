@@ -8,6 +8,8 @@ use App\Http\Controllers\CarrerasController;
 use App\Http\Controllers\AseguradoraController;
 use App\Http\Controllers\SocioController;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +41,8 @@ Route::get('/', function () {
 
 // ADMIN
 Route::get('/loginAdmin', function () {return view('Admin.loginAdmin');})->name('loginAdmin');
+
+// USER
 
 //TICKETS
 Route::get('/tickets', function () {return view('Enlaces.tickets');})->name('tickets');

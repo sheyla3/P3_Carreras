@@ -23,7 +23,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $km
  * @property Carbon $fechaHora
  * @property string $cartel
- * @property int $patrocinio
  * @property int $precio
  * @property string $qr
  * @property bool $activo
@@ -47,7 +46,6 @@ class Carrera extends Model
 		'aforo' => 'int',
 		'km' => 'int',
 		'fechaHora' => 'datetime',
-		'patrocinio' => 'int',
 		'precio' => 'int',
 		'activo' => 'bool'
 	];
@@ -66,7 +64,6 @@ class Carrera extends Model
 		'km',
 		'fechaHora',
 		'cartel',
-		'patrocinio',
 		'precio',
 		'qr',
 		'activo',
@@ -76,7 +73,7 @@ class Carrera extends Model
 	public function sponsors()
 	{
 		return $this->belongsToMany(Sponsor::class, '_sponsor_carrera', 'id_carrera', 'id_sponsor')
-					->withPivot('id_sponsorCarrera', 'remember_token')
+					->withPivot('id_sponsorCarrera', 'patrocinio', 'remember_token')
 					->withTimestamps();
 	}
 

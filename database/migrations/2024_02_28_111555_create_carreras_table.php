@@ -22,7 +22,6 @@ return new class extends Migration
             $table->integer('km');
             $table->dateTime('fechaHora');
             $table->string('cartel');
-            $table->integer('patrocinio');
             $table->integer('precio');
             $table->string('qr');
             $table->boolean('activo')->default(true);

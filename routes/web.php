@@ -46,6 +46,7 @@ Route::get('/tickets', function () {return view('Enlaces.tickets');})->name('tic
 
 Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
 Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->name('Admin_panel');
+Route::post('/admin-cerrar', [AdminController::class, 'CerrarSesion'])->name('admin.cerrar');
 
 // SOCIOS
 Route::get('/adminSocio', [SocioController::class, 'mostrarSocio'])->name('adminSocio');

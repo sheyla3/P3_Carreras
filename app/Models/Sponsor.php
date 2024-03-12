@@ -54,7 +54,7 @@ class Sponsor extends Model
 	public function carreras()
 	{
 		return $this->belongsToMany(Carrera::class, '_sponsor_carrera', 'id_sponsor', 'id_carrera')
-					->withPivot('id_sponsorCarrera', 'remember_token')
+					->withPivot('id_sponsorCarrera', 'patrocinio', 'remember_token')
 					->withTimestamps();
 	}
 }

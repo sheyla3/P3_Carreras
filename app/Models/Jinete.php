@@ -18,16 +18,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $apellido
  * @property string $correo
  * @property string $contrasena
+ * @property string $foto
  * @property int $telf
  * @property string $calle
- * @property int $num_federat
+ * @property string $num_federat
  * @property Carbon $edad
  * @property bool $activo
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
- * @property Collection|Caballo[] $caballos
  * @property Collection|Participante[] $participantes
  *
  * @package App\Models
@@ -53,6 +53,7 @@ class Jinete extends Model
 		'apellido',
 		'correo',
 		'contrasena',
+		'foto',
 		'telf',
 		'calle',
 		'num_federat',
@@ -61,16 +62,11 @@ class Jinete extends Model
 		'remember_token'
 	];
 
-	public function caballos()
-	{
-		return $this->hasMany(Caballo::class, 'id_jinete');
-	}
-
 	public function participantes()
 	{
 		return $this->hasMany(Participante::class, 'id_jinete');
 	}
-
+	
 	public function getFormattedEdadAttribute()
 	{
 		return $this->edad ? $this->edad->format('d/m/Y') : '';

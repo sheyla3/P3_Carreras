@@ -10,7 +10,6 @@ class CarrerasController extends Controller
 
     public function carreras()
     {
-
     }
 
     public function mostrarCarreras()
@@ -24,14 +23,14 @@ class CarrerasController extends Controller
         $carreras = Carrera::all();
         return view('enlaces.tickets', compact('carreras'));
     }
-    
+
 
     // Método para mostrar el formulario de creación de carreras
     public function create()
     {
         return view('admin.create');
     }
-    
+
     // Método para guardar la carrera creada
     public function store(Request $request)
     {
@@ -39,30 +38,60 @@ class CarrerasController extends Controller
         $validatedData = $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
+            'lugar_foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'cartel' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'fechaHora' => 'required|date',
-            'patrocinio' => 'required|integer',
-            'precio' => 'required|integer', 
-            // 'lugar_foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Corrige el nombre del campo a 'lugar_foto'
+            'precio' => 'required|integer',
+            'km' => 'required|integer',
+            'tipo' => 'required|in:plano,vallas,campo a traves,trote y arnes,parejeras',
         ]);
 
-        // // Manejar la imagen subida y guardarla en la carpeta storage/app/public/img
-        // $imagePath = $request->file('lugar_foto')->store('public/img');
+        if ($request->hasFile('lugar_foto')) {
+            $rutaArchivo1 = $request->file('lugar_foto')->store('Lugares', 'public');
+        }
 
-        // // Obtener la ruta relativa de la imagen guardada (incluyendo el prefijo 'public/')
-        // $imageUrl = $imagePath;
+        if ($request->hasFile('cartel')) {
+            $rutaArchivo2 = $request->file('cartel')->store('Carteles', 'public');
+        }
 
-        // Crear una nueva instancia de Carrera con los datos validados
-        $carrera = new Carrera();
-        $carrera->fill($validatedData);
-        // $carrera->lugar_foto = $imageUrl;
-        $carrera->km = 10; // Proporciona un valor para el campo km (o cualquier otro valor que desees)
-        $carrera->fechaHora = $validatedData['fechaHora'];
-        $carrera->patrocinio = $validatedData['patrocinio'];
-        $carrera->precio = $validatedData['precio'];
+        try {
+            $nuevoCarrera = new Carrera([
+                'nombre' => $request->input('nombre'),
+                'descripcion' => $request->input('descripcion'),
+                'lugar_foto' => $rutaArchivo1,
+                'km' => $request->input('km'),
+                'fechaHora' => $request->input('fechaHora'),
+                'cartel' => $rutaArchivo2,
+                'precio' => $request->input('precio'),
+                'activo' => true,
+            ]);
+        
+            $nuevoCarrera->save();
+        
+            return redirect()->route('carreras.create')->with('Guardado', 'Carrera agregada exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
+        }
+    }
 
+    public function cambiarActivo($id)
+    {
+        $carrera = Carrera::findOrFail($id);
+        $carrera->activo = !$carrera->activo;
         $carrera->save();
 
-        // Redirigir a alguna vista después de guardar la carrera
-        return redirect()->route('carreras.create')->with('Guardado', 'Carrera agregada exitosamente');
+        return response()->json(['activo' => $carrera->activo]);
+    }
+
+    public function editarCarrera($id)
+    {
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
+        $carrera = Carrera::findOrFail($id);  // Obtener el jinete por su ID
+        //return view('Admin.Formularios.editarJinete', compact('carrera', 'adminId', 'adminName'));
     }
 }

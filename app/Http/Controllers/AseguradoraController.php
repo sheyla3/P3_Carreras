@@ -15,18 +15,21 @@ class AseguradoraController extends Controller
             'calle' => 'required',
             'precio' => 'required',
         ]);
+        try {
+            $nuevoaseguradora = new Aseguradora([
+                'CIF' => $request->input('cif'),
+                'nombre' => $request->input('nombre'),
+                'calle' => $request->input('calle'),
+                'precio' => $request->input('precio'),
+                'activo' => true,
+            ]);
 
-        $nuevoaseguradora = new Aseguradora([
-            'CIF' => $request->input('cif'),
-            'nombre' => $request->input('nombre'),
-            'calle' => $request->input('calle'),
-            'precio' => $request->input('precio'),
-            'activo' => true,
-        ]);
+            $nuevoaseguradora->save();
 
-        $nuevoaseguradora->save();
-
-        return redirect()->route('formularioAseguradora')->with('Guardado', 'Aseguradora agregada exitosamente');
+            return redirect()->route('formularioAseguradora')->with('Guardado', 'Aseguradora agregada exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
+        }
     }
 
     public function formularioAseguradora()
@@ -52,7 +55,7 @@ class AseguradoraController extends Controller
         $adminName = session('admin_name');
 
         $aseguradoras = Aseguradora::all();
-        return view('admin.adminAseguradoras', compact('aseguradoras','adminId', 'adminName'));
+        return view('admin.adminAseguradoras', compact('aseguradoras', 'adminId', 'adminName'));
     }
 
     public function editarAseguradora($id)
@@ -64,7 +67,7 @@ class AseguradoraController extends Controller
         $adminId = session('admin_id');
         $adminName = session('admin_name');
         $aseguradora = Aseguradora::findOrFail($id);  // Obtener la aseguradora por su ID
-        return view('Admin.Formularios.EditarAseguradora', compact('aseguradora','adminId', 'adminName'));
+        return view('Admin.Formularios.EditarAseguradora', compact('aseguradora', 'adminId', 'adminName'));
     }
 
     public function editar(Request $request, $id)
@@ -76,16 +79,19 @@ class AseguradoraController extends Controller
             'calle' => 'required',
             'precio' => 'required',
         ]);
+        try {
+            $aseguradora->update([
+                'CIF' => $request->input('cif'),
+                'nombre' => $request->input('nombre'),
+                'calle' => $request->input('calle'),
+                'precio' => $request->input('precio'),
+                'activo' => true,
+            ]);
 
-        $aseguradora->update([
-            'CIF' => $request->input('cif'),
-            'nombre' => $request->input('nombre'),
-            'calle' => $request->input('calle'),
-            'precio' => $request->input('precio'),
-            'activo' => true,
-        ]);
-
-        return redirect()->route('editarAseguradora', $id)->with('Editado', 'Aseguradora editada exitosamente');
+            return redirect()->route('editarAseguradora', $id)->with('Editado', 'Aseguradora editada exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
+        }
     }
 
     public function cambiarActivo($id)

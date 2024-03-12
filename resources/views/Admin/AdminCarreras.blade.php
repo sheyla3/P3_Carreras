@@ -20,7 +20,7 @@
             <li class="float-right ml-4">
                 <form action="{{ route('carreras.create') }}" method="GET">
                     @csrf
-                    <button type="submit" class="d-inline p-2 btn btn-primary">Añadir Jinete</button>
+                    <button type="submit" class="d-inline p-2 btn btn-primary">Añadir Carreras</button>
                 </form>
             </li>
             <li class="float-right">
@@ -46,12 +46,15 @@
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Tipo</th>
+                    <th>Lugar</th>
                     <th>Aforo</th>
+                    <th>Km</th>
                     <th>Fecha y Hora</th>
-                    <!-- <th>Cartel</th> -->
-                    <th>Patrocinio</th>
+                    <th>Cartel</th>
                     <th>Precio</th>
+                    <th>Patrocinio</th>
                     <th>Activo</th>
+                    <th>Editar</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,13 +64,33 @@
                         <td>{{ $carrera->nombre }}</td>
                         <td>{{ $carrera->descripcion }}</td>
                         <td>{{ $carrera->tipo }}</td>
+                        <td>
+                            @if ($carrera->lugar_foto)
+                                <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" width="60" height="40" alt="lugar de {{ $carrera->nombre }}">
+                            @else
+                                Sin foto
+                            @endif
+                        </td>
                         <td>{{ $carrera->aforo }}</td>
+                        <td>{{ $carrera->km }}</td>
                         <td>{{ $carrera->fechaHora }}</td>
-                        <!-- <td>{{ $carrera->cartel }}</td> -->
-                        <td>{{ $carrera->patrocinio }}</td>
+                        <td>
+                            @if ($carrera->cartel)
+                                <img src="{{ asset('storage/' . $carrera->cartel) }}" width="60" height="40" alt="cartel de {{ $carrera->nombre }}">
+                            @else
+                                Sin foto
+                            @endif
+                        </td>
                         <td>{{ $carrera->precio }}</td>
-                        <td>{{ $carrera->activo }}</td>
-
+                        <td><a class="btn btn-info" href="{{ route('editarCarrera', $carrera->id_carrera) }}" >Patrocinio</a></td>
+                        <td>
+                            <button class="btn {{ $carrera->activo ? 'btn-success' : 'btn-danger' }}"
+                                onclick="cambiarEstado({{ $carrera->id_carrera }}, '{{ route('cambiarActivo', $carrera->id_carrera) }}')"
+                                data-id="{{ $carrera->id_carrera }}">
+                                {{ $carrera->activo ? 'Sí' : 'No' }}
+                            </button>
+                        </td>
+                        <td><a class="btn btn-dark" href="{{ route('editarCarrera', $carrera->id_carrera) }}" >Editar</a></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -78,5 +101,25 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
+<script>
+    function cambiarEstado(id, url) {
+        // Realizar una solicitud AJAX para cambiar el estado activo
+        fetch(url, {
+                method: 'PUT', // Cambiar a PUT
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Cambiar el texto y la clase del botón en consecuencia
+                const button = document.querySelector(`button[data-id="${id}"]`);
+                button.innerText = data.activo ? 'Sí' : 'No';
+                button.classList.remove('btn-success', 'btn-danger');
+                button.classList.add(`btn-${data.activo ? 'success' : 'danger'}`);
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
 </html>

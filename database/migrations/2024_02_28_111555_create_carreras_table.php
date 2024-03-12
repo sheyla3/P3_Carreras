@@ -23,7 +23,6 @@ return new class extends Migration
             $table->dateTime('fechaHora');
             $table->string('cartel');
             $table->integer('precio');
-            $table->string('qr');
             $table->boolean('activo')->default(true);
             $table->rememberToken();
             $table->timestamps();

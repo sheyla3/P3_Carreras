@@ -37,18 +37,20 @@ Route::get('/', function () {
     return view('index');
 })->name('/');
 
-// ADMIN
-Route::get('/loginAdmin', function () {return view('Admin.loginAdmin');})->name('loginAdmin');
 
-//TICKETS
+// USUARIO
+
+//mostrar tickets
+Route::get('/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');
 Route::get('/tickets', function () {return view('Enlaces.tickets');})->name('tickets');
 
-
+// ADMIN
+Route::get('/loginAdmin', function () {return view('Admin.loginAdmin');})->name('loginAdmin');
 Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
 Route::get('/Admin_panel', [AdminController::class, 'Admin_panelCarreras'])->name('Admin_panel');
 Route::post('/admin-cerrar', [AdminController::class, 'CerrarSesion'])->name('admin.cerrar');
 
-// SOCIOS
+// socios
 Route::get('/adminSocio', [SocioController::class, 'mostrarSocio'])->name('adminSocio');
 Route::get('/formularioSocio', [SocioController::class, 'formularioSocio'])->name('formularioSocio');
 Route::post('/guardarSocio', [SocioController::class, 'guardarSocio'])->name('guardar.socio');
@@ -78,6 +80,8 @@ Route::get('/AdminCarreras', [CarrerasController::class, 'mostrarCarreras'])->na
 Route::get('/editarCarrera/{id}', [CarrerasController::class, 'editarCarrera'])->name('editarCarrera');
 Route::post('/carreras-editar/{id}', [CarrerasController::class, 'editar'])->name('carreras.editar');
 Route::put('/cambiarActivo/{id}', [CarrerasController::class, 'cambiarActivo'])->name('cambiarActivo');
+Route::get('/patrocinioCarrera/{id}', [CarrerasController::class, 'patrocinioCarrera'])->name('patrocinioCarrera');
+Route::post('/carrera-patrocinio/{id}', [CarrerasController::class, 'nuevoPatrocinio'])->name('carrera.patrocinio');
 
 //aseguradoras
 Route::get('/formularioAseguradora', [AseguradoraController::class, 'formularioAseguradora'])->name('formularioAseguradora');
@@ -86,9 +90,3 @@ Route::get('/adminAseguradoras', [AseguradoraController::class, 'mostrarAsegurad
 Route::get('/editarAseguradora/{id}', [AseguradoraController::class, 'editarAseguradora'])->name('editarAseguradora');
 Route::post('/aseguradora-editar/{id}', [AseguradoraController::class, 'editar'])->name('aseguradora.editar');
 Route::put('/cambiarActivo/{id}', [AseguradoraController::class, 'cambiarActivo'])->name('cambiarActivo');
-
-// USUARIO
-
-//mostrar tickets:
-Route::get('/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');
-

@@ -66,7 +66,8 @@
                         <td>{{ $carrera->tipo }}</td>
                         <td>
                             @if ($carrera->lugar_foto)
-                                <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" width="60" height="40" alt="lugar de {{ $carrera->nombre }}">
+                                <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" width="60" height="40"
+                                    alt="lugar de {{ $carrera->nombre }}">
                             @else
                                 Sin foto
                             @endif
@@ -76,13 +77,15 @@
                         <td>{{ $carrera->fechaHora }}</td>
                         <td>
                             @if ($carrera->cartel)
-                                <img src="{{ asset('storage/' . $carrera->cartel) }}" width="60" height="40" alt="cartel de {{ $carrera->nombre }}">
+                                <img src="{{ asset('storage/' . $carrera->cartel) }}" width="60" height="40"
+                                    alt="cartel de {{ $carrera->nombre }}">
                             @else
                                 Sin foto
                             @endif
                         </td>
-                        <td>{{ $carrera->precio }}</td>
-                        <td><a class="btn btn-info" href="{{ route('editarCarrera', $carrera->id_carrera) }}" >Patrocinio</a></td>
+                        <td>{{ $carrera->precio }}€</td>
+                        <td><a class="btn btn-info"
+                                href="{{ route('patrocinioCarrera', $carrera->id_carrera) }}">Patrocinio</a></td>
                         <td>
                             <button class="btn {{ $carrera->activo ? 'btn-success' : 'btn-danger' }}"
                                 onclick="cambiarEstado({{ $carrera->id_carrera }}, '{{ route('cambiarActivo', $carrera->id_carrera) }}')"
@@ -90,7 +93,8 @@
                                 {{ $carrera->activo ? 'Sí' : 'No' }}
                             </button>
                         </td>
-                        <td><a class="btn btn-dark" href="{{ route('editarCarrera', $carrera->id_carrera) }}" >Editar</a></td>
+                        <td><a class="btn btn-dark"
+                                href="{{ route('editarCarrera', $carrera->id_carrera) }}">Editar</a></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -122,4 +126,5 @@
             .catch(error => console.error('Error:', error));
     }
 </script>
+
 </html>

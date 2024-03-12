@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carrera;
+use App\Models\SponsorCarrera;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 
 class CarrerasController extends Controller
@@ -65,9 +67,9 @@ class CarrerasController extends Controller
                 'precio' => $request->input('precio'),
                 'activo' => true,
             ]);
-        
+
             $nuevoCarrera->save();
-        
+
             return redirect()->route('carreras.create')->with('Guardado', 'Carrera agregada exitosamente');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
@@ -93,5 +95,39 @@ class CarrerasController extends Controller
         $adminName = session('admin_name');
         $carrera = Carrera::findOrFail($id);  // Obtener el jinete por su ID
         //return view('Admin.Formularios.editarJinete', compact('carrera', 'adminId', 'adminName'));
+    }
+
+    public function patrocinioCarrera($id)
+    {
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $sponsorCarreras = SponsorCarrera::where('id_carrera', $id)->with('sponsor')->get();
+        $sponsorsActivos = Sponsor::where('activo', true)->get(); // Obtén todos los sponsors activos
+
+        return view('admin.patrocinioCarrera', compact('sponsorCarreras', 'sponsorsActivos'));
+    }
+
+    public function nuevoPatrocinio(Request $request, $id)
+    {
+        $request->validate([
+            'id_sponsor' => 'required',
+            'patrocinio' => 'required',
+        ]);
+
+        try {
+            $nuevoSponsorCarrera = new SponsorCarrera([
+                'id_carrera' => $id,
+                'id_sponsor' => $request->input('id_sponsor'),
+                'patrocinio' => $request->input('patrocinio'),
+            ]);
+
+            $nuevoSponsorCarrera->save();
+
+            return redirect()->route('admin.patrocinioCarrera', $id)->with('Guardado', 'Aseguradora agregada exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
+        }
     }
 }

@@ -8,6 +8,8 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class Usuario
@@ -26,8 +28,10 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Usuario extends Model
+class Usuario extends Authenticatable //extends Model tmbn deberia ser
 {
+	use Notifiable;
+
 	protected $table = 'usuario';
 	protected $primaryKey = 'id_usuario';
 

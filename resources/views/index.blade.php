@@ -45,25 +45,26 @@
     <section class="Home">
         <div class="container" id="container" style="display: none;">
             <div class="form-container sign-up-container">
-                <form action="#" method="POST" id="signupForm">
+                <form action="{{ route('registroUsuario') }}" method="POST" id="signupForm">
                 @csrf
-                <h1>Create Account</h1>
+                <h1>¡Quiero Ser Socio!</h1>
                 <div id="step1">
                     <input type="text" placeholder="Nombre" name="nombre" required/>
                     <input type="text" placeholder="Apellido" name="apellido" required/>
-                    <input type="tel" placeholder="Teléfono" name="telefono" required/>
+                    <input type="tel" placeholder="Teléfono" name="telf" required/>
                     <button type="button" id="nextStep1">Next</button>
                 </div>
                 <div id="step2" style="display: none;">
                     <input type="text" placeholder="DNI" name="dni" required/>
-                    <input type="date" placeholder="Fecha de Nacimiento" name="fecha_nacimiento" required/>
+                    <input type="date" placeholder="Fecha de Nacimiento" name="edad" required/>
                     <button type="button" id="prevStep2">Previous</button>
                     <button type="button" id="nextStep2">Next</button>
                 </div>
                 <div id="step3" style="display: none;">
                     <input type="email" placeholder="Correo" name="correo" required/>
-                    <input type="password" placeholder="Contraseña" name="password" required/>
-                    <input type="password" placeholder="Confirmar Contraseña" name="confirm_password" required/>
+                    <input type="password" placeholder="Contraseña" name="contrasena" required/>
+                    <input type="password" placeholder="Confirmar Contraseña" name="contrasena"/>
+                    <input type="file" name="foto_perfil" accept="image/*"/>
                     <button type="button" id="prevStep3">Previous</button>
                     <button type="submit">Sign Up</button>
                 </div>
@@ -72,7 +73,7 @@
             <div class="form-container sign-in-container">
                 <form action="{{ route('loginUser') }}" method="POST">
                 @csrf
-                    <h1>Sign in</h1>
+                    <h1>Iniciar Sesion</h1>
                     <input type="email" name="correo" placeholder="Enter your correo" required/>  
                     <input type="password" name="password" placeholder="Enter your password" required/>
                     <a href="#">Forgot your password?</a>

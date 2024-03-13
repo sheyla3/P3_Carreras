@@ -47,7 +47,7 @@
             <div class="form-container sign-up-container">
                 <form action="{{ route('registroUsuario') }}" method="POST" id="signupForm">
                 @csrf
-                <h1>Create Account</h1>
+                <h1>¡Quiero Ser Socio!</h1>
                 <div id="step1">
                     <input type="text" placeholder="Nombre" name="nombre" required/>
                     <input type="text" placeholder="Apellido" name="apellido" required/>
@@ -73,7 +73,7 @@
             <div class="form-container sign-in-container">
                 <form action="{{ route('loginUser') }}" method="POST">
                 @csrf
-                    <h1>Sign in</h1>
+                    <h1>Iniciar Sesion</h1>
                     <input type="email" name="correo" placeholder="Enter your correo" required/>  
                     <input type="password" name="password" placeholder="Enter your password" required/>
                     <a href="#">Forgot your password?</a>

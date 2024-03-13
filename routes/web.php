@@ -45,6 +45,7 @@ Route::get('/', function () {
 
 // USUARIO
 Route::post('/loginUser', [UsuarioController::class, 'loginUsuario'])->name('loginUser');
+Route::post('/registroUsuario', [UsuarioController::class, 'registroUsuario'])->name('registroUsuario');
 
 //mostrar tickets
 Route::get('/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');

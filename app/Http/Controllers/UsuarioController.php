@@ -39,6 +39,34 @@ class UsuarioController extends Controller
         }
     }
 
+    public function registroUsuario(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'telf' => 'required',
+            'dni' => 'required',
+            'edad' => 'required',
+            'correo' => 'required',
+            'contrasena' => 'required',
+        ]);
+
+        $usuario = new Usuario;
+        $usuario->nombre = $request->nombre;
+        $usuario->apellido = $request->apellido;
+        $usuario->telf = $request->telf;
+        $usuario->dni = $request->dni;
+        $usuario->edad = $request->edad;
+        $usuario->correo = $request->correo;
+        $usuario->contrasena = $request->contrasena;
+        $usuario->save();
+
+        // Loguear al usuario automáticamente después de registrarse
+        Auth::login($usuario);
+
+        return redirect()->route('Admin_panel');
+    }
+
     public function cerrarSesion(Request $request)
     {
         Auth::logout();

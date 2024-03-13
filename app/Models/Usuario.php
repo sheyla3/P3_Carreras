@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class Usuario
@@ -28,6 +29,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Usuario extends Model
 {
+	use Notifiable;
+
 	protected $table = 'usuario';
 	protected $primaryKey = 'id_usuario';
 

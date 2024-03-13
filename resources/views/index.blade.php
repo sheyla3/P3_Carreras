@@ -17,7 +17,7 @@
         <img src="{{ asset('img/logoCaballo.png') }}" alt="">
     </div>
     <div class="right-links">
-        <a href="{{ route('loginAdmin') }}" class="btn btn-primary">Iniciar Sesion</a>
+        <a href="#" class="btn btn-primary" id="loginBtn">Iniciar Sesion</a>
         <a href="{{ route('loginAdmin') }}" class="btn btn-primary">Registrarme</a>
     </div>
 </nav>
@@ -43,47 +43,34 @@
 
 </style>
     <section class="Home">
-        <!-- <div class="form_container">
-            <i class="uil uil-times form_close"></i> -->
-            <!-- Login form -->
-            <!-- <div class="form login_form">
-            <form action="{{ route('loginUser') }}" method="POST">
+        <div class="container" id="container" style="display: none;">
+            <div class="form-container sign-up-container">
+                <form action="#" method="POST" id="signupForm">
                 @csrf
-                <h2>Login</h2>
-                <div class="input_box"> -->
-                    <!-- será un email -->
-                    <!-- <input type="email" name="correo" placeholder="Enter your correo" required/>  
-                    <i class="uil uil-envelope-alt email"></i>
+                <h1>Create Account</h1>
+                <div id="step1">
+                    <input type="text" placeholder="Nombre" name="nombre" required/>
+                    <input type="text" placeholder="Apellido" name="apellido" required/>
+                    <input type="tel" placeholder="Teléfono" name="telefono" required/>
+                    <button type="button" id="nextStep1">Next</button>
                 </div>
-                <div class="input_box">
-                    <input type="password" name="password" placeholder="Enter your password" required/>
-                    <i class="uil uil-lock password"></i>
-                    <i class="uil uil-eye-slash pw_hide"></i>
+                <div id="step2" style="display: none;">
+                    <input type="text" placeholder="DNI" name="dni" required/>
+                    <input type="date" placeholder="Fecha de Nacimiento" name="fecha_nacimiento" required/>
+                    <button type="button" id="prevStep2">Previous</button>
+                    <button type="button" id="nextStep2">Next</button>
                 </div>
-                <input type="submit" value="Iniciar">
+                <div id="step3" style="display: none;">
+                    <input type="email" placeholder="Correo" name="correo" required/>
+                    <input type="password" placeholder="Contraseña" name="password" required/>
+                    <input type="password" placeholder="Confirmar Contraseña" name="confirm_password" required/>
+                    <button type="button" id="prevStep3">Previous</button>
+                    <button type="submit">Sign Up</button>
+                </div>
             </form>
             </div>
-        </div> -->
-
-        <div class="container" id="container">
-            <div class="form-container sign-up-container">
-                <form action="#">
-                @csrf
-                    <h1>Create Account</h1>
-                    <div class="social-container">
-                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <span>or use your email for registration</span>
-                    <input type="text" placeholder="Name" />
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Password" />
-                    <button>Sign Up</button>
-                </form>
-            </div>
             <div class="form-container sign-in-container">
-                <form action="{{ route('loginUser') }}">
+                <form action="{{ route('loginUser') }}" method="POST">
                 @csrf
                     <h1>Sign in</h1>
                     <input type="email" name="correo" placeholder="Enter your correo" required/>  
@@ -110,18 +97,61 @@
     </section>
 
     <script>
-        const signUpButton = document.getElementById('signUp');
-        const signInButton = document.getElementById('signIn');
-        const container = document.getElementById('container');
+    const loginBtn = document.getElementById('loginBtn');
+    const container = document.getElementById('container');
 
-        signUpButton.addEventListener('click', () => {
-            container.classList.add("right-panel-active");
-        });
+    loginBtn.addEventListener('click', () => {
+        container.style.display = 'block';
+    });
 
-        signInButton.addEventListener('click', () => {
-            container.classList.remove("right-panel-active");
-        });
-    </script>
+    document.addEventListener('click', (e) => {
+        if (!container.contains(e.target) && e.target !== loginBtn) {
+            container.style.display = 'none';
+        }
+    });
+
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+
+    signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+    });
+</script>
+
+<script>
+    const signupForm = document.getElementById('signupForm');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    const nextStep1 = document.getElementById('nextStep1');
+    const nextStep2 = document.getElementById('nextStep2');
+    const prevStep2 = document.getElementById('prevStep2');
+    const prevStep3 = document.getElementById('prevStep3');
+
+    nextStep1.addEventListener('click', () => {
+        step1.style.display = 'none';
+        step2.style.display = 'block';
+    });
+
+    nextStep2.addEventListener('click', () => {
+        step2.style.display = 'none';
+        step3.style.display = 'block';
+    });
+
+    prevStep2.addEventListener('click', () => {
+        step2.style.display = 'none';
+        step1.style.display = 'block';
+    });
+
+    prevStep3.addEventListener('click', () => {
+        step3.style.display = 'none';
+        step2.style.display = 'block';
+    });
+</script>
     
 
 

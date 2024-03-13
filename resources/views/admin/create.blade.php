@@ -15,7 +15,6 @@
     @include('layouts.cabAdmin')
     <div class="container">
         <h1>Crear Carrera</h1>
-
         <!-- Formulario para crear una nueva carrera -->
         <form action="{{ route('carreras.store') }}" method="post" enctype="multipart/form-data">
             @csrf <!-- Agrega el token CSRF para protección contra falsificación de solicitudes entre sitios -->
@@ -40,7 +39,6 @@
                     <option value="trote y arnes">Trote y arnes</option>
                     <option value="parejeras">Parejeras</option>
                 </select>
-                {!! $errors->first('tipo', '<small class="text-danger">:message</small>') !!}
             </div>
 
             <div class="form-group">

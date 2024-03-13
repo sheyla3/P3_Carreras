@@ -6,6 +6,8 @@ use App\Models\Carrera;
 use App\Models\SponsorCarrera;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class CarrerasController extends Controller
 {
@@ -36,33 +38,34 @@ class CarrerasController extends Controller
     // Método para guardar la carrera creada
     public function store(Request $request)
     {
-        // Validar los datos del formulario
-        $validatedData = $request->validate([
-            'nombre' => 'required|string|max:255',
-            'descripcion' => 'required|string',
-            'lugar_foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'cartel' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'fechaHora' => 'required|date',
-            'precio' => 'required|integer',
-            'km' => 'required|integer',
-            'tipo' => 'required|in:plano,vallas,campo a traves,trote y arnes,parejeras',
-        ]);
-
-        if ($request->hasFile('lugar_foto')) {
-            $rutaArchivo1 = $request->file('lugar_foto')->store('Lugares', 'public');
-        }
-
-        if ($request->hasFile('cartel')) {
-            $rutaArchivo2 = $request->file('cartel')->store('Carteles', 'public');
-        }
-
         try {
+            $request->validate([
+                'nombre' => 'required',
+                'descripcion' => 'required',
+                'tipo' => 'required',
+                'lugar_foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'km' => 'required|integer',
+                'fechaHora' => 'required',
+                'cartel' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'precio' => 'required|integer'
+            ]);
+
+            if ($request->hasFile('lugar_foto')) {
+                $rutaArchivo1 = $request->file('lugar_foto')->store('Lugares', 'public');
+            }
+
+            if ($request->hasFile('cartel')) {
+                $rutaArchivo2 = $request->file('cartel')->store('Carteles', 'public');
+            }
+            $fechaHora = Carbon::parse($request->input('fechaHora'));
+
             $nuevoCarrera = new Carrera([
                 'nombre' => $request->input('nombre'),
                 'descripcion' => $request->input('descripcion'),
+                'tipo' => $request->input('tipo'),
                 'lugar_foto' => $rutaArchivo1,
                 'km' => $request->input('km'),
-                'fechaHora' => $request->input('fechaHora'),
+                'fechaHora' => $fechaHora,
                 'cartel' => $rutaArchivo2,
                 'precio' => $request->input('precio'),
                 'activo' => true,
@@ -72,6 +75,7 @@ class CarrerasController extends Controller
 
             return redirect()->route('carreras.create')->with('Guardado', 'Carrera agregada exitosamente');
         } catch (\Exception $e) {
+            Log::error('Error al guardar carrera: ' . $e->getMessage());
             return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
         }
     }

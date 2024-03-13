@@ -31,14 +31,14 @@ use App\Http\Controllers\AseguradoraController;
             <li class="float-right ml-4">
                 <form action="{{ route('formularioAseguradora') }}" method="GET">
                     @csrf
-                    <button type="submit" class="d-inline p-2 btn btn-primary">Añadir Aseguradoras</button>
+                    <button type="submit" class="d-inline p-2 btn btn-primary"><img src="{{ asset('img/mas.svg') }}" alt="+" width="30" height="30"></button>
                 </form>
             </li>
             <li class="float-right">
                 <form>
                     @csrf
                     <div class="form-group row">
-                        <button type="submit" class="col-sm-2 btn btn-white">
+                        <button type="submit" class="btn btn-white">
                             <img src="{{ asset('img/lupa.svg') }}" alt="Buscar" width="20" height="20">
                         </button>
                         <div>

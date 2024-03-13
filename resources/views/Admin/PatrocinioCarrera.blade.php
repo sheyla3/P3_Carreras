@@ -21,7 +21,7 @@
                 <h1>Patrocinio</h1>
             </li>
             <li class="float-right ml-4">
-                <button id="btnAgregarPatrocinio" class="d-inline p-2 btn btn-primary">Añadir Patrocinio</button>
+                <button id="btnAgregarPatrocinio" class="d-inline p-2 btn btn-primary"><img src="{{ asset('img/mas.svg') }}" alt="+" width="30" height="30"></button>
             </li>
         </ul>
         <br><br>

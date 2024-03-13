@@ -20,7 +20,7 @@
             <li class="float-right ml-4">
                 <form action="{{ route('carreras.create') }}" method="GET">
                     @csrf
-                    <button type="submit" class="d-inline p-2 btn btn-primary">Añadir Carreras</button>
+                    <button type="submit" class="d-inline p-2 btn btn-primary rounded-circle"><img src="{{ asset('img/mas.svg') }}" alt="+" width="30" height="30"></button>
                 </form>
             </li>
             <li class="float-right">
@@ -62,7 +62,7 @@
                     <tr>
                         <td>{{ $carrera->id_carrera }}</td>
                         <td>{{ $carrera->nombre }}</td>
-                        <td>{{ $carrera->descripcion }}</td>
+                        <td width="170" style="overflow: auto">{{ $carrera->descripcion }}</td>
                         <td>{{ $carrera->tipo }}</td>
                         <td>
                             @if ($carrera->lugar_foto)
@@ -77,7 +77,7 @@
                         <td>{{ $carrera->fechaHora }}</td>
                         <td>
                             @if ($carrera->cartel)
-                                <img src="{{ asset('storage/' . $carrera->cartel) }}" width="60" height="40"
+                                <img src="{{ asset('storage/' . $carrera->cartel) }}" width="30" height="40"
                                     alt="cartel de {{ $carrera->nombre }}">
                             @else
                                 Sin foto

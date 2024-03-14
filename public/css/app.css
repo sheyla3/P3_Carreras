@@ -150,13 +150,6 @@ header button {
     font-size: 26px;
 }
 
-.Maestro-2 {
-    height: 70vh;
-    background: #1F323F;
-    margin-bottom: 10.5vh;
-    margin-top: -17px;
-}
-
 .Maestro-3 {
     display: flex;
     flex-direction: row;
@@ -546,4 +539,52 @@ section .social-container a {
     transform: translate(-50%, -50%);
     z-index: 9999;
     /* Asegura que esté por encima de todo */
+}
+
+
+.carousel-inner button {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Para centrar los botones horizontalmente */
+}
+
+.carousel-inner img {
+    width: 380px; /* Ajusta el ancho de las imágenes según tus necesidades */
+    height: 420px; /* Ajusta el alto de las imágenes según tus necesidades */
+    padding: 1em; /* Agrega un relleno alrededor de las imágenes */
+    margin-right: 10px; /* Ajusta la separación entre las imágenes */
+    border-radius: 10px; /* Agrega bordes redondeados a las imágenes */
+}
+
+.carousel-control-prev, .carousel-control-next {
+    display: flex;
+    align-items: center;
+    background: red;
+    position: absolute; /* Para posicionar los botones en relación con el contenedor padre */
+    height: 50px; /* Ajusta el alto de los botones según tus necesidades */
+    background-color: rgba(0, 0, 0, 0.5); /* Agrega un color de fondo a los botones */
+    color: white; /* Color del texto de los botones */
+    font-size: 20px; /* Tamaño del texto de los botones */
+    border: none; /* Elimina el borde de los botones */
+    cursor: pointer; /* Cambia el cursor al pasar sobre los botones */
+    z-index: 1; /* Asegura que los botones estén por encima de las imágenes */
+}
+
+.carousel-control-prev {
+    left: 0; /* Posiciona el botón "Anterior" a la izquierda */
+}
+
+.carousel-control-next {
+    right: 0; /* Posiciona el botón "Siguiente" a la derecha */
+}
+
+
+.Maestro-2 {
+    display: flex;
+    height: 70vh;
+    justify-content: center;
+    align-items: center;
+    background: #1F323F;
+    margin-bottom: 10.5vh;
+    margin-top: -17px;
 }

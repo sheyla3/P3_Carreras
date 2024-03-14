@@ -21,7 +21,7 @@ class CarrerasController extends Controller
         return view('admin.AdminCarreras', compact('carreras'));
     }
 
-    public function index()
+    public function index2()
     {
         $carreras = Carrera::all(); // Suponiendo que Carrera sea el modelo de tu tabla de carreras
         return view('index', compact('carreras'));

@@ -37,7 +37,7 @@
     @foreach($carreras as $carrera)
         <div class="carrera">
             <div>
-                <img src="{{ asset('img/prueba.png') }}" alt="">
+                <img src="{{ asset('storage/'.$carrera->lugar_foto) }}" width="378px" height="342px" alt="">
             </div>
 
         <div class="datos">

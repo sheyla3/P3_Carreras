@@ -68,7 +68,7 @@ use App\Http\Controllers\sponsorController;
                         <td>{{ $sponsor->nombre }}</td>
                         <td>
                             @if ($sponsor->logo)
-                                <img src="{{ asset('storage/' . $sponsor->logo) }}" width="60" height="40">
+                                <img src="{{ asset('storage/' . $sponsor->logo) }}" width="60" height="40" alt="Logo {{ $sponsor->nombre }}">
                             @else
                                 Sin logo
                             @endif

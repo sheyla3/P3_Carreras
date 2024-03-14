@@ -21,13 +21,12 @@
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" class="form-control">
-                {!! $errors->first('nombre', '<small class="text-danger">:message</small>') !!}
             </div>
 
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>
                 <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
-                {!! $errors->first('descripcion', '<small class="text-danger">:message</small>') !!}
+                <span id="contadorCaracteres"></span>/1000
             </div>
 
             <div class="form-group">
@@ -44,31 +43,26 @@
             <div class="form-group">
                 <label for="lugar_foto">Foto del lugar:</label>
                 <input type="file" id="lugar_foto" name="lugar_foto" class="form-control">
-                {!! $errors->first('lugar_foto', '<small>:message</small>') !!}
             </div>
 
             <div class="form-group">
                 <label for="km">Distancia en km:</label>
                 <input type="number" id="km" name="km" class="form-control">
-                {!! $errors->first('km', '<small class="text-danger">:message</small>') !!}
             </div>
 
             <div class="form-group">
                 <label for="fechaHora">Fecha y Hora:</label>
                 <input type="datetime-local" id="fechaHora" name="fechaHora" class="form-control">
-                {!! $errors->first('fechaHora', '<small class="text-danger">:message</small>') !!}
             </div>
 
             <div class="form-group">
                 <label for="cartel">Cartel:</label>
                 <input type="file" id="cartel" name="cartel" class="form-control">
-                {!! $errors->first('cartel', '<small>:message</small>') !!}
             </div>
 
             <div class="form-group">
                 <label for="precio">Precio:</label>
                 <input type="number" id="precio" name="precio" class="form-control">
-                {!! $errors->first('precio', '<small class="text-danger">:message</small>') !!}
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
@@ -136,5 +130,19 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+<script>
+    function mostrarCaracteres(textareaElement, contadorElement) {
+        contadorElement.innerText = textareaElement.value.length;
+    }
 
+    document.addEventListener('DOMContentLoaded', function() {
+        let descripcion = document.getElementById('descripcion');
+        let contadorCaracteres = document.getElementById('contadorCaracteres');
+
+        mostrarCaracteres(descripcion, contadorCaracteres);
+        descripcion.addEventListener('input', function() {
+            mostrarCaracteres(descripcion, contadorCaracteres);
+        });
+    });
+</script>
 </html>

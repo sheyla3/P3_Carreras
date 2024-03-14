@@ -7,7 +7,7 @@
     <title>Editar Carrera</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+    <script src="{{ asset('js/app.js') }}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -29,6 +29,7 @@
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>
                 <textarea id="descripcion" name="descripcion" class="form-control">{{ $carrera->descripcion ?? '' }}</textarea>
+                <span id="contadorCaracteres"></span>/1000
             </div>
 
             <div class="form-group">
@@ -84,7 +85,7 @@
                 <label for="cartel" class="form-label">Nuevo Cartel:</label>
                 <input type="file" id="cartel" name="cartel" class="form-control">
             </div>
-            
+
             <div class="form-group">
                 <label for="precio">Precio:</label>
                 <input type="number" id="precio" name="precio" class="form-control"
@@ -155,5 +156,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+<script>
+    function mostrarCaracteres(textareaElement, contadorElement) {
+        contadorElement.innerText = textareaElement.value.length;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let descripcion = document.getElementById('descripcion');
+        let contadorCaracteres = document.getElementById('contadorCaracteres');
+
+        mostrarCaracteres(descripcion, contadorCaracteres);
+        descripcion.addEventListener('input', function() {
+            mostrarCaracteres(descripcion, contadorCaracteres);
+        });
+    });
+</script>
 
 </html>

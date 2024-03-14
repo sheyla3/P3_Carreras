@@ -43,6 +43,7 @@
                 @endforeach
             </tbody>
         </table>
+        <a href="{{ route('AdminCarreras') }}" class="btn btn-secondary">Atrás</a>
     </div>
 
     <!-- Modal -->
@@ -57,7 +58,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('carrera.patrocinio', $sponsorCarreras[0]->id_carrera) }}" method="POST"
+                    <form action="{{ route('carrera.patrocinio', $idCarrera) }}" method="POST"
                         class="mb-4 needs-validation">
                         @csrf
                         <div class="form-group">

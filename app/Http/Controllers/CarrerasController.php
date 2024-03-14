@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Carrera;
@@ -105,32 +106,31 @@ class CarrerasController extends Controller
             return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
         }
 
-        $carreraCarreras = SponsorCarrera::where('id_carrera', $id)->with('carrera')->get();
-        $carrerasActivos = carrera::where('activo', true)->get(); // Obtén todos los carreras activos
+        $idCarrera = $id;
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
+        $sponsorCarreras = SponsorCarrera::where('id_carrera', $id)->with('carrera')->get();
+        $sponsorsActivos = carrera::where('activo', true)->get(); // Obtén todos los carreras activos
 
-        return view('admin.patrocinioCarrera', compact('carreraCarreras', 'carrerasActivos'));
+        return view('admin.patrocinioCarrera', compact('sponsorCarreras', 'sponsorsActivos', 'adminId', 'adminName', 'idCarrera'));
     }
 
-    public function nuevoPatrocinio(Request $request, $id)
+    public function nuevoPatrocinio(Request $request, $idCarrera)
     {
         $request->validate([
-            'id_carrera' => 'required',
+            'id_sponsor' => 'required',
             'patrocinio' => 'required',
         ]);
 
-        try {
-            $nuevocarreraCarrera = new SponsorCarrera([
-                'id_carrera' => $id,
-                'id_sponsor' => $request->input('id_sponsor'),
-                'patrocinio' => $request->input('patrocinio'),
-            ]);
+        $nuevocarreraCarrera = new SponsorCarrera([
+            'id_carrera' => $idCarrera,
+            'id_sponsor' => $request->input('id_sponsor'),
+            'patrocinio' => $request->input('patrocinio'),
+        ]);
 
-            $nuevocarreraCarrera->save();
+        $nuevocarreraCarrera->save();
 
-            return redirect()->route('admin.patrocinioCarrera', $id)->with('Guardado', 'Aseguradora agregada exitosamente');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
-        }
+        return redirect()->route('admin.patrocinioCarrera', $idCarrera);
     }
 
     public function editar(Request $request, $id)

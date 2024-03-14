@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,11 +12,10 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('node_modules/slick-carousel/slick/slick.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('node_modules/slick-carousel/slick/slick-theme.css') }}">
+    <script src="{{ asset('node_modules/slick-carousel/slick/slick.min.js') }}"></script>
 </head>
-
 <body>
     @include('layouts.CaballoHeader')
     @include('layouts.SliderHome')
@@ -48,49 +46,33 @@
     </nav>
 
     <div class="Maestro-2">
-    <div class="slider">
-        <div>
-            <!-- Contenido del primer slide -->
-            <img src="ruta-a-tu-imagen-1.jpg" alt="Carrera 1">
-            <h3>Carrera 1</h3>
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach($carreras->chunk(3) as $chunk)
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}" data-bs-interval="10000">
+                        <div class="row">
+                            @foreach($chunk as $carrera)
+                                <div class="col">
+                                    <div class="lugares">
+                                        <img src="{{ asset('storage/'.$carrera->lugar_foto) }}" alt="Lugar de {{ $carrera->nombre }}">
+                                        <h3>{{ $carrera->nombre }}</h3>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <div>
-            <!-- Contenido del segundo slide -->
-            <img src="ruta-a-tu-imagen-2.jpg" alt="Carrera 2">
-            <h3>Carrera 2</h3>
-        </div>
-        <div>
-            <!-- Contenido del tercer slide -->
-            <img src="ruta-a-tu-imagen-3.jpg" alt="Carrera 3">
-            <h3>Carrera 3</h3>
-        </div>
-        <!-- Agrega más divs según sea necesario -->
     </div>
-        <button class="prev">Anterior</button>
-        <button class="next">Siguiente</button>
-    </div>
-
-    <script>
-    $(document).ready(function(){
-        $('.slider').slick({
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            prevArrow: $('.prev'),
-            nextArrow: $('.next'),
-            responsive: [
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
-    });
-</script>
-
-
 
     <div class="Maestro-3">
         <div class="container-4">

@@ -32,9 +32,7 @@ Route::get('/peliculas/{titulo}', function ($titulo) {
 */
 
 // INICIO
-Route::get('/', function () {
-    return view('index');
-})->name('/');
+Route::get('/', [CarrerasController::class, 'index2'])->name('/');
 
 
 // USUARIO

@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Carrera;
 use App\Models\SponsorCarrera;
-use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
@@ -106,7 +104,7 @@ class CarrerasController extends Controller
         $adminId = session('admin_id');
         $adminName = session('admin_name');
         $carrera = Carrera::findOrFail($id);  // Obtener el jinete por su ID
-        //return view('Admin.Formularios.editarJinete', compact('carrera', 'adminId', 'adminName'));
+        return view('Admin.Formularios.EditarCarrera', compact('carrera', 'adminId', 'adminName'));
     }
 
     public function patrocinioCarrera($id)
@@ -115,29 +113,73 @@ class CarrerasController extends Controller
             return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
         }
 
-        $sponsorCarreras = SponsorCarrera::where('id_carrera', $id)->with('sponsor')->get();
-        $sponsorsActivos = Sponsor::where('activo', true)->get(); // Obtén todos los sponsors activos
+        $carreraCarreras = SponsorCarrera::where('id_carrera', $id)->with('carrera')->get();
+        $carrerasActivos = carrera::where('activo', true)->get(); // Obtén todos los carreras activos
 
-        return view('admin.patrocinioCarrera', compact('sponsorCarreras', 'sponsorsActivos'));
+        return view('admin.patrocinioCarrera', compact('carreraCarreras', 'carrerasActivos'));
     }
 
     public function nuevoPatrocinio(Request $request, $id)
     {
         $request->validate([
-            'id_sponsor' => 'required',
+            'id_carrera' => 'required',
             'patrocinio' => 'required',
         ]);
 
         try {
-            $nuevoSponsorCarrera = new SponsorCarrera([
+            $nuevocarreraCarrera = new SponsorCarrera([
                 'id_carrera' => $id,
                 'id_sponsor' => $request->input('id_sponsor'),
                 'patrocinio' => $request->input('patrocinio'),
             ]);
 
-            $nuevoSponsorCarrera->save();
+            $nuevocarreraCarrera->save();
 
             return redirect()->route('admin.patrocinioCarrera', $id)->with('Guardado', 'Aseguradora agregada exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
+        }
+    }
+
+    public function editar(Request $request, $id)
+    {
+        $carrera = Carrera::findOrFail($id);
+        $request->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'tipo' => 'required',
+            'lugar_foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'km' => 'required|integer',
+            'fechaHora' => 'required',
+            'cartel' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'precio' => 'required|integer'
+        ]);
+
+        if ($request->hasFile('lugar_foto')) {
+            $rutaArchivo1 = $request->file('lugar_foto')->store('Lugar', 'public');
+        } else {
+            $rutaArchivo1 = $carrera->lugar_foto;
+        }
+
+        if ($request->hasFile('cartel')) {
+            $rutaArchivo2 = $request->file('cartel')->store('Carteles', 'public');
+        } else {
+            $rutaArchivo2 = $carrera->cartel;
+        }
+        $fechaHora = Carbon::parse($request->input('fechaHora'));
+        try {
+            $carrera->nombre = $request->input('nombre');
+            $carrera->descripcion = $request->input('descripcion');
+            $carrera->tipo = $request->input('tipo');
+            $carrera->lugar_foto = $rutaArchivo1;
+            $carrera->km = $request->has('km');
+            $carrera->fechaHora = $fechaHora;
+            $carrera->cartel = $rutaArchivo2;
+            $carrera->precio = $request->input('precio');
+            $carrera->activo = true;
+            $carrera->save();
+
+            return redirect()->route('editarcarrera', $id)->with('Editado', 'carrera editado exitosamente');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
         }

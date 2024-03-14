@@ -12,167 +12,98 @@
 </head>
 
 <body>
-    <div class="pie">
-        <footer>
-            <div class="columna">
-                <div class="item">
-                    <h3>Servicios</h3>
-                    <ul>
-                        <li><a href="#">Politica de Privacidad</a></li>
-                        <li><a href="#">Cupones de Regalo</a></li>
-                        <li><a href="#">Devoluciones</a></li>
+    <div class="footer-container mx-auto mt-3">
+        <footer class="py-5">
+            <div class="row justify-content-around">
+                <div class="col-md mb-3 text-center">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="#"
+                                class="nav-link p-0 text-body-secondary">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a>
+                        </li>
                     </ul>
                 </div>
-                <div class="item">
-                    <h3>About</h3>
-                    <ul>
-                        <li><a href="#">Nosotros</a></li>
-                        <li><a href="#">Contacto</a></li>
-                        <li><a href="#">Contacto</a></li>
-                    </ul>
-                </div>
-                <div class="item">
-                    <h3>Empresa</h3>
-                    <ul>
-                        <li><a href="#">Empresa</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Careers</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="item social">
-                <a href="https://www.facebook.com/?locale=ca_ES"><img
-                        src="{{ asset('img/facebook.png') }}"alt="Facebook" width="20" height="20"></a>
-                <a href="https://www.instagram.com/"><img src="{{ asset('img/instagram.png') }}" alt="Instagram"
-                        width="20" height="20"></a>
-                <a href="https://twitter.com/?lang=es"><img src="{{ asset('img/twitter.png') }}" alt="Twitter"
-                        width="20" height="20"></a>
-                <a href="https://www.pinterest.com/"><img src="{{ asset('img/pintrest.png') }}" alt="Pinterest"
-                        width="20" height="20"></a>
-            </div>
-            <p class="copyright">© 2023 SRG Todos los derechos reservados</p>
-            <p><a class="linkAdminLogin" href="{{ route('loginAdmin') }}"> Panel Administrador</a></p>
 
+                <div class="col-md mb-3 text-center">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="#"
+                                class="nav-link p-0 text-body-secondary">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md mb-3 text-center">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="#"
+                                class="nav-link p-0 text-body-secondary">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+                <p>&copy; 2024 Caballos Race, Inc. Todos los derechos reservados.</p>
+                <ul class="list-unstyled d-flex">
+                    <li class="ms-3">
+                        <a href="https://twitter.com/?lang=es"><img src="{{ asset('img/twitter.png') }}" alt="Twitter"
+                                width="30" height="30"></a>
+                    </li>
+                    <li class="ms-3 px-4">
+                        <a href="https://www.instagram.com/"><img src="{{ asset('img/instagram.png') }}" alt="Instagram"
+                                width="30" height="30"></a>
+                    </li>
+                    <li class="ms-3 mr-5">
+                        <a href="https://www.facebook.com/?locale=ca_ES"><img
+                                src="{{ asset('img/facebook.png') }}"alt="Facebook" width="30" height="30"></a>
+                    </li>
+                </ul>
+            </div>
         </footer>
     </div>
-    <style>
-        /* Footer INICIO*/
-        footer,
-        .pie {
-            background-color: black;
-            padding-left: 1%;
-            padding-top: 50px;
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-        }
-
-        .pie {
-            padding: 50px 0;
-            color: white;
-        }
-
-        .pie h3 {
-            margin-top: 0;
-            margin-bottom: 12px;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .columna {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-left: 15%;
-            margin-right: 20%;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .pie ul {
-            padding: 0;
-            list-style: none;
-            line-height: 1.6;
-            font-size: 14px;
-            margin-bottom: 0;
-        }
-
-        .pie ul a {
-            color: inherit;
-            text-decoration: none;
-            opacity: 0.6;
-        }
-
-        .pie ul a:hover {
-            opacity: 0.8;
-        }
-
-        @media (max-width:767px) {
-            .pie .item:not(.social) {
-                text-align: center;
-                padding-bottom: 20px;
-            }
-        }
-
-        .pie .item.text {
-            margin-bottom: 36px;
-        }
-
-        @media (max-width:767px) {
-            .pie .item.text {
-                margin-bottom: 0;
-            }
-        }
-
-        .pie .item.text p {
-            opacity: 0.6;
-            margin-bottom: 0;
-        }
-
-        .pie .item.social {
-            text-align: center;
-        }
-
-        @media (max-width:991px) {
-            .pie .item.social {
-                text-align: center;
-                margin-top: 20px;
-            }
-        }
-
-        .pie .item.social>a {
-            font-size: 20px;
-            width: 36px;
-            height: 36px;
-            line-height: 36px;
-            display: inline-block;
-            text-align: center;
-            border-radius: 50%;
-            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4);
-            margin: 0 8px;
-            color: #fff;
-            opacity: 0.75;
-        }
-
-        .pie .item.social>a:hover {
-            opacity: 0.9;
-        }
-
-        .pie .copyright {
-            text-align: center;
-            padding-top: 24px;
-            opacity: 0.3;
-            font-size: 13px;
-            margin-bottom: 0;
-        }
-
-        /* Footer FIN*/
-    </style>
     <!-- Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+<style>
+    .footer-container {
+        background-color: #1C1C1C;
+        color: white;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .footer-container footer {
+        width: 100%;
+    }
+
+    li a {
+        cursor: pointer;
+    }
+</style>
+
 
 </html>

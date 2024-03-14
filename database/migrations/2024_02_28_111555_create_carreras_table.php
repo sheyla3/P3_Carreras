@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('carreras', function (Blueprint $table) {
             $table->id('id_carrera');
             $table->string('nombre');
-            $table->string('descripcion');
+            $table->string('descripcion')->max(1000);
             $table->enum('tipo', ['plano','vallas','campo a traves','trote y arnes','parejeras']);
             $table->string('lugar_foto');
             $table->integer('max_participantes')->default(10);

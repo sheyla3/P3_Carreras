@@ -21,7 +21,8 @@
                 <h1>Patrocinio</h1>
             </li>
             <li class="float-right ml-4">
-                <button id="btnAgregarPatrocinio" class="d-inline p-2 btn btn-primary"><img src="{{ asset('img/mas.svg') }}" alt="+" width="30" height="30"></button>
+                <button id="btnAgregarPatrocinio" class="d-inline p-2 btn btn-primary"><img
+                        src="{{ asset('img/mas.svg') }}" alt="+" width="30" height="30"></button>
             </li>
         </ul>
         <br><br>
@@ -44,6 +45,11 @@
             </tbody>
         </table>
         <a href="{{ route('AdminCarreras') }}" class="btn btn-secondary">Atrás</a>
+        @foreach ($sponsorsActivos as $sponsor)
+            <p> id: {{ $sponsor->id_sponsor }}
+                nombre: {{ $sponsor->nombre }}
+            </p>
+        @endforeach
     </div>
 
     <!-- Modal -->
@@ -58,8 +64,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('carrera.patrocinio', $idCarrera) }}" method="POST"
-                        class="mb-4 needs-validation">
+                    <form action="{{ route('carrera.patrocinio', $idCarrera) }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="id_sponsor">Sponsor:</label>
@@ -70,12 +75,10 @@
                                     </option>
                                 @endforeach
                             </select>
-                            {!! $errors->first('id_sponsor', '<small class="text-danger">:message</small>') !!}
                         </div>
                         <div class="form-group">
                             <label for="patrocinio">Patrocinio:</label>
                             <input type="number" id="patrocinio" name="patrocinio" class="form-control">
-                            {!! $errors->first('patrocinio', '<small class="text-danger">:message</small>') !!}
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>

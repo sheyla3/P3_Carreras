@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carrera;
+use App\Models\Sponsor;
 use App\Models\SponsorCarrera;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -10,11 +11,6 @@ use Illuminate\Support\Facades\Log;
 
 class CarrerasController extends Controller
 {
-
-    public function carreras()
-    {
-    }
-
     public function mostrarCarreras()
     {
         $carreras = Carrera::all();
@@ -27,22 +23,17 @@ class CarrerasController extends Controller
         return view('index', compact('carreras'));
     }
     
-
-
     public function mostrarCarrerasClientes()
     {
         $carreras = Carrera::all();
         return view('enlaces.tickets', compact('carreras'));
     }
 
-
-    // Método para mostrar el formulario de creación de carreras
     public function create()
     {
         return view('admin.create');
     }
 
-    // Método para guardar la carrera creada
     public function store(Request $request)
     {
         try {
@@ -118,18 +109,18 @@ class CarrerasController extends Controller
         $adminId = session('admin_id');
         $adminName = session('admin_name');
         $sponsorCarreras = SponsorCarrera::where('id_carrera', $id)->with('carrera')->get();
-        $sponsorsActivos = carrera::where('activo', true)->get(); // Obtén todos los carreras activos
+        $sponsorsActivos = Sponsor::where('activo', true)->get(); // Obtén todos los carreras activos
 
         return view('admin.patrocinioCarrera', compact('sponsorCarreras', 'sponsorsActivos', 'adminId', 'adminName', 'idCarrera'));
     }
 
-    public function nuevoPatrocinio(Request $request, $idCarrera)
+    public function nuevoPatrocinio(Request $request, $id)
     {
         $request->validate([
             'id_sponsor' => 'required',
             'patrocinio' => 'required',
         ]);
-
+        $idCarrera = $id;
         $nuevocarreraCarrera = new SponsorCarrera([
             'id_carrera' => $idCarrera,
             'id_sponsor' => $request->input('id_sponsor'),
@@ -138,7 +129,7 @@ class CarrerasController extends Controller
 
         $nuevocarreraCarrera->save();
 
-        return redirect()->route('admin.patrocinioCarrera', $idCarrera);
+        return redirect()->route('patrocinioCarrera', $idCarrera);
     }
 
     public function editar(Request $request, $id)

@@ -73,7 +73,6 @@ Route::put('/cambiarActivo/{id}', [SponsorController::class, 'cambiarActivo'])->
 //carreras
 Route::get('/carreras/create', [CarrerasController::class, 'create'])->name('carreras.create');
 Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras.store');
-Route::get('/admin/carreras', [CarrerasController::class, 'carreras'])->name('admin.carreras');
 Route::get('/AdminCarreras', [CarrerasController::class, 'mostrarCarreras'])->name('AdminCarreras');
 Route::get('/editarCarrera/{id}', [CarrerasController::class, 'editarCarrera'])->name('editarCarrera');
 Route::post('/carrera-editar/{id}', [CarrerasController::class, 'editar'])->name('carrera.editar');

@@ -16,6 +16,7 @@
 <body>
     @include('layouts.CaballoHeader')
     @include('layouts.2Header')
+    
     <style>
         @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
     </style>
@@ -57,5 +58,5 @@
     </div>
     <!-- <a class="linkAdminLogin" href="{{ route('loginAdmin') }}"> Panel Administrador</a> -->
 </body>
-
+@include('layouts.footer')
 </html>

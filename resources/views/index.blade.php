@@ -20,7 +20,7 @@
 
 <body>
     @include('layouts.CaballoHeader')
-    @include('layouts.2Header')
+    @include('layouts.SliderHome')
     
     <style>
         @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');

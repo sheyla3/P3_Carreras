@@ -12,6 +12,17 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
+    <style>
+        #navbar {
+            background: #1C1C1C;
+            height: 40px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>

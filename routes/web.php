@@ -42,8 +42,7 @@ Route::post('/loginUser', [UsuarioController::class, 'loginUsuario'])->name('log
 Route::post('/registroUsuario', [UsuarioController::class, 'registroUsuario'])->name('registroUsuario');
 
 //mostrar tickets
-Route::get('/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');
-Route::get('/tickets', function () {return view('Enlaces.tickets');})->name('tickets');
+Route::get('/enlaces/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');
 
 // ADMIN
 Route::get('/loginAdmin', function () {return view('Admin.loginAdmin');})->name('loginAdmin');

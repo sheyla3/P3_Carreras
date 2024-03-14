@@ -69,15 +69,15 @@
                 <ul class="list-unstyled d-flex">
                     <li class="ms-3">
                         <a href="https://twitter.com/?lang=es"><img src="{{ asset('img/twitter.png') }}" alt="Twitter"
-                                width="20" height="20"></a>
+                                width="30" height="30"></a>
                     </li>
                     <li class="ms-3 px-4">
                         <a href="https://www.instagram.com/"><img src="{{ asset('img/instagram.png') }}" alt="Instagram"
-                                width="20" height="20"></a>
+                                width="30" height="30"></a>
                     </li>
                     <li class="ms-3 mr-5">
                         <a href="https://www.facebook.com/?locale=ca_ES"><img
-                                src="{{ asset('img/facebook.png') }}"alt="Facebook" width="20" height="20"></a>
+                                src="{{ asset('img/facebook.png') }}"alt="Facebook" width="30" height="30"></a>
                     </li>
                 </ul>
             </div>
@@ -98,6 +98,10 @@
 
     .footer-container footer {
         width: 100%;
+    }
+
+    li a {
+        cursor: pointer;
     }
 </style>
 

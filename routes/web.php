@@ -79,7 +79,7 @@ Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras.s
 Route::get('/admin/carreras', [CarrerasController::class, 'carreras'])->name('admin.carreras');
 Route::get('/AdminCarreras', [CarrerasController::class, 'mostrarCarreras'])->name('AdminCarreras');
 Route::get('/editarCarrera/{id}', [CarrerasController::class, 'editarCarrera'])->name('editarCarrera');
-Route::post('/carreras-editar/{id}', [CarrerasController::class, 'editar'])->name('carreras.editar');
+Route::post('/carrera-editar/{id}', [CarrerasController::class, 'editar'])->name('carrera.editar');
 Route::put('/cambiarActivo/{id}', [CarrerasController::class, 'cambiarActivo'])->name('cambiarActivo');
 Route::get('/patrocinioCarrera/{id}', [CarrerasController::class, 'patrocinioCarrera'])->name('patrocinioCarrera');
 Route::post('/carrera-patrocinio/{id}', [CarrerasController::class, 'nuevoPatrocinio'])->name('carrera.patrocinio');

@@ -22,6 +22,14 @@ class CarrerasController extends Controller
         return view('admin.AdminCarreras', compact('carreras'));
     }
 
+    public function index()
+    {
+        $carreras = Carrera::all(); // Suponiendo que Carrera sea el modelo de tu tabla de carreras
+        return view('index', compact('carreras'));
+    }
+    
+
+
     public function mostrarCarrerasClientes()
     {
         $carreras = Carrera::all();

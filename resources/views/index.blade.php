@@ -46,33 +46,59 @@
     </nav>
 
     <div class="Maestro-2">
-        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                @foreach($carreras->chunk(3) as $chunk)
-                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}" data-bs-interval="10000">
-                        <div class="row">
-                            @foreach($chunk as $carrera)
-                                <div class="col">
-                                    <div class="lugares">
-                                        <img src="{{ asset('storage/'.$carrera->lugar_foto) }}" alt="Lugar de {{ $carrera->nombre }}">
-                                        <h3>{{ $carrera->nombre }}</h3>
-                                    </div>
-                                </div>
-                            @endforeach
+    <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        @foreach($carreras->chunk(3) as $chunk)
+            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                <div class="row">
+                    @foreach($chunk as $carrera)
+                        <div class="col">
+                            <div class="lugares">
+                                <img src="{{ asset('storage/'.$carrera->lugar_foto) }}" alt="Lugar de {{ $carrera->nombre }}">
+                                <h3>{{ $carrera->nombre }}</h3>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+        @endforeach
     </div>
+    <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+    </div>
+
+    <script>$(document).ready(function(){
+    $('#carouselExampleInterval').slick({
+        slidesToShow: 3, // Número de carreras a mostrar simultáneamente
+        slidesToScroll: 1, // Número de carreras a avanzar
+        autoplay: true, // Habilita el autoplay
+        autoplaySpeed: 2000, // Velocidad del autoplay en milisegundos
+        prevArrow: $('.carousel-control-prev'), // Selector del botón previo
+        nextArrow: $('.carousel-control-next'), // Selector del botón siguiente
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2 // Cambia el número de carreras mostradas en dispositivos de tamaño medio
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1 // Cambia el número de carreras mostradas en dispositivos pequeños
+                }
+            }
+        ]
+    });
+});
+</script>
 
     <div class="Maestro-3">
         <div class="container-4">
@@ -87,4 +113,38 @@
     <!-- <a class="linkAdminLogin" href="{{ route('loginAdmin') }}"> Panel Administrador</a> -->
 </body>
 @include('layouts.footer')
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<!-- Slick Carousel JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#carouselExampleInterval').slick({
+            slidesToShow: 3, // Número de carreras a mostrar simultáneamente
+            slidesToScroll: 1, // Número de carreras a avanzar
+            autoplay: true, // Habilita el autoplay
+            autoplaySpeed: 5000, // Velocidad del autoplay en milisegundos
+            prevArrow: '<span class="carousel-control-prev-icon" aria-hidden="true"></span>',
+            nextArrow: '<span class="carousel-control-next-icon" aria-hidden="true"></span>',
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2 // Cambia el número de carreras mostradas en dispositivos de tamaño medio
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1 // Cambia el número de carreras mostradas en dispositivos pequeños
+                    }
+                }
+            ]
+        });
+    });
+</script>
 </html>

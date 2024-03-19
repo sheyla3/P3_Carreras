@@ -50,7 +50,14 @@
                     </div>
                     <div id="step2" style="display: none;">
                         <input type="text" placeholder="DNI" name="dni" pattern="^\d{8}[A-Za-z]$" required title="Formato de DNI incorrecto"/>
-                        <input type="date" placeholder="Fecha de Nacimiento" name="edad" required max="{{ date('Y-m-d') }}" title="La fecha de nacimiento no puede ser posterior a hoy"/>
+                        <input type="date" placeholder="Fecha de Nacimiento" name="edad" id="edad" required max="{{ date('Y-m-d') }}" title="La fecha de nacimiento no puede ser posterior a hoy"/>
+                            <script>
+                                function validarFecha() {
+                                    var fechaNacimiento = document.getElementById("edad").value;
+                                    var fechaActual = new Date();
+                                    var fechaLimite = new Date(fechaActual.getFullYear() - 18, fechaActual.getMonth(), fechaActual.getDate());
+                                    if (new Date(fechaNacimiento) > fechaLimite) {alert("Debes ser mayor de edad para registrarte.");return false;}return true;}
+                            </script>
                         <button type="button" id="prevStep2">Previous</button>
                         <button type="button" id="nextStep2">Next</button>
                     </div>

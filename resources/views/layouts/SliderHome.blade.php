@@ -13,10 +13,12 @@
     <style>
         .header-slider-container {
             position: relative;
-            width: 100%;
+            width: auto;
             z-index: -1;
             height: auto;
-            padding-top: 40px;
+            padding-top: 24px;
+            margin-left: -20px;
+            margin-right: -20px;
         }
 
         #carouselExampleIndicators {
@@ -46,40 +48,26 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img class="d-block w-100" src="{{ asset('img/banner.png') }}" alt="First slide">
-                    <div class="carousel-caption d-none d-md-block">
-                        <button type="button" class="btn mx-3" style="background:#D9D9D9;color:black;">READ
+                    <div class="carousel-caption d-none d-inline ">
+                        <button type="button" class="btn mx-3 d-inline " style="background:#D9D9D9;color:black;">READ
                             MORE</button>
-                        <button type="button" class="btn mx-3" style="background: #1F323F;color:white;">GET A
+                        <button type="button" class="btn mx-3 d-inline " style="background: #1F323F;color:white;">GET A
                             QUOTE</button>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img class="d-block w-100" src="{{ asset('img/banner1.jpg') }}" alt="Second slide">
-                    <div class="carousel-caption d-none d-md-block">
-                        <button type="button" class="btn mx-3" style="background:#D9D9D9;color:black;">READ
-                            MORE</button>
-                        <button type="button" class="btn mx-3" style="background: #1F323F;color:white;">GET A
-                            QUOTE</button>
+                    <div class="carousel-caption">
+                        <p>CARRERAS DE CABALLOS</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img class="d-block w-100" src="{{ asset('img/banner.png') }}" alt="Second slide">
-                    <div class="carousel-caption d-none d-md-block">
-                        <button type="button" class="btn mx-3" style="background:#D9D9D9;color:black;">READ
-                            MORE</button>
-                        <button type="button" class="btn mx-3" style="background: #1F323F;color:white;">GET A
-                            QUOTE</button>
+                    <div class="carousel-caption">
+                        <p>DISFRUTA DE TODOS LOS TIPOS</p>
                     </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
     </div>
 

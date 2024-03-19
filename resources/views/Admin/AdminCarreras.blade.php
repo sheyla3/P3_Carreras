@@ -20,7 +20,8 @@
             <li class="float-right ml-4">
                 <form action="{{ route('carreras.create') }}" method="GET">
                     @csrf
-                    <button type="submit" class="d-inline btn btn-primary"><img src="{{ asset('img/mas.svg') }}" alt="+" width="30" height="30"></button>
+                    <button type="submit" class="d-inline btn btn-primary"><img src="{{ asset('img/mas.svg') }}"
+                            alt="+" width="30" height="30"></button>
                 </form>
             </li>
             <li class="float-right">
@@ -86,13 +87,12 @@
                         <td>{{ $carrera->precio }}€</td>
                         <td><a class="btn btn-info"
                                 href="{{ route('patrocinioCarrera', $carrera->id_carrera) }}">Patrocinio</a></td>
-                        <td>
-                            <button class="btn {{ $carrera->activo ? 'btn-success' : 'btn-danger' }}"
-                                onclick="cambiarEstado({{ $carrera->id_carrera }}, '{{ route('cambiarActivo', $carrera->id_carrera) }}')"
-                                data-id="{{ $carrera->id_carrera }}">
-                                {{ $carrera->activo ? 'Sí' : 'No' }}
-                            </button>
-                        </td>
+
+                        @if ($carrera->cartel == true)
+                            <td><a class="btn btn-success" href="{{ route('inactivo', $carrera->id_carrera) }}">Sí</a></td>
+                        @else
+                            <td><a class="btn btn-danger" href="{{ route('activo', $carrera->id_carrera) }}">No</a></td>
+                        @endif
                         <td><a class="btn btn-dark"
                                 href="{{ route('editarCarrera', $carrera->id_carrera) }}">Editar</a></td>
                     </tr>

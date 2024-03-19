@@ -13,8 +13,14 @@ class CarrerasController extends Controller
 {
     public function mostrarCarreras()
     {
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
         $carreras = Carrera::all();
-        return view('admin.AdminCarreras', compact('carreras'));
+        return view('admin.AdminCarreras', compact('carreras', 'adminId', 'adminName'));
     }
 
     public function index2()
@@ -22,7 +28,7 @@ class CarrerasController extends Controller
         $carreras = Carrera::all(); // Suponiendo que Carrera sea el modelo de tu tabla de carreras
         return view('index', compact('carreras'));
     }
-    
+
     public function mostrarCarrerasClientes()
     {
         $carreras = Carrera::all();
@@ -174,5 +180,32 @@ class CarrerasController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
         }
+    }
+
+    public function inactivo($id)
+    {
+        $carrera = Carrera::findOrFail($id);
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+
+        $carrera->activo = false;
+        $carrera->save();
+        return redirect()->route('AdminCarreras')->with('success', 'El estado de la carrera ha sido actualizado correctamente.');
+    }
+
+
+    public function activo($id)
+    {
+        $carrera = Carrera::findOrFail($id);
+        if (!session()->has('admin_id') || !session()->has('admin_name')) {
+            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        }
+        $carrera->activo = true;
+        $carrera->save();
+
+        $adminId = session('admin_id');
+        $adminName = session('admin_name');
+        return redirect()->route('AdminCarreras');
     }
 }

@@ -10,9 +10,6 @@ use App\Http\Controllers\SocioController;
 use App\Http\Controllers\UsuarioController;
 
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,6 +76,8 @@ Route::post('/carrera-editar/{id}', [CarrerasController::class, 'editar'])->name
 Route::put('/cambiarActivo/{id}', [CarrerasController::class, 'cambiarActivo'])->name('cambiarActivo');
 Route::get('/patrocinioCarrera/{id}', [CarrerasController::class, 'patrocinioCarrera'])->name('patrocinioCarrera');
 Route::post('/carrera-patrocinio/{id}', [CarrerasController::class, 'nuevoPatrocinio'])->name('carrera.patrocinio');
+Route::get('/inactivo/{id}', [CarrerasController::class, 'inactivo'])->name('inactivo');
+Route::get('/activo/{id}', [CarrerasController::class, 'activo'])->name('activo');
 
 //aseguradoras
 Route::get('/formularioAseguradora', [AseguradoraController::class, 'formularioAseguradora'])->name('formularioAseguradora');

@@ -25,9 +25,22 @@ class CarrerasController extends Controller
 
     public function index2()
     {
-        $carreras = Carrera::all(); // Suponiendo que Carrera sea el modelo de tu tabla de carreras
-        return view('index', compact('carreras'));
+        if (session()->has('socio_id') && session()->has('socio_name')) {
+            $socioId = session('socio_id');
+            $socioName = session('socio_name');
+            $carreras = Carrera::all();
+            return view('index', compact('carreras', 'socioId', 'socioName'));
+        } elseif (session()->has('jinete_id') && session()->has('jinete_name')) {
+            $jineteId = session('jinete_id');
+            $jineteName = session('jinete_name');
+            $carreras = Carrera::all();
+            return view('index', compact('carreras', 'jineteId', 'jineteName'));
+        } else {
+            $carreras = Carrera::all();
+            return view('index', compact('carreras'));
+        }
     }
+
 
     public function mostrarCarrerasClientes()
     {

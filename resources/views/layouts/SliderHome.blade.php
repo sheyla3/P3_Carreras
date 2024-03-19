@@ -13,12 +13,10 @@
     <style>
         .header-slider-container {
             position: relative;
-            width: auto;
+            width: 100%;
             z-index: -1;
             height: auto;
             padding-top: 24px;
-            margin-left: -20px;
-            margin-right: -20px;
         }
 
         #carouselExampleIndicators {
@@ -47,7 +45,7 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="{{ asset('img/banner.png') }}" alt="First slide">
+                    <img class="d-block p-0 w-100" src="{{ asset('img/banner.png') }}" alt="First slide">
                     <div class="carousel-caption d-none d-inline ">
                         <button type="button" class="btn mx-3 d-inline " style="background:#D9D9D9;color:black;">READ
                             MORE</button>
@@ -56,13 +54,13 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ asset('img/banner1.jpg') }}" alt="Second slide">
+                    <img class="d-block p-0 w-100" src="{{ asset('img/banner1.jpg') }}" alt="Second slide">
                     <div class="carousel-caption">
                         <p>CARRERAS DE CABALLOS</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ asset('img/banner3.jpg') }}" alt="Second slide">
+                    <img class="d-block p-0 w-100" src="{{ asset('img/banner3.jpg') }}" alt="Second slide">
                     <div class="carousel-caption">
                         <p>DISFRUTA DE TODOS LOS TIPOS</p>
                     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -25,17 +26,12 @@ class UsuarioController extends Controller
 
         $confUsu = Usuario::where('correo', $email)->first();
 
-        if (!$confUsu) {
-            return redirect()->back()->withErrors(['correo' => 'El correo no existe']);
-        }
-
-        if ($password === $confUsu->contrasena) {
-            // Guardar información del usuario en la sesión
+        if ($confUsu && Hash::check($password, $confUsu->contrasena)) {
             session(['socio_id' => $confUsu->id_usuario, 'socio_name' => $confUsu->correo]);
 
-            return redirect()->route('Admin_panel');
+            return redirect()->route('/');
         } else {
-            return redirect()->back()->withErrors(['contra' => 'La contraseña es incorrecta']);
+            return redirect()->back()->withErrors(['password' => 'La contraseña es incorrecta']);
         }
     }
 
@@ -58,13 +54,12 @@ class UsuarioController extends Controller
         $usuario->dni = $request->dni;
         $usuario->edad = $request->edad;
         $usuario->correo = $request->correo;
-        $usuario->contrasena = $request->contrasena;
+        $usuario->contrasena = Hash::make($request->contrasena);
         $usuario->save();
 
-        // Loguear al usuario automáticamente después de registrarse
         Auth::login($usuario);
 
-        return redirect()->route('Admin_panel');
+        return redirect()->route('/');
     }
 
     public function cerrarSesion(Request $request)
@@ -74,5 +69,4 @@ class UsuarioController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('formularioInicio');
     }
-
 }

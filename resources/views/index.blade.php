@@ -34,7 +34,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
     </style>
-    <div class="Maestro-1">
+    <div class="Maestro-1 d-flex justify-content-center">
         <div class="container-1">
             <img src="{{ asset('img/horseblack.png') }}" alt="">
         </div>

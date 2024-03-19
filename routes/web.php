@@ -57,7 +57,8 @@ Route::post('/jinete-nuevo', [JineteController::class, 'nuevo'])->name('jinete.n
 Route::get('/editarJinete/{id}', [JineteController::class, 'editarJinete'])->name('editarJinete');
 Route::post('/jinete-editar/{id}', [JineteController::class, 'editar'])->name('jinete.editar');
 Route::get('/adminJinetes', [JineteController::class, 'mostrarJinetes'])->name('adminJinetes');
-Route::put('/cambiarActivo/{id}', [JineteController::class, 'cambiarActivo'])->name('cambiarActivo');
+Route::get('/inactivo-jinete/{id}', [JineteController::class, 'inactivo'])->name('inactivoJinete');
+Route::get('/activo-jinete/{id}', [JineteController::class, 'activo'])->name('activoJinete');
 
 //sponsors
 Route::get('/formularioSponsor', [SponsorController::class, 'formularioSponsor'])->name('formularioSponsor');
@@ -65,7 +66,8 @@ Route::get('/adminSponsors', [SponsorController::class, 'mostrarSponsors'])->nam
 Route::post('/sponsor-nuevo', [SponsorController::class, 'nuevo'])->name('sponsor.nuevo');
 Route::get('/editarSponsor/{id}', [SponsorController::class, 'editarSponsor'])->name('editarSponsor');
 Route::post('/sponsor-editar/{id}', [SponsorController::class, 'editar'])->name('sponsor.editar');
-Route::put('/cambiarActivo/{id}', [SponsorController::class, 'cambiarActivo'])->name('cambiarActivo');
+Route::get('/inactivo-sponsor/{id}', [SponsorController::class, 'inactivo'])->name('inactivoSponsor');
+Route::get('/activo-sponsor/{id}', [SponsorController::class, 'activo'])->name('activoSponsor');
 
 //carreras
 Route::get('/carreras/create', [CarrerasController::class, 'create'])->name('carreras.create');
@@ -73,11 +75,10 @@ Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras.s
 Route::get('/AdminCarreras', [CarrerasController::class, 'mostrarCarreras'])->name('AdminCarreras');
 Route::get('/editarCarrera/{id}', [CarrerasController::class, 'editarCarrera'])->name('editarCarrera');
 Route::post('/carrera-editar/{id}', [CarrerasController::class, 'editar'])->name('carrera.editar');
-Route::put('/cambiarActivo/{id}', [CarrerasController::class, 'cambiarActivo'])->name('cambiarActivo');
 Route::get('/patrocinioCarrera/{id}', [CarrerasController::class, 'patrocinioCarrera'])->name('patrocinioCarrera');
 Route::post('/carrera-patrocinio/{id}', [CarrerasController::class, 'nuevoPatrocinio'])->name('carrera.patrocinio');
-Route::get('/inactivo/{id}', [CarrerasController::class, 'inactivo'])->name('inactivo');
-Route::get('/activo/{id}', [CarrerasController::class, 'activo'])->name('activo');
+Route::get('/inactivo-carrera/{id}', [CarrerasController::class, 'inactivo'])->name('inactivoCarrera');
+Route::get('/activo-carrera/{id}', [CarrerasController::class, 'activo'])->name('activoCarrera');
 
 //aseguradoras
 Route::get('/formularioAseguradora', [AseguradoraController::class, 'formularioAseguradora'])->name('formularioAseguradora');
@@ -85,4 +86,5 @@ Route::post('/aseguradora-nuevo', [AseguradoraController::class, 'nuevo'])->name
 Route::get('/adminAseguradoras', [AseguradoraController::class, 'mostrarAseguradoras'])->name('adminAseguradoras');
 Route::get('/editarAseguradora/{id}', [AseguradoraController::class, 'editarAseguradora'])->name('editarAseguradora');
 Route::post('/aseguradora-editar/{id}', [AseguradoraController::class, 'editar'])->name('aseguradora.editar');
-Route::put('/cambiarActivo/{id}', [AseguradoraController::class, 'cambiarActivo'])->name('cambiarActivo');
+Route::get('/inactivo-aseguradora/{id}', [AseguradoraController::class, 'inactivo'])->name('inactivoAseguradora');
+Route::get('/activo-aseguradora/{id}', [AseguradoraController::class, 'activo'])->name('activoAseguradora');

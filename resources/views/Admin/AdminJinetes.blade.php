@@ -86,11 +86,11 @@ use App\Http\Controllers\JineteController;
                         <td>{{ $jinete->num_federat }}</td>
                         <td>{{ $jinete->formatted_edad }}</td>
                         <td>
-                            <button class="btn {{ $jinete->activo ? 'btn-success' : 'btn-danger' }}"
-                                onclick="cambiarEstado({{ $jinete->id_jinete }}, '{{ route('cambiarActivo', $jinete->id_jinete) }}')"
-                                data-id="{{ $jinete->id_jinete }}">
-                                {{ $jinete->activo ? 'Sí' : 'No' }}
-                            </button>
+                            @if ($jinete->activo)
+                                <a class="btn btn-success" href="{{ route('inactivoJinete', $jinete->id_jinete) }}">Sí</a>
+                            @else
+                                <a class="btn btn-danger" href="{{ route('activoJinete', $jinete->id_jinete) }}">No</a>
+                            @endif
                         </td>
                         <td><a class="btn btn-dark" href="{{ route('editarJinete', $jinete->id_jinete) }}" >Editar</a></td>
                     </tr>
@@ -103,25 +103,4 @@ use App\Http\Controllers\JineteController;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-<script>
-    function cambiarEstado(id, url) {
-        // Realizar una solicitud AJAX para cambiar el estado activo
-        fetch(url, {
-                method: 'PUT', // Cambiar a PUT
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Cambiar el texto y la clase del botón en consecuencia
-                const button = document.querySelector(`button[data-id="${id}"]`);
-                button.innerText = data.activo ? 'Sí' : 'No';
-                button.classList.remove('btn-success', 'btn-danger');
-                button.classList.add(`btn-${data.activo ? 'success' : 'danger'}`);
-            })
-            .catch(error => console.error('Error:', error));
-    }
-</script>
 </html>

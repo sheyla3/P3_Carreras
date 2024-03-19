@@ -76,11 +76,11 @@ use App\Http\Controllers\sponsorController;
                         <td>{{ $sponsor->calle }}</td>
                         <td>{{ $sponsor->destacado ? 'Sí' : 'No' }}</td>
                         <td>
-                            <button class="btn {{ $sponsor->activo ? 'btn-success' : 'btn-danger' }}"
-                                onclick="cambiarEstado({{ $sponsor->id_sponsor }}, '{{ route('cambiarActivo', $sponsor->id_sponsor) }}')"
-                                data-id="{{ $sponsor->id_sponsor }}">
-                                {{ $sponsor->activo ? 'Sí' : 'No' }}
-                            </button>
+                            @if ($sponsor->activo)
+                                <a class="btn btn-success" href="{{ route('inactivoSponsor', $sponsor->id_sponsor) }}">Sí</a>
+                            @else
+                                <a class="btn btn-danger" href="{{ route('activoSponsor', $sponsor->id_sponsor) }}">No</a>
+                            @endif
                         </td>
                         <td><a class="btn btn-dark"
                                 href="{{ route('editarSponsor', $sponsor->id_sponsor) }}">Editar</a></td>
@@ -90,26 +90,4 @@ use App\Http\Controllers\sponsorController;
         </table>
     </div>
 </body>
-<script>
-    function cambiarEstado(id, url) {
-        // Realizar una solicitud AJAX para cambiar el estado activo
-        fetch(url, {
-                method: 'PUT', // Cambiar a PUT
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Cambiar el texto y la clase del botón en consecuencia
-                const button = document.querySelector(`button[data-id="${id}"]`);
-                button.innerText = data.activo ? 'Sí' : 'No';
-                button.classList.remove('btn-success', 'btn-danger');
-                button.classList.add(`btn-${data.activo ? 'success' : 'danger'}`);
-            })
-            .catch(error => console.error('Error:', error));
-    }
-</script>
-
 </html>

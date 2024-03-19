@@ -107,12 +107,22 @@ class SponsorController extends Controller
         }
     }
 
-    public function cambiarActivo($id)
+    public function inactivo($id)
     {
         $sponsor = Sponsor::findOrFail($id);
-        $sponsor->activo = !$sponsor->activo;
+        $sponsor->activo = false;
+        $sponsor->save();
+        
+        return redirect()->route('adminSponsors');
+    }
+
+
+    public function activo($id)
+    {
+        $sponsor = Sponsor::findOrFail($id);
+        $sponsor->activo = true;
         $sponsor->save();
 
-        return response()->json(['activo' => $sponsor->activo]);
+        return redirect()->route('adminSponsors');
     }
 }

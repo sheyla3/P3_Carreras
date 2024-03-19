@@ -45,11 +45,6 @@
             </tbody>
         </table>
         <a href="{{ route('AdminCarreras') }}" class="btn btn-secondary">Atrás</a>
-        @foreach ($sponsorsActivos as $sponsor)
-            <p> id: {{ $sponsor->id_sponsor }}
-                nombre: {{ $sponsor->nombre }}
-            </p>
-        @endforeach
     </div>
 
     <!-- Modal -->

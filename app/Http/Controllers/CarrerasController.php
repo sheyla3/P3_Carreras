@@ -84,15 +84,6 @@ class CarrerasController extends Controller
         }
     }
 
-    public function cambiarActivo($id)
-    {
-        $carrera = Carrera::findOrFail($id);
-        $carrera->activo = !$carrera->activo;
-        $carrera->save();
-
-        return response()->json(['activo' => $carrera->activo]);
-    }
-
     public function editarCarrera($id)
     {
         if (!session()->has('admin_id') || !session()->has('admin_name')) {
@@ -185,10 +176,6 @@ class CarrerasController extends Controller
     public function inactivo($id)
     {
         $carrera = Carrera::findOrFail($id);
-        if (!session()->has('admin_id') || !session()->has('admin_name')) {
-            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
-        }
-
         $carrera->activo = false;
         $carrera->save();
         return redirect()->route('AdminCarreras')->with('success', 'El estado de la carrera ha sido actualizado correctamente.');
@@ -198,14 +185,8 @@ class CarrerasController extends Controller
     public function activo($id)
     {
         $carrera = Carrera::findOrFail($id);
-        if (!session()->has('admin_id') || !session()->has('admin_name')) {
-            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
-        }
         $carrera->activo = true;
         $carrera->save();
-
-        $adminId = session('admin_id');
-        $adminName = session('admin_name');
         return redirect()->route('AdminCarreras');
     }
 }

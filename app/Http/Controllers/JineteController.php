@@ -113,12 +113,22 @@ class JineteController extends Controller
         }
     }
 
-    public function cambiarActivo($id)
+    public function inactivo($id)
     {
         $jinete = Jinete::findOrFail($id);
-        $jinete->activo = !$jinete->activo;
+        $jinete->activo = false;
+        $jinete->save();
+        
+        return redirect()->route('adminJinetes')->with('success', 'El estado de la carrera ha sido actualizado correctamente.');
+    }
+
+
+    public function activo($id)
+    {
+        $jinete = Jinete::findOrFail($id);
+        $jinete->activo = true;
         $jinete->save();
 
-        return response()->json(['activo' => $jinete->activo]);
+        return redirect()->route('adminJinetes');
     }
 }

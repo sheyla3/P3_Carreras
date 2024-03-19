@@ -31,7 +31,8 @@ use App\Http\Controllers\AseguradoraController;
             <li class="float-right ml-4">
                 <form action="{{ route('formularioAseguradora') }}" method="GET">
                     @csrf
-                    <button type="submit" class="d-inline p-2 btn btn-primary"><img src="{{ asset('img/mas.svg') }}" alt="+" width="30" height="30"></button>
+                    <button type="submit" class="d-inline p-2 btn btn-primary"><img src="{{ asset('img/mas.svg') }}"
+                            alt="+" width="30" height="30"></button>
                 </form>
             </li>
             <li class="float-right">
@@ -71,64 +72,22 @@ use App\Http\Controllers\AseguradoraController;
                         <td>{{ $aseguradora->calle }}</td>
                         <td>{{ $aseguradora->precio }}€</td>
                         <td>
-                            <button class="btn {{ $aseguradora->activo ? 'btn-success' : 'btn-danger' }}"
-                                onclick="cambiarEstado({{ $aseguradora->id }}, '{{ route('cambiarActivo', $aseguradora->id) }}')"
-                                data-id="{{ $aseguradora->id }}">
-                                {{ $aseguradora->activo ? 'Sí' : 'No' }}
-                            </button>
+                            @if ($aseguradora->activo)
+                                <a class="btn btn-success" href="{{ route('inactivoAseguradora', $aseguradora->id) }}">Sí</a>
+                            @else
+                                <a class="btn btn-danger" href="{{ route('activoAseguradora', $aseguradora->id) }}">No</a>
+                            @endif
                         </td>
-                        <td><a class="btn btn-dark" href="{{ route('editarAseguradora', $aseguradora->id) }}" >Editar</a></td>
+                        <td><a class="btn btn-dark"
+                                href="{{ route('editarAseguradora', $aseguradora->id) }}">Editar</a></td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-    @if (session('Estado'))
-    <div class="modal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{ session('Estado') }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        $(document).ready(function() {
-            $('#successModal').modal('show');
-        });
-    </script>
-@endif
+    <!-- Agrega los enlaces a los archivos JavaScript de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-<script>
-    function cambiarEstado(id, url) {
-        // Realizar una solicitud AJAX para cambiar el estado activo
-        fetch(url, {
-                method: 'PUT', // Cambiar a PUT
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Cambiar el texto y la clase del botón en consecuencia
-                const button = document.querySelector(`button[data-id="${id}"]`);
-                button.innerText = data.activo ? 'Sí' : 'No';
-                button.classList.remove('btn-success', 'btn-danger');
-                button.classList.add(`btn-${data.activo ? 'success' : 'danger'}`);
-            })
-            .catch(error => console.error('Error:', error));
-    }
-</script>
 </html>

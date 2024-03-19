@@ -94,12 +94,21 @@ class AseguradoraController extends Controller
         }
     }
 
-    public function cambiarActivo($id)
+    public function inactivo($id)
     {
         $aseguradora = Aseguradora::findOrFail($id);
-        $aseguradora->activo = !$aseguradora->activo;
+
+        $aseguradora->activo = false;
+        $aseguradora->save();
+        return redirect()->route('adminAseguradoras');
+    }
+
+    public function activo($id)
+    {
+        $aseguradora = Aseguradora::findOrFail($id);
+        $aseguradora->activo = true;
         $aseguradora->save();
 
-        return response()->json(['activo' => $aseguradora->activo]);
+        return redirect()->route('adminAseguradoras');
     }
 }

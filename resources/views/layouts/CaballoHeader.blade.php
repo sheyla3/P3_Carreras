@@ -43,26 +43,25 @@
                     @csrf
                     <h1>¡Quiero Ser Socio!</h1>
                     <div id="step1">
-                        <input type="text" placeholder="Nombre" name="nombre" required />
-                        <input type="text" placeholder="Apellido" name="apellido" required />
-                        <input type="tel" placeholder="Teléfono" name="telf" required />
+                        <input type="text" placeholder="Nombre" name="nombre" pattern="^[a-zA-Z]+$" required title="El nombre no puede contener espacios ni caracteres especiales"/>
+                        <input type="text" placeholder="Apellido" name="apellido" pattern="^[a-zA-Z]+$" required title="El apellido no puede contener espacios ni caracteres especiales"/>
+                        <input type="tel" placeholder="Teléfono" name="telf" pattern="^\d{9}$" required title="El teléfono debe tener 9 dígitos"/>
                         <button type="button" id="nextStep1">Next</button>
                     </div>
                     <div id="step2" style="display: none;">
-                        <input type="text" placeholder="DNI" name="dni" required />
-                        <input type="date" placeholder="Fecha de Nacimiento" name="edad" required />
+                        <input type="text" placeholder="DNI" name="dni" pattern="^\d{8}[A-Za-z]$" required title="Formato de DNI incorrecto"/>
+                        <input type="date" placeholder="Fecha de Nacimiento" name="edad" required max="{{ date('Y-m-d') }}" title="La fecha de nacimiento no puede ser posterior a hoy"/>
                         <button type="button" id="prevStep2">Previous</button>
                         <button type="button" id="nextStep2">Next</button>
                     </div>
                     <div id="step3" style="display: none;">
-                        <input type="email" placeholder="Correo" name="correo" required />
-                        <input type="password" placeholder="Contraseña" name="contrasena" required />
-                        <input type="password" placeholder="Confirmar Contraseña" name="contrasena" />
-                        <input type="file" name="foto_perfil" accept="image/*" />
+                        <input type="email" placeholder="Correo" name="correo" pattern="^\S+@\S+\.\S+$" required title="Formato de correo electrónico incorrecto"/>
+                        <input type="password" placeholder="Contraseña" name="contrasena" required title="La contraseña no puede estar vacía"/>
+                        <input type="password" placeholder="Confirmar Contraseña" name="contrasena_confirmacion" required title="La contraseña de confirmación no puede estar vacía"/>
                         <button type="button" id="prevStep3">Previous</button>
                         <button type="submit">Sign Up</button>
                     </div>
-                </form>
+                </form>                
             </div>
             <div class="form-container sign-in-container">
                 <form action="{{ route('loginUser') }}" method="POST">

@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ asset('img/banner.png') }}" alt="Second slide">
+                    <img class="d-block w-100" src="{{ asset('img/banner3.jpg') }}" alt="Second slide">
                     <div class="carousel-caption">
                         <p>DISFRUTA DE TODOS LOS TIPOS</p>
                     </div>

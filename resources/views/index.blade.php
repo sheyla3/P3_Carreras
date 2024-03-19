@@ -35,7 +35,7 @@
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero exercitationem consequatur voluptatem
                 soluta reprehenderit repudiandae eveniet explicabo reiciendis. Praesentium quia explicabo maiores
                 accusamus nostrum ex fugiat quaerat! Suscipit maxime eaque adipisci reprehenderit quos natus!</p>
-            <button type="button" class="btn btn-primary" style="background:white;">READ MORE</button>
+            <button type="button" class="btn btn-primary" style="background:#1F323F; width: 20%">READ MORE</button>
         </div>
     </div>
 

@@ -28,11 +28,11 @@
 <body>
     <nav class="navbar bg-body-tertiary p-0" id="navbar">
         <div class="p-0">
-            <img src="{{ asset('img/logoCaballo.png') }}" alt="Caballo">
+            <a href="{{ route('/') }}"><img src="{{ asset('img/logoCaballo.png') }}" alt="Caballo"></a>
         </div>
         <div class="right-links">
-            <a href="#" class="btn p-0" id="loginBtn">Iniciar Sesion</a>
-            <a href="{{ route('loginAdmin') }}" class="btn p-0 mx-3">Registrarme</a>
+            <a href="#" class="btn p-0" id="loginBtn">Socio</a>
+            <a href="{{ route('loginAdmin') }}" class="btn p-0 mx-3">Jinete</a>
         </div>
     </nav>
 
@@ -68,10 +68,10 @@
                 <form action="{{ route('loginUser') }}" method="POST">
                     @csrf
                     <h1>Iniciar Sesion</h1>
-                    <input type="email" name="correo" placeholder="Enter your correo" required />
-                    <input type="password" name="password" placeholder="Enter your password" required />
-                    <a href="#">Forgot your password?</a>
-                    <button>Sign In</button>
+                    <input type="email" name="correo" placeholder="Correo" required />
+                    <input type="password" name="password" placeholder="Contraseña" required />
+                    <a href="#">Has olvidado tu contraseña?</a>
+                    <button type="submit">Entrar</button>
                 </form>
             </div>
             <div class="overlay-container">

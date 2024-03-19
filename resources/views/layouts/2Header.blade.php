@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+    <style>.fondoheader{background: #1C1C1C;}</style>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Fonts -->
@@ -17,11 +17,11 @@
     <header>
         <nav class="navbar bg-body-tertiary p-0">
             <div class="container-fluid" id="listaHeader">
-                <a class="navbar-brand @if (request()->is('/')) bg-dark @endif"
+                <a class="navbar-brand @if (request()->is('/')) fondoheader @endif"
                     href="{{ route('/') }}">HOME</a>
-                <a class="navbar-brand @if (request()->is('carreras')) bg-dark @endif" href="#">CARRERAS</a>
-                <a class="navbar-brand @if (request()->is('record')) bg-dark @endif" href="#">RECORD</a>
-                <a class="navbar-brand @if (request()->is('tickets')) bg-dark @endif"
+                <a class="navbar-brand @if (request()->is('carreras')) fondoheader @endif" href="#">CARRERAS</a>
+                <a class="navbar-brand @if (request()->is('record')) fondoheader @endif" href="#">RECORD</a>
+                <a class="navbar-brand @if (request()->is('tickets')) fondoheader @endif"
                     href="{{ route('tickets') }}">TICKETS</a>
             </div>
         </nav>

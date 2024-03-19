@@ -32,7 +32,7 @@ class CarrerasController extends Controller
     public function mostrarCarrerasClientes()
     {
         $carreras = Carrera::all();
-        return view('enlaces.tickets', compact('carreras'));
+        return view('Enlaces.tickets', compact('carreras'));
     }
 
     public function create()

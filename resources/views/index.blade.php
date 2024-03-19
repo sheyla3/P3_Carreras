@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,16 +11,26 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('node_modules/slick-carousel/slick/slick.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('node_modules/slick-carousel/slick/slick-theme.css') }}">
     <script src="{{ asset('node_modules/slick-carousel/slick/slick.min.js') }}"></script>
 </head>
+
 <body>
-    @include('layouts.CaballoHeader')
+    @if (isset($socioId) && isset($socioName))
+        @include('layouts.CHSocio')
+    @elseif (isset($jineteId) && isset($jineteName))
+        @include('layouts.CHJinete')
+    @else
+        @include('layouts.CaballoHeader')
+    @endif
+
     @include('layouts.SliderHome')
-    
+
     <style>
         @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
     </style>
@@ -48,13 +59,14 @@
     <div class="Maestro-2">
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                @foreach($carreras->chunk(3) as $chunk)
+                @foreach ($carreras->chunk(3) as $chunk)
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}" data-bs-interval="10000">
                         <div class="row">
-                            @foreach($chunk as $carrera)
+                            @foreach ($chunk as $carrera)
                                 <div class="col">
                                     <div class="lugares">
-                                        <img src="{{ asset('storage/'.$carrera->lugar_foto) }}" alt="Lugar de {{ $carrera->nombre }}">
+                                        <img src="{{ asset('storage/' . $carrera->lugar_foto) }}"
+                                            alt="Lugar de {{ $carrera->nombre }}">
                                         <h3>{{ $carrera->nombre }}</h3>
                                     </div>
                                 </div>
@@ -63,11 +75,13 @@
                     </div>
                 @endforeach
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
@@ -87,4 +101,5 @@
     <!-- <a class="linkAdminLogin" href="{{ route('loginAdmin') }}"> Panel Administrador</a> -->
 </body>
 @include('layouts.footer')
+
 </html>

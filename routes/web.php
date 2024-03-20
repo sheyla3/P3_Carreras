@@ -35,6 +35,7 @@ Route::get('/', [CarrerasController::class, 'index2'])->name('/');
 // USUARIO
 Route::post('/loginUser', [UsuarioController::class, 'loginUsuario'])->name('loginUser');
 Route::post('/registroUsuario', [UsuarioController::class, 'registroUsuario'])->name('registroUsuario');
+Route::post('/usuario-cerrar', [UsuarioController::class, 'cerrarSesion'])->name('usuario.cerrar');
 
 //mostrar tickets
 Route::get('/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');

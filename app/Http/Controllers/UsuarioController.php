@@ -64,9 +64,9 @@ class UsuarioController extends Controller
 
     public function cerrarSesion(Request $request)
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('formularioInicio');
+        return redirect()->route('/');
     }
 }

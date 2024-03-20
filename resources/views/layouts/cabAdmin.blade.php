@@ -41,7 +41,7 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('adminJinetes') }}">Jinetes</a>
             <a class="navbar-brand" href="{{ route('adminSocio') }}">Socios</a>
-            <a class="navbar-brand" href="#">Fotos</a>
+            <a class="navbar-brand" href="{{ route('adminFotos') }}">Fotos</a>
         </div>
     </nav>
     <!-- Bootstrap JS -->

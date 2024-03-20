@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\JineteController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\CarrerasController;
+use App\Http\Controllers\FotosController;
 use App\Http\Controllers\AseguradoraController;
 use App\Http\Controllers\SocioController;
 use App\Http\Controllers\UsuarioController;
@@ -89,3 +90,10 @@ Route::get('/editarAseguradora/{id}', [AseguradoraController::class, 'editarAseg
 Route::post('/aseguradora-editar/{id}', [AseguradoraController::class, 'editar'])->name('aseguradora.editar');
 Route::get('/inactivo-aseguradora/{id}', [AseguradoraController::class, 'inactivo'])->name('inactivoAseguradora');
 Route::get('/activo-aseguradora/{id}', [AseguradoraController::class, 'activo'])->name('activoAseguradora');
+
+//fotos
+Route::get('/adminFotos', [FotosController::class, 'mostrarFotos'])->name('adminFotos');
+Route::post('/anadirFoto', [FotosController::class, 'anadirFoto'])->name('anadirFoto');
+Route::get('/verFotos/{id}', [FotosController::class, 'verFotos'])->name('verFotos');
+Route::get('/eliminarFoto', [FotosController::class, 'eliminarFoto'])->name('eliminarFoto');
+Route::get('/eliminarTodasFotos/{id}', [FotosController::class, 'eliminarTodasFotos'])->name('eliminarTodasFotos');

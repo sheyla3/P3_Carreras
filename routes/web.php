@@ -95,5 +95,5 @@ Route::get('/activo-aseguradora/{id}', [AseguradoraController::class, 'activo'])
 Route::get('/adminFotos', [FotosController::class, 'mostrarFotos'])->name('adminFotos');
 Route::post('/anadirFoto', [FotosController::class, 'anadirFoto'])->name('anadirFoto');
 Route::get('/verFotos/{id}', [FotosController::class, 'verFotos'])->name('verFotos');
-Route::get('/eliminarFoto', [FotosController::class, 'eliminarFoto'])->name('eliminarFoto');
+Route::get('/eliminarFoto/{id}', [FotosController::class, 'eliminarFoto'])->name('eliminarFoto');
 Route::get('/eliminarTodasFotos/{id}', [FotosController::class, 'eliminarTodasFotos'])->name('eliminarTodasFotos');

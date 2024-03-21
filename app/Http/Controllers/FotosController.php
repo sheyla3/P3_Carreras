@@ -39,23 +39,32 @@ class FotosController extends Controller
         if (!session()->has('admin_id') || !session()->has('admin_name')) {
             return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
         }
-
+        $idCarrera = $id;
         $adminId = session('admin_id');
         $adminName = session('admin_name');
         $carreraFotos = Foto::where('id_carrera', $id)->with('carrera')->get();
-        return view('admin.fotosCarrera', compact('carreraFotos', 'adminId', 'adminName'));
+        return view('admin.fotosCarrera', compact('carreraFotos', 'idCarrera', 'adminId', 'adminName'));
     }
 
     public function eliminarFoto($id)
     {
-        if (!session()->has('admin_id') || !session()->has('admin_name')) {
-            return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
+        $fotosEliminar = Foto::find($id);
+
+        if ($fotosEliminar) {
+            $fotosEliminar->delete();
+        }
+        return redirect()->route('verFotos');
+    }
+
+    public function eliminarTodasFotos($id)
+    {
+        $idCarrera = $id;
+        // Obtener todas las fotos asociadas a la carrera
+        $fotosEliminar = Foto::where('id_carrera', $idCarrera)->get();
+        foreach ($fotosEliminar as $foto) {
+            $foto->delete();
         }
 
-        $idCarrera = $id;
-        $adminId = session('admin_id');
-        $adminName = session('admin_name');
-        $carreras = Carrera::where('activo', true)->get();
-        return view('admin.AdminFotos', compact('carreras', 'adminId', 'adminName'));
+        return redirect()->route('verFotos', $idCarrera);
     }
 }

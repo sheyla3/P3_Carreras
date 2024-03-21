@@ -17,6 +17,14 @@
             <li>
                 <h1>Fotos</h1>
             </li>
+            <li class="float-right ml-4">
+                <a class="btn btn-danger" href="{{ route('eliminarTodasFotos', $idCarrera) }}">
+                    Eliminar todas
+                </a>
+            </li>
+            <li class="float-right">
+                <p class="btn btn-warning">Eliminar</p>
+            </li>
         </ul>
         <br><br>
         @if ($carreraFotos->isEmpty())

@@ -21,6 +21,64 @@
             align-items: center;
             position: absolute;
             width: 100%;
+            z-index: 9999; /* Asegura que el navbar esté por encima de todo */
+        }
+
+        /* Estilos para el formulario de jinetes */
+        #container2 {
+            position: fixed;
+            width: 25%;
+            height: 480px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 99999;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 10px 5px 10px rgb(0 0 0 / 25%);
+        }
+
+        #step1 {
+            margin-top: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #step1 input {
+            background-color: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 100%;
+        }
+
+        #step1 button {
+            border-radius: 20px;
+            border: 1px solid #13212B;
+            background-color: #13212B;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            margin: 12px;
+        }
+        
+
+        #step1 h1 {
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Estilos para los botones del formulario de jinetes */
+        #container2 button {
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -32,7 +90,7 @@
         </div>
         <div class="right-links">
             <a href="#" class="btn p-0" id="loginBtn">Socio</a>
-            <a href="{{ route('loginAdmin') }}" class="btn p-0 mx-3">Jinete</a>
+            <a href="#" class="btn p-0" id="JineteBtn">Jinete</a>
         </div>
     </nav>
 
@@ -96,6 +154,26 @@
             </div>
         </div>
     </section>
+    <div class="container" id="container2" style="display: none;">
+    <div class="form-container sign-up-container">
+        <form action="" method="POST" id="jineteForm">
+            @csrf
+            <div id="step1">
+                <form action="{{ route('loginUser') }}" method="POST">
+                    @csrf
+                    <h1>Soy Jinete!</h1>
+                    <input type="email" name="correo" placeholder="Correo" required />
+                    <input type="password" name="password" placeholder="Contraseña" required />
+                    <a href="#">Has olvidado tu contraseña?</a>
+                    <a href="#">Más información: carrera@carrerasms.es</a>
+                    <button class="ghost" type="submit" >Entrar</button>
+                </form>
+            </div>
+        </form>                
+    </div>
+</div>
+
+
     <!-- Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -103,15 +181,29 @@
 </body>
 <script>
     const loginBtn = document.getElementById('loginBtn');
+    const JineteBtn = document.getElementById('JineteBtn');
     const container = document.getElementById('container');
+    const container2 = document.getElementById('container2');
 
     loginBtn.addEventListener('click', () => {
         container.style.display = 'block';
+        container2.style.display = 'none'; // Ocultar el formulario de jinete al mostrar el de socio
     });
+
+    JineteBtn.addEventListener('click', () => {
+        container2.style.display = 'block';
+        container.style.display = 'none'; // Ocultar el formulario de socio al mostrar el de jinete
+    })
 
     document.addEventListener('click', (e) => {
         if (!container.contains(e.target) && e.target !== loginBtn) {
             container.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!container2.contains(e.target) && e.target !== JineteBtn) {
+            container2.style.display = 'none';
         }
     });
 
@@ -126,6 +218,7 @@
         container.classList.remove("right-panel-active");
     });
 </script>
+
 
 <script>
     const signupForm = document.getElementById('signupForm');

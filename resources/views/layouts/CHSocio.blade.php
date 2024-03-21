@@ -52,7 +52,11 @@
                 <div class="dropdown-menu dropdown-menu-right" style="background-color: #1C1C1C">
                     <button class="dropdown-item" type="button">Perfil</button>
                     <button class="dropdown-item" type="button">Foto</button>
-                    <button class="dropdown-item" type="button">Cerrar sesion</button>
+                    <form method="POST" action="{{ route('admin.cerrar') }}">
+                    @csrf
+                    <a href="{{ route('admin.cerrar') }}"
+                        onclick="event.preventDefault(); this.closest('form').submit();">Cerrar sesión</a>
+                </form>
                 </div>
             </div>
         </div>

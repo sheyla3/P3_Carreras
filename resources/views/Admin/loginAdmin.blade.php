@@ -19,22 +19,27 @@ use App\Http\Controllers\AseguradoraController;
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
 </head>
+@include('layouts.CaballoHeader')
 
 <body class="FondoAdmin">
     <div class="ImgAdmin">
-        <h1>Login Admin</h1>
-        <form action="{{ route('admin.iniciar') }}" method="POST">
-            @csrf
-            <label for="usuario">Usuario:</label><br>
-            <input type="text" id="usuario" name="usuario" value="{{ old('usuario') }}" placeholder="Usuario"><br>
-            {!! $errors->first('usuario', '<small>:message</small>') !!}<br>
-            <label for="contra">Contraseña:</label><br>
-            <input type="password" id="contra" name="contra" value="{{ old('contra') }}"
-                placeholder="Contraseña"><br>
-            {!! $errors->first('contra', '<small>:message</small>') !!}<br><br>
-            <input type="submit" value="Iniciar">
-        </form>
-        <a href="{{ route('/') }}">Home</a>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <form action="{{ route('admin.iniciar') }}" method="POST" class="box">
+                        @csrf
+                        <h1>ADMIN</h1>
+                        <p class="text-muted"> BIENVENIDO! Pon tu usuario y contraseña:</p>
+                        <input type="text" id="usuario" name="usuario" value="{{ old('usuario') }}" placeholder="Usuario">
+                        <p style="color: white">{!! $errors->first('usuario', '<small>:message</small>') !!}</p>
+                        <input type="password" id="contra" name="contra" value="{{ old('contra') }}" placeholder="Contraseña">
+                        <p style="color: white">{!! $errors->first('contra', '<small>:message</small>') !!}</p>
+                        <input type="submit" value="Iniciar">
+                        <a href="{{ route('/') }}" style="color: white">Home</a>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     @if (session('ERROR'))
         <div class="modal" id="errormodal" tabindex="-1" role="dialog" aria-labelledby="errormodalLabel"
@@ -67,5 +72,6 @@ use App\Http\Controllers\AseguradoraController;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+@include('layouts.footer')
 
 </html>

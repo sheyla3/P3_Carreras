@@ -41,6 +41,10 @@ Route::post('/usuario-cerrar', [UsuarioController::class, 'cerrarSesion'])->name
 //mostrar tickets
 Route::get('/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');
 
+//mostrar carreras antiguas
+Route::get('/record', [CarrerasController::class, 'mostrarCarrerasAntiguas'])->name('record');
+Route::get('/carreraAntigua/{id}', [CarrerasController::class, 'carreraAntigua'])->name('carreraAntigua');
+
 // ADMIN
 Route::get('/loginAdmin', function () {return view('Admin.loginAdmin');})->name('loginAdmin');
 Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');

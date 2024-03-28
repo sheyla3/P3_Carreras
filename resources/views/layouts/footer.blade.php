@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="footer-container mx-auto mt-3">
+    <div class="footer-container mx-auto">
         <footer class="py-5">
             <div class="row justify-content-around">
                 <div class="col-md mb-3 text-center">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Carrera;
 use App\Models\Sponsor;
+use App\Models\Foto;
 use App\Models\SponsorCarrera;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -201,5 +202,23 @@ class CarrerasController extends Controller
         $carrera->activo = true;
         $carrera->save();
         return redirect()->route('AdminCarreras');
+    }
+
+    public function mostrarCarrerasAntiguas()
+    {
+        // Obtenemos la fecha actual
+        $fechaActual = Carbon::now()->toDateString();
+
+        $carreras = Carrera::whereDate('fechaHora', '<', $fechaActual)->where('activo', true)->get();
+
+        return view('Enlaces.record', compact('carreras'));
+    }
+
+    public function carreraAntigua($id)
+    {
+        $carrera = Carrera::findOrFail($id);
+        $fotos = Foto::where('id_carrera', $id)->with('carrera')->get();
+
+        return view('Enlaces.CarreraAntigua', compact('carrera', 'fotos'));
     }
 }

@@ -21,7 +21,7 @@
         @include('layouts.CaballoHeader')
     @endif
     <div class="enlacesHeader">
-        <h1 class="float-left tituloHeader2">Tickets</h1>
+        <h1 class="float-left tituloHeader2">Record</h1>
         @include('layouts.2Header')
     </div>
     <div class="contenedor-tickets">
@@ -29,7 +29,7 @@
             <div class="carrera">
                 <div>
                     <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" width="378px" height="342px"
-                        alt="">
+                        alt="{{ $carrera->nombre }}">
                 </div>
 
                 <div class="datos">
@@ -37,19 +37,15 @@
                         <h3>{{ $carrera->nombre }}</h3>
                     </div>
                     <div>
-                        <p>Lugar: {{ $carrera->descripcion }}</p>
+                        <p>{{ $carrera->descripcion }}</p>
                     </div>
                     <div>
-                        <p>{{ $carrera->precio }} €</p>
+                        <p>{{ $carrera->tipo }} de {{ $carrera->km }}km</p>
                     </div>
-                </div>
-
-                <div class="jinetes">
-                    <a href="">Jinetes</a>
                 </div>
 
                 <div class="clasificacion">
-                    <button>Ver clasificacion</button>
+                    <a href="{{ route('carreraAntigua', $carrera->id_carrera) }}"><button>Ver clasificacion</button></a>
                 </div>
             </div>
         @endforeach

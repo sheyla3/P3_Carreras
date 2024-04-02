@@ -243,10 +243,11 @@ header button {
 }
 
 .container-3 img {
-    width: 800px;
+    width: 725px;
     height: auto;
     margin-left: 5px;
     margin-right: 3em;
+    margin-bottom: 12px;
 }
 
 .container-4 {

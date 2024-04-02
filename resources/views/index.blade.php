@@ -39,14 +39,14 @@
             <img src="{{ asset('img/horseblack.png') }}" alt="">
         </div>
         <div class="container-2">
-            <h1>Lorem ipsum dolor sit.</h1>
+            <h1>¡Caballos en acción! ¡Compra ya!</h1>
             <svg width="95" height="26" viewBox="0 0 95 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="94.2" height="25.7073" rx="12.8537" fill="#1F323F" />
             </svg>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero exercitationem consequatur voluptatem
                 soluta reprehenderit repudiandae eveniet explicabo reiciendis. Praesentium quia explicabo maiores
                 accusamus nostrum ex fugiat quaerat! Suscipit maxime eaque adipisci reprehenderit quos natus!</p>
-            <button type="button" class="btn btn-primary" style="background:#1F323F; width: 20%">READ MORE</button>
+            <button href="{{ route('tickets') }}" type="button" class="btn btn-primary" style="background:#1F323F; width: 20%">READ MORE</button>
         </div>
     </div>
 

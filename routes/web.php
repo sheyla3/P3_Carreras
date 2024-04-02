@@ -40,6 +40,7 @@ Route::post('/usuario-cerrar', [UsuarioController::class, 'cerrarSesion'])->name
 
 //mostrar tickets
 Route::get('/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');
+Route::get('/index', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');
 
 //mostrar carreras antiguas
 Route::get('/record', [CarrerasController::class, 'mostrarCarrerasAntiguas'])->name('record');

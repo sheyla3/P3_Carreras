@@ -21,6 +21,7 @@
             align-items: center;
             position: absolute;
             width: 100%;
+            z-index: 999;
         }
 
         .dropdown-menu {

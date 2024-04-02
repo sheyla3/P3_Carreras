@@ -38,13 +38,20 @@ class JineteController extends Controller
             $nuevoJinete->num_federat = $request->input('num_fede');
             $nuevoJinete->edad = $request->input('edad');
             $nuevoJinete->activo = true;
-
             $nuevoJinete->save();
 
-            return redirect()->route('formularioJinete')->with('Guardado', 'Jinete agregado exitosamente');
+            if (session()->has('admin_id') || session()->has('admin_name')) {
+                return redirect()->route('formularioJinete')->with('Guardado', 'Jinete agregado exitosamente');
+            } else {
+                return redirect()->route('/');
+            }
+
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
         }
+
+
+        
     }
 
     public function mostrarJinetes()
@@ -134,6 +141,7 @@ class JineteController extends Controller
         return redirect()->route('adminJinetes');
     }
 
+    
     public function loginJinete(Request $request)
     {
         $request->validate([

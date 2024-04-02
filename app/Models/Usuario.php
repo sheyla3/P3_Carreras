@@ -51,6 +51,7 @@ class Usuario extends Authenticatable //extends Model tmbn deberia ser
 		'telf',
 		'dni',
 		'edad',
+		'num_federat',
 		'remember_token'
 	];
 }

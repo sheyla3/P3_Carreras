@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="app.css">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <script src="https://www.paypal.com/sdk/js?client-id=AWbHTcaJ9_9CZ3ZREICbLJos0DmP1hnmv9pIg3jX-Qj9XAY5IGuiaakjVWdsGIyHcyhX7cs3Jqv8OVGo&currency=USD"></script>
+
 </head>
 
 <body>
@@ -55,6 +57,10 @@
         @endforeach
     </div>
 
+<div></div>
+<script>
+    paypal.Buttons().render('#paypal-button-container')
+</script>
 </body>
 
 </html>

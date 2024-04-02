@@ -23,6 +23,19 @@
             width: 100%;
             z-index: 999;
         }
+
+        .dropdown-menu {
+            color: #ffffff;
+        }
+
+        .dropdown-menu button {
+            color: #ffffff;
+        }
+
+        .dropdown-menu button:hover {
+            background-color: #ffffff;
+            color: #1C1C1C;
+        }
     </style>
 </head>
 
@@ -31,21 +44,34 @@
         <div class="p-0">
             <a href="{{ route('/') }}"><img src="{{ asset('img/logoCaballo.png') }}" alt="Caballo"></a>
         </div>
-        <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="{{ asset('img/menu.svg') }}" alt="menu">
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+        <div class="right-links">
+            <div class="dropdown show">
+                <button type="button" class="dropdown-toggle btn p-0 mr-1" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <img src="{{ asset('img/menu.svg') }}" alt="menu" height="30" width="30">
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" style="background-color: #1C1C1C">
+                    <button class="dropdown-item" type="button">Perfil</button>
+                    <button class="dropdown-item" type="button">Mis carreras</button>
+                    <form method="POST" action="{{ route('admin.cerrar') }}">
+                        @csrf
+                        <a href="{{ route('admin.cerrar') }}"
+                            onclick="event.preventDefault(); this.closest('form').submit();">Cerrar sesión</a>
+                    </form>
+                </div>
             </div>
-          </div>
+        </div>
     </nav>
 
     <!-- Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+        $('.dropdown-toggle').dropdown()
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+<script>
+    $('.dropdown-toggle').dropdown()
+</script>
+
 </html>

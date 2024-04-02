@@ -54,10 +54,10 @@
                     <button class="dropdown-item" type="button">Perfil</button>
                     <button class="dropdown-item" type="button">Foto</button>
                     <form method="POST" action="{{ route('admin.cerrar') }}">
-                    @csrf
-                    <a href="{{ route('admin.cerrar') }}"
-                        onclick="event.preventDefault(); this.closest('form').submit();">Cerrar sesión</a>
-                </form>
+                        @csrf
+                        <a href="{{ route('admin.cerrar') }}"
+                            onclick="event.preventDefault(); this.closest('form').submit();">Cerrar sesión</a>
+                    </form>
                 </div>
             </div>
         </div>

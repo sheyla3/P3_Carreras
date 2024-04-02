@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Jinete;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class JineteController extends Controller
 {
@@ -130,5 +132,26 @@ class JineteController extends Controller
         $jinete->save();
 
         return redirect()->route('adminJinetes');
+    }
+
+    public function loginJinete(Request $request)
+    {
+        $request->validate([
+            'correo' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $email = $request->input("correo");
+        $password = $request->input("password");
+
+        $confUsu = Jinete::where('correo', $email)->first();
+
+        if ($confUsu && Hash::check($password, $confUsu->contrasena)) {
+            session(['jinete_id' => $confUsu->id_jinete, 'jinete_name' => $confUsu->correo]);
+
+            return redirect()->route('/');
+        } else {
+            return redirect()->back()->withErrors(['password' => 'La contraseña es incorrecta']);
+        }
     }
 }

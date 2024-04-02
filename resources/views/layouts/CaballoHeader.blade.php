@@ -172,7 +172,7 @@
     <section class="HomeJinete">
     <div class="container" id="container" style="display: none;">
             <div class="form-container sign-up-container">
-                <form action="{{ route('registroUsuario') }}" method="POST" id="signupForm">
+                <form action="{{ route('jinete.nuevo') }}" method="POST" id="signupForm" enctype="multipart/form-data">
                     @csrf
                     <h1>¡Quiero Ser Jinete!</h1>
                     <div id="step1">
@@ -182,10 +182,31 @@
                         <button type="button" id="nextStep1">Next</button>
                     </div>
                     <div id="step2" style="display: none;">
-                        <input type="text" placeholder="Nº FEDERACIÓN" name="num_federat" pattern="" required title="Numero de federación invalido"/>
-                        <input type="password" placeholder="Contraseña" name="contrasena" required title="La contraseña no puede estar vacía"/>
-                        <input type="password" placeholder="Confirmar Contraseña" name="contrasena_confirmacion" required title="La contraseña de confirmación no puede estar vacía"/>
+                        <input type="text" placeholder="Nº FEDERACIÓN" name="num_fede" required title="Numero de federación invalido"/>
+                        <input type="password" placeholder="Contraseña" name="contra" required title="La contraseña no puede estar vacía"/>
+                        <input type="password" placeholder="Confirmar Contraseña" name="contra_confirmacion" required title="La contraseña de confirmación no puede estar vacía"/>
                         <button type="button" id="prevStep2">Previous</button>
+                        <button type="button" id="nextStep2">Next</button>
+                    </div>
+                    <div id="step3" style="display: none;">
+                        <input type="file" placeholder="Foto" name="foto"/>
+                        <input type="text" placeholder="Dirección" name="calle"/>
+                        <input type="text" placeholder="Telefono" name="telf"/>
+                        <input type="date" placeholder="Fecha de Nacimiento" name="edad" id="edad" required
+                            max="{{ date('Y-m-d') }}" title="La fecha de nacimiento no puede ser posterior a hoy" />
+                        <script>
+                            function validarFecha() {
+                                var fechaNacimiento = document.getElementById("edad").value;
+                                var fechaActual = new Date();
+                                var fechaLimite = new Date(fechaActual.getFullYear() - 18, fechaActual.getMonth(), fechaActual.getDate());
+                                if (new Date(fechaNacimiento) > fechaLimite) {
+                                    alert("Debes ser mayor de edad para registrarte.");
+                                    return false;
+                                }
+                                return true;
+                            }
+                        </script>
+                        <button type="button" id="prevStep3">Previous</button>
                         <button type="submit">Sign Up</button>
                     </div>
                 </form>                

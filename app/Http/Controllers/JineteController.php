@@ -31,7 +31,7 @@ class JineteController extends Controller
             $nuevoJinete->nombre = $request->input('nombre');
             $nuevoJinete->apellido = $request->input('apellido');
             $nuevoJinete->correo = $request->input('correo');
-            $nuevoJinete->contrasena = $request->input('contra');
+            $nuevoJinete->contrasena = Hash::make($request->input('contra'));
             $nuevoJinete->foto = $rutaArchivo;
             $nuevoJinete->telf = $request->input('telf');
             $nuevoJinete->calle = $request->input('calle');
@@ -49,9 +49,6 @@ class JineteController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
         }
-
-
-        
     }
 
     public function mostrarJinetes()

@@ -33,7 +33,8 @@ Route::get('/peliculas/{titulo}', function ($titulo) {
 Route::get('/', [CarrerasController::class, 'index2'])->name('/');
 
 
-// USUARIO
+// USUARIOS: Socios / Jinetes
+Route::post('/loginJinete', [JineteController::class, 'loginJinete'])->name('loginJinete');
 Route::post('/loginUser', [UsuarioController::class, 'loginUsuario'])->name('loginUser');
 Route::post('/registroUsuario', [UsuarioController::class, 'registroUsuario'])->name('registroUsuario');
 Route::post('/usuario-cerrar', [UsuarioController::class, 'cerrarSesion'])->name('usuario.cerrar');

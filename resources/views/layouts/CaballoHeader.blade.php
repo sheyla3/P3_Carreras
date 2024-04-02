@@ -21,7 +21,8 @@
             align-items: center;
             position: absolute;
             width: 100%;
-            z-index: 9999; /* Asegura que el navbar esté por encima de todo */
+            z-index: 9999;
+            /* Asegura que el navbar esté por encima de todo */
         }
 
         /* Estilos para el formulario de jinetes */
@@ -69,7 +70,7 @@
             transition: transform 80ms ease-in;
             margin: 12px;
         }
-        
+
 
         #step1 h1 {
             font-weight: bold;
@@ -101,32 +102,45 @@
                     @csrf
                     <h1>¡Quiero Ser Socio!</h1>
                     <div id="step1">
-                        <input type="text" placeholder="Nombre" name="nombre" pattern="^[a-zA-Z]+$" required title="El nombre no puede contener espacios ni caracteres especiales"/>
-                        <input type="text" placeholder="Apellido" name="apellido" pattern="^[a-zA-Z]+$" required title="El apellido no puede contener espacios ni caracteres especiales"/>
-                        <input type="tel" placeholder="Teléfono" name="telf" pattern="^\d{9}$" required title="El teléfono debe tener 9 dígitos"/>
+                        <input type="text" placeholder="Nombre" name="nombre" pattern="^[a-zA-Z]+$" required
+                            title="El nombre no puede contener espacios ni caracteres especiales" />
+                        <input type="text" placeholder="Apellido" name="apellido" pattern="^[a-zA-Z]+$" required
+                            title="El apellido no puede contener espacios ni caracteres especiales" />
+                        <input type="tel" placeholder="Teléfono" name="telf" pattern="^\d{9}$" required
+                            title="El teléfono debe tener 9 dígitos" />
                         <button type="button" id="nextStep1">Next</button>
                     </div>
                     <div id="step2" style="display: none;">
-                        <input type="text" placeholder="DNI" name="dni" pattern="^\d{8}[A-Za-z]$" required title="Formato de DNI incorrecto"/>
-                        <input type="date" placeholder="Fecha de Nacimiento" name="edad" id="edad" required max="{{ date('Y-m-d') }}" title="La fecha de nacimiento no puede ser posterior a hoy"/>
-                            <script>
-                                function validarFecha() {
-                                    var fechaNacimiento = document.getElementById("edad").value;
-                                    var fechaActual = new Date();
-                                    var fechaLimite = new Date(fechaActual.getFullYear() - 18, fechaActual.getMonth(), fechaActual.getDate());
-                                    if (new Date(fechaNacimiento) > fechaLimite) {alert("Debes ser mayor de edad para registrarte.");return false;}return true;}
-                            </script>
+                        <input type="text" placeholder="DNI" name="dni" pattern="^\d{8}[A-Za-z]$" required
+                            title="Formato de DNI incorrecto" />
+                        <input type="date" placeholder="Fecha de Nacimiento" name="edad" id="edad" required
+                            max="{{ date('Y-m-d') }}" title="La fecha de nacimiento no puede ser posterior a hoy" />
+                        <script>
+                            function validarFecha() {
+                                var fechaNacimiento = document.getElementById("edad").value;
+                                var fechaActual = new Date();
+                                var fechaLimite = new Date(fechaActual.getFullYear() - 18, fechaActual.getMonth(), fechaActual.getDate());
+                                if (new Date(fechaNacimiento) > fechaLimite) {
+                                    alert("Debes ser mayor de edad para registrarte.");
+                                    return false;
+                                }
+                                return true;
+                            }
+                        </script>
                         <button type="button" id="prevStep2">Previous</button>
                         <button type="button" id="nextStep2">Next</button>
                     </div>
                     <div id="step3" style="display: none;">
-                        <input type="email" placeholder="Correo" name="correo" pattern="^\S+@\S+\.\S+$" required title="Formato de correo electrónico incorrecto"/>
-                        <input type="password" placeholder="Contraseña" name="contrasena" required title="La contraseña no puede estar vacía"/>
-                        <input type="password" placeholder="Confirmar Contraseña" name="contrasena_confirmacion" required title="La contraseña de confirmación no puede estar vacía"/>
+                        <input type="email" placeholder="Correo" name="correo" pattern="^\S+@\S+\.\S+$" required
+                            title="Formato de correo electrónico incorrecto" />
+                        <input type="password" placeholder="Contraseña" name="contrasena" required
+                            title="La contraseña no puede estar vacía" />
+                        <input type="password" placeholder="Confirmar Contraseña" name="contrasena_confirmacion"
+                            required title="La contraseña de confirmación no puede estar vacía" />
                         <button type="button" id="prevStep3">Previous</button>
                         <button type="submit">Sign Up</button>
                     </div>
-                </form>                
+                </form>
             </div>
             <div class="form-container sign-in-container">
                 <form action="{{ route('loginUser') }}" method="POST">
@@ -203,21 +217,19 @@
         </div>
     </section>
     <div class="container" id="container2" style="display: none;">
-    <div class="form-container sign-up-container">
-        <form action="" method="POST" id="jineteForm">
-            @csrf
+        <div class="form-container sign-up-container">
             <div id="step1">
-                <form action="{{ route('loginUser') }}" method="POST">
+                <form action="{{ route('loginJinete') }}" method="POST">
                     @csrf
                     <h1>Soy Jinete!</h1>
                     <input type="email" name="correo" placeholder="Correo" required />
                     <input type="password" name="password" placeholder="Contraseña" required />
                     <a href="#">Has olvidado tu contraseña?</a>
-                    <a href="#">Más información: carrera@carrerasms.es</a>
-                    <button class="ghost" type="submit" >Entrar</button>
+                    <p>Más información: <a href="#">carrera@carrerasms.es</a></p>
+                    <button class="ghost" type="submit">Entrar</button>
                 </form>
             </div>
-        </form>                
+        </div>
     </div>
 
     <!-- <div class="container" id="container2" style="display: none;">

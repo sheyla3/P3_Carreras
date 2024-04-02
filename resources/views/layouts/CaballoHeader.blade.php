@@ -94,7 +94,7 @@
         </div>
     </nav>
 
-    <section class="Home">
+    <!-- <section class="Home">
         <div class="container" id="container" style="display: none;">
             <div class="form-container sign-up-container">
                 <form action="{{ route('registroUsuario') }}" method="POST" id="signupForm">
@@ -153,6 +153,54 @@
                 </div>
             </div>
         </div>
+    </section> -->
+
+    <section class="HomeJinete">
+    <div class="container" id="container" style="display: none;">
+            <div class="form-container sign-up-container">
+                <form action="{{ route('registroUsuario') }}" method="POST" id="signupForm">
+                    @csrf
+                    <h1>¡Quiero Ser Jinete!</h1>
+                    <div id="step1">
+                        <input type="text" placeholder="Nombre" name="nombre" pattern="^[a-zA-Z]+$" required title="El nombre no puede contener espacios ni caracteres especiales"/>
+                        <input type="text" placeholder="Apellido" name="apellido" pattern="^[a-zA-Z]+$" required title="El apellido no puede contener espacios ni caracteres especiales"/>
+                        <input type="email" placeholder="Correo" name="correo" pattern="^\S+@\S+\.\S+$" required title="Formato de correo electrónico incorrecto"/>
+                        <button type="button" id="nextStep1">Next</button>
+                    </div>
+                    <div id="step2" style="display: none;">
+                        <input type="text" placeholder="Nº FEDERACIÓN" name="num_federat" pattern="" required title="Numero de federación invalido"/>
+                        <input type="password" placeholder="Contraseña" name="contrasena" required title="La contraseña no puede estar vacía"/>
+                        <input type="password" placeholder="Confirmar Contraseña" name="contrasena_confirmacion" required title="La contraseña de confirmación no puede estar vacía"/>
+                        <button type="button" id="prevStep2">Previous</button>
+                        <button type="submit">Sign Up</button>
+                    </div>
+                </form>                
+            </div>
+            <div class="form-container sign-in-container">
+                <form action="{{ route('loginUser') }}" method="POST">
+                    @csrf
+                    <h1>Iniciar Sesion</h1>
+                    <input type="email" name="correo" placeholder="Correo" required />
+                    <input type="password" name="password" placeholder="Contraseña" required />
+                    <a href="#">Has olvidado tu contraseña?</a>
+                    <button type="submit">Entrar</button>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Bienvenido de nuevo!</h1>
+                        <p>Inicia Sesión y actualiza tu información</p>
+                        <button class="ghost" id="signIn">Sign In</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>¿Quieres ser un Jinete?</h1>
+                        <p>Registarte y participa en la proxima carrera.</p>
+                        <button class="ghost" id="signUp">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <div class="container" id="container2" style="display: none;">
     <div class="form-container sign-up-container">
@@ -171,6 +219,24 @@
             </div>
         </form>                
     </div>
+
+    <!-- <div class="container" id="container2" style="display: none;">
+    <div class="form-container sign-up-container">
+        <form action="" method="POST" id="jineteForm">
+            @csrf
+            <div id="step1">
+                <form action="{{ route('loginUser') }}" method="POST">
+                    @csrf
+                    <h1>Soy Jinete!</h1>
+                    <input type="email" name="correo" placeholder="Correo" required />
+                    <input type="password" name="password" placeholder="Contraseña" required />
+                    <a href="#">Has olvidado tu contraseña?</a>
+                    <a href="#">Más información: carrera@carrerasms.es</a>
+                    <button class="ghost" type="submit" >Entrar</button>
+                </form>
+            </div>
+        </form>                
+    </div> -->
 </div>
 
 

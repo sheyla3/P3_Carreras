@@ -1,3 +1,7 @@
+input {
+    outline: none !important;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -57,45 +61,27 @@ nav a {
     /* Ajusta el tamaño del fondo */
 }
 
-.card {
-    width: 70%;
-    padding: 5%;
-    background: #1c1c1c9d;
-    text-align: center;
-    transition: 0.25s;
-    border-radius: 10%;
+.form-control {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 3px solid #ffffff !important;
+    color: #ffffff !important;
+    margin-bottom: 10px;
+}
+.form-control:focus {
+    border-bottom: 3px solid #8B4513 !important;
 }
 
-.box {
-    height: 400px;
-    background: transparent;
-    /* Eliminamos el fondo del formulario */
-    text-align: center;
-    border-radius: 10%;
-    /* Ajustamos el radio del borde */
+.btn-iniciar {
+    background: linear-gradient(45deg, rgb(131, 56, 12), white) !important;
+    color: #ffffff;
+    border-radius: 20px;
+    width: 90%;
 }
 
-.box input[type="text"],
-.box input[type="password"] {
-    /* Mantenemos los estilos anteriores */
-    border: 2px solid #D9D9D9;
-    padding: 10px 10px;
-    width: 250px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
-}
-
-.box input[type="submit"] {
-    /* Mantenemos los estilos anteriores */
-    border: 2px solid #745B5B;
-    padding: 14px 40px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
-    cursor: pointer;
+.btn-iniciar:hover {
+    background: linear-gradient(45deg, black, rgb(167, 91, 30)) !important;
+    color: #D2B48C;
 }
 
 /* FIN LOGIN ADMIN */

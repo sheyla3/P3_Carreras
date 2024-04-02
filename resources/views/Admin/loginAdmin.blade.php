@@ -23,20 +23,25 @@ use App\Http\Controllers\AseguradoraController;
 
 <body class="FondoAdmin">
     <div class="ImgAdmin">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <form action="{{ route('admin.iniciar') }}" method="POST" class="box">
-                        @csrf
-                        <h1>ADMIN</h1>
-                        <p class="text-muted"> BIENVENIDO! Pon tu usuario y contraseña:</p>
-                        <input type="text" id="usuario" name="usuario" value="{{ old('usuario') }}" placeholder="Usuario">
-                        <p style="color: white">{!! $errors->first('usuario', '<small>:message</small>') !!}</p>
-                        <input type="password" id="contra" name="contra" value="{{ old('contra') }}" placeholder="Contraseña">
-                        <p style="color: white">{!! $errors->first('contra', '<small>:message</small>') !!}</p>
-                        <input type="submit" value="Iniciar">
-                        <a href="{{ route('/') }}" style="color: white">Home</a>
-                    </form>
+        <div class="row w-100 d-flex justify-content-center">
+            <div class="w-25">
+                <div class="card w-100 shadow-lg rounded text-white bg-dark mb-3 text-center">
+                    <div class="card-header">ADMIN</div>
+                    <div class="card-body">
+                        <h5 class="card-title">BIENVENIDO!</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Pon tu usuario y contraseña:</h6>
+                        <form action="{{ route('admin.iniciar') }}" method="POST">
+                            @csrf
+                            <input type="text" id="usuario" name="usuario" value="{{ old('usuario') }}" placeholder="Usuario" class="form-control rounded-0">
+                            <p>{!! $errors->first('usuario', '<small>:message</small>') !!}</p>
+                            <input type="password" id="contra" name="contra" value="{{ old('contra') }}" placeholder="Contraseña" class="form-control rounded-0">
+                            <p>{!! $errors->first('contra', '<small>:message</small>') !!}</p>
+                            <input type="submit" value="Iniciar" class="btn btn-iniciar text-white">
+                        </form>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <a href="{{ route('/') }}">Home</a>
+                    </div>
                 </div>
             </div>
         </div>

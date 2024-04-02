@@ -39,13 +39,15 @@ Route::post('/loginUser', [UsuarioController::class, 'loginUsuario'])->name('log
 Route::post('/registroUsuario', [UsuarioController::class, 'registroUsuario'])->name('registroUsuario');
 Route::post('/usuario-cerrar', [UsuarioController::class, 'cerrarSesion'])->name('usuario.cerrar');
 
-//mostrar tickets
+//TICKETS: mostrar tickets
 Route::get('/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');
-Route::get('/index', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');
 
-//mostrar carreras antiguas
+//RECORD: mostrar carreras antiguas
 Route::get('/record', [CarrerasController::class, 'mostrarCarrerasAntiguas'])->name('record');
 Route::get('/carreraAntigua/{id}', [CarrerasController::class, 'carreraAntigua'])->name('carreraAntigua');
+
+//CARRERAS: mostrar carreras posteriores
+Route::get('/carreras', [CarrerasController::class, 'mostrarCarrerasJinetes'])->name('carreras');
 
 // ADMIN
 Route::get('/loginAdmin', function () {return view('Admin.loginAdmin');})->name('loginAdmin');
@@ -78,8 +80,8 @@ Route::get('/inactivo-sponsor/{id}', [SponsorController::class, 'inactivo'])->na
 Route::get('/activo-sponsor/{id}', [SponsorController::class, 'activo'])->name('activoSponsor');
 
 //carreras
-Route::get('/carreras/create', [CarrerasController::class, 'create'])->name('carreras.create');
-Route::post('/carreras', [CarrerasController::class, 'store'])->name('carreras.store');
+Route::get('/carreras-create', [CarrerasController::class, 'create'])->name('carreras.create');
+Route::post('/carreras-store', [CarrerasController::class, 'store'])->name('carreras.store');
 Route::get('/AdminCarreras', [CarrerasController::class, 'mostrarCarreras'])->name('AdminCarreras');
 Route::get('/editarCarrera/{id}', [CarrerasController::class, 'editarCarrera'])->name('editarCarrera');
 Route::post('/carrera-editar/{id}', [CarrerasController::class, 'editar'])->name('carrera.editar');

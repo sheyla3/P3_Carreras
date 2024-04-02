@@ -221,4 +221,14 @@ class CarrerasController extends Controller
 
         return view('Enlaces.CarreraAntigua', compact('carrera', 'fotos'));
     }
+
+    public function mostrarCarrerasJinetes()
+    {
+        // Obtenemos la fecha actual
+        $fechaActual = Carbon::now()->toDateString();
+
+        $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
+
+        return view('Enlaces.carreras', compact('carreras'));
+    }
 }

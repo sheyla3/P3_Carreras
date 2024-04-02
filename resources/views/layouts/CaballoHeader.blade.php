@@ -89,8 +89,8 @@
             <a href="{{ route('/') }}"><img src="{{ asset('img/logoCaballo.png') }}" alt="Caballo"></a>
         </div>
         <div class="right-links">
-            <a href="#" class="btn p-0" id="loginBtn">Socio</a>
-            <a href="#" class="btn p-0" id="JineteBtn">Jinete</a>
+            <a href="#" class="btn p-0 mr-4" id="loginBtn">Socio</a>
+            <a href="#" class="btn p-0 mr-3" id="JineteBtn">Jinete</a>
         </div>
     </nav>
 

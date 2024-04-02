@@ -20,7 +20,7 @@
                 <a class="navbar-brand @if (request()->is('/')) fondoheader @endif"
                     href="{{ route('/') }}">HOME</a>
                 <a class="navbar-brand @if (request()->is('carreras')) fondoheader @endif" href="#">CARRERAS</a>
-                <a class="navbar-brand @if (request()->is('record')) fondoheader @endif" href="#">RECORD</a>
+                <a class="navbar-brand @if (request()->is('record')) fondoheader @endif" href="{{ route('record') }}">RECORD</a>
                 <a class="navbar-brand @if (request()->is('tickets')) fondoheader @endif"
                     href="{{ route('tickets') }}">TICKETS</a>
             </div>

@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="app.css">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    <script src="https://www.paypal.com/sdk/js?client-id=AWbHTcaJ9_9CZ3ZREICbLJos0DmP1hnmv9pIg3jX-Qj9XAY5IGuiaakjVWdsGIyHcyhX7cs3Jqv8OVGo&currency=USD"></script>
-
 </head>
 
 <body>
@@ -23,7 +21,7 @@
         @include('layouts.CaballoHeader')
     @endif
     <div class="enlacesHeader">
-        <h1 class="float-left tituloHeader2">Tickets</h1>
+        <h1 class="float-left tituloHeader2">Record</h1>
         @include('layouts.2Header')
     </div>
     <div class="contenedor-tickets">
@@ -31,7 +29,7 @@
             <div class="carrera">
                 <div>
                     <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" width="378px" height="342px"
-                        alt="">
+                        alt="{{ $carrera->nombre }}">
                 </div>
 
                 <div class="datos">
@@ -39,28 +37,20 @@
                         <h3>{{ $carrera->nombre }}</h3>
                     </div>
                     <div>
-                        <p>Lugar: {{ $carrera->descripcion }}</p>
+                        <p>{{ $carrera->descripcion }}</p>
                     </div>
                     <div>
-                        <p>{{ $carrera->precio }} €</p>
+                        <p>{{ $carrera->tipo }} de {{ $carrera->km }}km</p>
                     </div>
-                </div>
-
-                <div class="jinetes">
-                    <a href="">Jinetes</a>
                 </div>
 
                 <div class="clasificacion">
-                    <button>Ver clasificacion</button>
+                    <a href="{{ route('carreraAntigua', $carrera->id_carrera) }}"><button>Ver clasificacion</button></a>
                 </div>
             </div>
         @endforeach
     </div>
 
-<div></div>
-<script>
-    paypal.Buttons().render('#paypal-button-container')
-</script>
 </body>
 
 </html>

@@ -26,7 +26,6 @@
         .header-container {
             position: absolute;
             width: 100%;
-            margin-top: 40px;
         }
     </style>
 </head>

@@ -581,7 +581,7 @@ section .container.right-panel-active .overlay-left {
 }
 
 section .overlay-right {
-    right: -40px;
+    right: 0;
     transform: translateX(0);
 }
 

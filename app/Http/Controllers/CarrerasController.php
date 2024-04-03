@@ -90,7 +90,6 @@ class CarrerasController extends Controller
             if ($request->hasFile('cartel')) {
                 $rutaArchivo2 = $request->file('cartel')->store('Carteles', 'public');
             }
-            $fechaHora = Carbon::parse($request->input('fechaHora'));
 
             $nuevoCarrera = new Carrera([
                 'nombre' => $request->input('nombre'),
@@ -98,7 +97,7 @@ class CarrerasController extends Controller
                 'tipo' => $request->input('tipo'),
                 'lugar_foto' => $rutaArchivo1,
                 'km' => $request->input('km'),
-                'fechaHora' => $fechaHora,
+                'fechaHora' => $request->input('fechaHora'),
                 'cartel' => $rutaArchivo2,
                 'precio' => $request->input('precio'),
                 'activo' => true,
@@ -183,14 +182,13 @@ class CarrerasController extends Controller
         } else {
             $rutaArchivo2 = $carrera->cartel;
         }
-        $fechaHora = Carbon::parse($request->input('fechaHora'));
         try {
             $carrera->nombre = $request->input('nombre');
             $carrera->descripcion = $request->input('descripcion');
             $carrera->tipo = $request->input('tipo');
             $carrera->lugar_foto = $rutaArchivo1;
-            $carrera->km = $request->has('km');
-            $carrera->fechaHora = $fechaHora;
+            $carrera->km = $request->input('km');
+            $carrera->fechaHora = $request->input('fechaHora');
             $carrera->cartel = $rutaArchivo2;
             $carrera->precio = $request->input('precio');
             $carrera->activo = true;
@@ -209,7 +207,6 @@ class CarrerasController extends Controller
         $carrera->save();
         return redirect()->route('AdminCarreras')->with('success', 'El estado de la carrera ha sido actualizado correctamente.');
     }
-
 
     public function activo($id)
     {
@@ -293,10 +290,7 @@ class CarrerasController extends Controller
                 $nuevo = new Participante([
                     'id_carrera' => $id_carrera,
                     'id_jinete' => $id_jinete,
-                    'num_participante' => $num_participante,
-                    'dorsal' =>null,
-                    'qr' => null,
-                    'tiempo' =>null,
+                    'num_partcipante' => $num_participante,
                 ]);
 
                 $nuevo->save();
@@ -305,6 +299,19 @@ class CarrerasController extends Controller
             } else {
                 return redirect()->route('carreras')->with('ERROR', 'Lo siento, la carrera ya está completa.');
             }
+        } catch (\Exception $e) {
+            return redirect()->route('carreras')->with('ERROR', 'Hubo un problema al procesar la solicitud.');
+        }
+    }
+
+    public function desinscribirse($id_carrera, $id_jinete)
+    {
+        try {
+            $eliminar_participante = Participante::where('id_carrera', $id_carrera)->where('id_jinete', $id_jinete)->firstOrFail();
+
+            $eliminar_participante->delete();
+
+            return redirect()->route('carreras')->with('Desinscrito', 'Te has desinscrito exitosamente de la carrera.');
         } catch (\Exception $e) {
             return redirect()->route('carreras')->with('ERROR', 'Hubo un problema al procesar la solicitud.');
         }

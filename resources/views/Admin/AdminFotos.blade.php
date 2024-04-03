@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- Agrega los enlaces a los archivos CSS de Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -73,9 +75,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
     <!-- Añadir fotos -->
-    <div class="modal fade" id="modalAgregarFoto" tabindex="-1" role="dialog" aria-labelledby="modalAgregarFotoLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalAgregarFoto" tabindex="-1" role="dialog" aria-labelledby="modalAgregarFotoLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -85,28 +87,74 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('anadirFoto') }}" method="POST" enctype="multipart/form-data">
+                    <form id="formAgregarFoto" action="{{ route('anadirFoto') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="carrera_id" id="carreraIdInput">
-                        <input type="file" name="fotos[]" multiple><br><br>
+                        <div id="dropArea" class="drop-area" style="height: 200px">
+                            <p id="uploadStatus">Arrastra y suelta tus imágenes aquí o haz clic para seleccionarlas.</p>
+                            <input type="file" name="fotos[]" id="fileInput" multiple style="display: none;">
+                        </div>
+                        <br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">Subir Fotos</button>
                         </div>
-                    </form>
+                    </form>                    
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
+    
 </body>
 <script>
+    //Abrir modal
     $(document).ready(function() {
         $('.btn-abrir-modal1').click(function() {
             var carreraId = $(this).data('id');
             $('#modalAgregarFoto').modal('show');
-            $('#carreraIdInput').val(
-                carreraId); // Inserta el ID de la carrera en un input oculto en el formulario
+            $('#carreraIdInput').val(carreraId); 
         });
+    });
+
+    //Funcion drag and drop
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropArea = document.getElementById("dropArea");
+        const fileInput = document.getElementById("fileInput");
+        const uploadStatus = document.getElementById("uploadStatus");
+
+        dropArea.addEventListener("dragover", function (e) {
+            e.preventDefault();
+            dropArea.classList.add("dragover");
+        });
+
+        dropArea.addEventListener("dragleave", function () {
+            dropArea.classList.remove("dragover");
+        });
+
+        dropArea.addEventListener("drop", function (e) {
+            e.preventDefault();
+            dropArea.classList.remove("dragover");
+            const files = e.dataTransfer.files;
+            updateUploadStatus(files);
+        });
+
+        dropArea.addEventListener("click", function () {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener("change", function () {
+            const files = fileInput.files;
+            updateUploadStatus(files);
+        });
+
+        function updateUploadStatus(files) {
+            if (files.length > 0) {
+                const fileNames = Array.from(files).map(file => file.name);
+                uploadStatus.innerText = `Se han seleccionado ${files.length} imágenes: ${fileNames.join(", ")}`;
+            } else {
+                uploadStatus.innerText = "Arrastra y suelta tus imágenes aquí o haz clic para seleccionarlas.";
+            }
+        }
     });
 </script>
 </html>

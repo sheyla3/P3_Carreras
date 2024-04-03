@@ -40,16 +40,16 @@
                         <p>{{ $carrera->descripcion }}</p>
                     </div>
                     <div>
-                        <p>{{ $carrera->tipo }} de {{ $carrera->km }}km</p>
+                        <p>Carrera {{ $carrera->tipo }} de {{ $carrera->km }}km</p>
                     </div>
                     <div>
-                        <p>{{ $participantesActuales[$carrera->id_carrera] }} / {{ $carrera->max_participantes }}</p>
+                        <p>Participantes: {{ $participantesActuales[$carrera->id_carrera] }} / {{ $carrera->max_participantes }}</p>
                     </div>
                 </div>
 
                 @if (isset($jineteId) && $carrera->participantes()->where('id_jinete', $jineteId)->exists())
                     <div class="clasificacion2">
-                        <button>Inscrito</button>
+                        <a href="{{ route('desinscribirse', ['id_carrera' => $carrera->id_carrera, 'id_jinete' => $jineteId]) }}"><button>Inscrito</button></a>
                     </div>
                 @else
                     <div class="clasificacion">
@@ -85,6 +85,33 @@
             });
         </script>
     @endif
+
+    @if (session('Desinscrito'))
+    <div class="modal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ session('Desinscrito') }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#successModal').modal('show');
+        });
+    </script>
+@endif
 
     @if (session('ERROR'))
         <div class="modal" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"

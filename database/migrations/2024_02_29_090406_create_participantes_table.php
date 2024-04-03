@@ -18,9 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id_jinete');
             $table->foreign('id_jinete')->references('id_jinete')->on('jinetes');
             $table->integer('num_partcipante');
-            $table->string('dorsal');
-            $table->string('qr');
-            $table->time('tiempo');
+            $table->string('dorsal')->nullable(); ;
+            $table->string('qr')->nullable(); ;
+            $table->time('tiempo')->nullable(); ;
             $table->rememberToken();
             $table->timestamps();
         });

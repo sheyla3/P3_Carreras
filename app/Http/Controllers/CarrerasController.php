@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Carrera;
 use App\Models\Sponsor;
+use App\Models\Participante;
 use App\Models\Foto;
 use App\Models\SponsorCarrera;
 use Illuminate\Http\Request;
@@ -260,19 +261,52 @@ class CarrerasController extends Controller
     {
         $fechaActual = Carbon::now()->toDateString();
 
-        if (session()->has('socio_id') && session()->has('socio_name')) {
-            $socioId = session('socio_id');
-            $socioName = session('socio_name');
-            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
-            return view('Enlaces.carreras', compact('carreras', 'socioId', 'socioName'));
-        } elseif (session()->has('jinete_id') && session()->has('jinete_name')) {
+        if (session()->has('jinete_id') && session()->has('jinete_name')) {
             $jineteId = session('jinete_id');
             $jineteName = session('jinete_name');
+
             $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
-            return view('Enlaces.carreras', compact('carreras', 'jineteId', 'jineteName'));
+
+            // Obtener el número de participantes actuales para cada carrera
+            $participantesActuales = [];
+            foreach ($carreras as $carrera) {
+                $participantesActuales[$carrera->id_carrera] = $carrera->participantes()->count();
+            }
+
+            return view('Enlaces.carreras', compact('carreras', 'participantesActuales', 'jineteId', 'jineteName'));
         } else {
             $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
             return view('Enlaces.carreras', compact('carreras'));
+        }
+    }
+
+    public function inscribirse($id_carrera, $id_jinete)
+    {
+        $carrera = Carrera::findOrFail($id_carrera);
+        $maxParticipantes = $carrera->max_participantes;
+        $participantes_actuales = Participante::where('id_carrera', $id_carrera)->count();
+
+        try {
+            if ($participantes_actuales <= $maxParticipantes) {
+                $num_participante = $participantes_actuales + 1;
+
+                $nuevo = new Participante([
+                    'id_carrera' => $id_carrera,
+                    'id_jinete' => $id_jinete,
+                    'num_participante' => $num_participante,
+                    'dorsal' =>null,
+                    'qr' => null,
+                    'tiempo' =>null,
+                ]);
+
+                $nuevo->save();
+
+                return redirect()->route('carreras')->with('Inscrito', 'Te has inscrito exitosamente en la carrera.');
+            } else {
+                return redirect()->route('carreras')->with('ERROR', 'Lo siento, la carrera ya está completa.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('carreras')->with('ERROR', 'Hubo un problema al procesar la solicitud.');
         }
     }
 }

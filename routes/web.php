@@ -48,6 +48,7 @@ Route::get('/carreraAntigua/{id}', [CarrerasController::class, 'carreraAntigua']
 
 //CARRERAS: mostrar carreras posteriores
 Route::get('/carreras', [CarrerasController::class, 'mostrarCarrerasJinetes'])->name('carreras');
+Route::get('/inscribirse/{id_carrera}/{id_jinete}', [CarrerasController::class, 'inscribirse'])->name('inscribirse');
 
 
 

@@ -16,9 +16,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_carrera
  * @property int $id_jinete
  * @property int $num_partcipante
- * @property string $dorsal
- * @property string $qr
- * @property Carbon $tiempo
+ * @property string|null $dorsal
+ * @property string|null $qr
+ * @property Carbon|null $tiempo
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at

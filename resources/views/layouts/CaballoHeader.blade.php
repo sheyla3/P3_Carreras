@@ -28,7 +28,7 @@
         /* Estilos para el formulario de jinetes */
         #container2 {
             position: fixed;
-            width: 25%;
+            width: 50%;
             height: 480px;
             top: 50%;
             left: 50%;
@@ -95,7 +95,7 @@
         </div>
     </nav>
 
-    <!-- <section class="Home">
+    <section class="Home">
         <div class="container" id="container" style="display: none;">
             <div class="form-container sign-up-container">
                 <form action="{{ route('registroUsuario') }}" method="POST" id="signupForm">
@@ -108,7 +108,7 @@
                             title="El apellido no puede contener espacios ni caracteres especiales" />
                         <input type="tel" placeholder="Teléfono" name="telf" pattern="^\d{9}$" required
                             title="El teléfono debe tener 9 dígitos" />
-                        <button type="button" id="nextStep1">Next</button>
+                        <button type="button" id="nextStep1">siguiente</button>
                     </div>
                     <div id="step2" style="display: none;">
                         <input type="text" placeholder="DNI" name="dni" pattern="^\d{8}[A-Za-z]$" required
@@ -127,8 +127,8 @@
                                 return true;
                             }
                         </script>
-                        <button type="button" id="prevStep2">Previous</button>
-                        <button type="button" id="nextStep2">Next</button>
+                        <button type="button" id="prevStep2">anterior</button>
+                        <button type="button" id="nextStep2">siguiente</button>
                     </div>
                     <div id="step3" style="display: none;">
                         <input type="email" placeholder="Correo" name="correo" pattern="^\S+@\S+\.\S+$" required
@@ -137,8 +137,8 @@
                             title="La contraseña no puede estar vacía" />
                         <input type="password" placeholder="Confirmar Contraseña" name="contrasena_confirmacion"
                             required title="La contraseña de confirmación no puede estar vacía" />
-                        <button type="button" id="prevStep3">Previous</button>
-                        <button type="submit">Sign Up</button>
+                        <button type="button" id="prevStep3">anterior</button>
+                        <button type="submit">Registrar</button>
                     </div>
                 </form>
             </div>
@@ -155,64 +155,63 @@
             <div class="overlay-container">
                 <div class="overlay">
                     <div class="overlay-panel overlay-left">
-                        <h1>Welcome Back!</h1>
-                        <p>To keep connected with us please login with your personal info</p>
-                        <button class="ghost" id="signIn">Sign In</button>
+                        <h1>Bienvenido de vuelta socio!</h1>
+                        <p>Conectate y visualiza todas las novedades.</p>
+                        <button class="ghost" id="signIn">Entrar</button>
                     </div>
                     <div class="overlay-panel overlay-right">
-                        <h1>Hello, Friend!</h1>
-                        <p>Enter your personal details and start journey with us</p>
-                        <button class="ghost" id="signUp">Sign Up</button>
+                        <h1>Hola Futuro Socio!</h1>
+                        <p>Registrate para ver las mejores carreras de caballos!</p>
+                        <button class="ghost" id="signUp">Registrarme</button>
                     </div>
                 </div>
             </div>
         </div>
-    </section> -->
+    </section>
 
     <section class="HomeJinete">
-    <div class="container" id="container" style="display: none;">
-            <div class="form-container sign-up-container">
-                <form action="{{ route('jinete.nuevo') }}" method="POST" id="signupForm" enctype="multipart/form-data">
-                    @csrf
-                    <h1>¡Quiero Ser Jinete!</h1>
-                    <div id="step1">
-                        <input type="text" placeholder="Nombre" name="nombre" pattern="^[a-zA-Z]+$" required title="El nombre no puede contener espacios ni caracteres especiales"/>
-                        <input type="text" placeholder="Apellido" name="apellido" pattern="^[a-zA-Z]+$" required title="El apellido no puede contener espacios ni caracteres especiales"/>
-                        <input type="email" placeholder="Correo" name="correo" pattern="^\S+@\S+\.\S+$" required title="Formato de correo electrónico incorrecto"/>
-                        <button type="button" id="nextStep1">Next</button>
-                    </div>
-                    <div id="step2" style="display: none;">
-                        <input type="text" placeholder="Nº FEDERACIÓN" name="num_fede" required title="Numero de federación invalido"/>
-                        <input type="password" placeholder="Contraseña" name="contra" required title="La contraseña no puede estar vacía"/>
-                        <input type="password" placeholder="Confirmar Contraseña" name="contra_confirmacion" required title="La contraseña de confirmación no puede estar vacía"/>
-                        <button type="button" id="prevStep2">Previous</button>
-                        <button type="button" id="nextStep2">Next</button>
-                    </div>
-                    <div id="step3" style="display: none;">
-                        <input type="file" placeholder="Foto" name="foto"/>
-                        <input type="text" placeholder="Dirección" name="calle"/>
-                        <input type="text" placeholder="Telefono" name="telf"/>
-                        <input type="date" placeholder="Fecha de Nacimiento" name="edad" id="edad" required
-                            max="{{ date('Y-m-d') }}" title="La fecha de nacimiento no puede ser posterior a hoy" />
-                        <script>
-                            function validarFecha() {
-                                var fechaNacimiento = document.getElementById("edad").value;
-                                var fechaActual = new Date();
-                                var fechaLimite = new Date(fechaActual.getFullYear() - 18, fechaActual.getMonth(), fechaActual.getDate());
-                                if (new Date(fechaNacimiento) > fechaLimite) {
-                                    alert("Debes ser mayor de edad para registrarte.");
-                                    return false;
-                                }
-                                return true;
+    <div class="container" id="container2" style="display: none;">
+        <div class="form-container sign-up-container">
+            <form action="{{ route('jinete.nuevo') }}" method="POST" id="signupFormJinete" enctype="multipart/form-data">
+                @csrf
+                <h1>¡Quiero Ser Jinete!</h1>
+                <div id="step1Jinete">
+                    <input type="text" placeholder="Nombre" name="nombre" pattern="^[a-zA-Z]+$" required title="El nombre no puede contener espacios ni caracteres especiales"/>
+                    <input type="text" placeholder="Apellido" name="apellido" pattern="^[a-zA-Z]+$" required title="El apellido no puede contener espacios ni caracteres especiales"/>
+                    <input type="email" placeholder="Correo" name="correo" pattern="^\S+@\S+\.\S+$" required title="Formato de correo electrónico incorrecto"/>
+                    <button type="button" id="nextStep1Jinete">siguiente</button>
+                </div>
+                <div id="step2Jinete" style="display: none;">
+                    <input type="text" placeholder="Nº FEDERACIÓN" name="num_fede" required title="Numero de federación invalido"/>
+                    <input type="password" placeholder="Contraseña" name="contra" required title="La contraseña no puede estar vacía"/>
+                    <input type="password" placeholder="Confirmar Contraseña" name="contra_confirmacion" required title="La contraseña de confirmación no puede estar vacía"/>
+                    <button type="button" id="prevStep2Jinete">anterior</button>
+                    <button type="button" id="nextStep2Jinete">siguiente</button>
+                </div>
+                <div id="step3Jinete" style="display: none;">
+                    <input type="file" placeholder="Foto" name="foto"/>
+                    <input type="text" placeholder="Dirección" name="calle"/>
+                    <input type="text" placeholder="Telefono" name="telf"/>
+                    <input type="date" placeholder="Fecha de Nacimiento" name="edad" id="edadJinete" required max="{{ date('Y-m-d') }}" title="La fecha de nacimiento no puede ser posterior a hoy" />
+                    <script>
+                        function validarFechaJinete() {
+                            var fechaNacimiento = document.getElementById("edadJinete").value;
+                            var fechaActual = new Date();
+                            var fechaLimite = new Date(fechaActual.getFullYear() - 18, fechaActual.getMonth(), fechaActual.getDate());
+                            if (new Date(fechaNacimiento) > fechaLimite) {
+                                alert("Debes ser mayor de edad para registrarte.");
+                                return false;
                             }
-                        </script>
-                        <button type="button" id="prevStep3">Previous</button>
-                        <button type="submit">Sign Up</button>
-                    </div>
-                </form>                
-            </div>
+                            return true;
+                        }
+                    </script>
+                    <button type="button" id="prevStep3Jinete">anterior</button>
+                    <button type="submit">Entrar</button>
+                </div>
+            </form>                
+        </div>
             <div class="form-container sign-in-container">
-                <form action="{{ route('loginUser') }}" method="POST">
+                <form action="{{ route('loginJinete') }}" method="POST">
                     @csrf
                     <h1>Iniciar Sesion</h1>
                     <input type="email" name="correo" placeholder="Correo" required />
@@ -226,50 +225,17 @@
                     <div class="overlay-panel overlay-left">
                         <h1>Bienvenido de nuevo!</h1>
                         <p>Inicia Sesión y actualiza tu información</p>
-                        <button class="ghost" id="signIn">Sign In</button>
+                        <button class="ghost" id="signIn2">Entrar</button>
                     </div>
                     <div class="overlay-panel overlay-right">
                         <h1>¿Quieres ser un Jinete?</h1>
                         <p>Registarte y participa en la proxima carrera.</p>
-                        <button class="ghost" id="signUp">Sign Up</button>
+                        <button class="ghost" id="signUp2">Registrarme</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <div class="container" id="container2" style="display: none;">
-        <div class="form-container sign-up-container">
-            <div id="step1">
-                <form action="{{ route('loginJinete') }}" method="POST">
-                    @csrf
-                    <h1>Soy Jinete!</h1>
-                    <input type="email" name="correo" placeholder="Correo" required />
-                    <input type="password" name="password" placeholder="Contraseña" required />
-                    <a href="#">Has olvidado tu contraseña?</a>
-                    <p>Más información: <a href="#">carrera@carrerasms.es</a></p>
-                    <button class="ghost" type="submit">Entrar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- <div class="container" id="container2" style="display: none;">
-    <div class="form-container sign-up-container">
-        <form action="" method="POST" id="jineteForm">
-            @csrf
-            <div id="step1">
-                <form action="{{ route('loginUser') }}" method="POST">
-                    @csrf
-                    <h1>Soy Jinete!</h1>
-                    <input type="email" name="correo" placeholder="Correo" required />
-                    <input type="password" name="password" placeholder="Contraseña" required />
-                    <a href="#">Has olvidado tu contraseña?</a>
-                    <a href="#">Más información: carrera@carrerasms.es</a>
-                    <button class="ghost" type="submit" >Entrar</button>
-                </form>
-            </div>
-        </form>                
-    </div> -->
 </div>
 
 
@@ -280,29 +246,15 @@
 </body>
 <script>
     const loginBtn = document.getElementById('loginBtn');
-    const JineteBtn = document.getElementById('JineteBtn');
     const container = document.getElementById('container');
-    const container2 = document.getElementById('container2');
 
     loginBtn.addEventListener('click', () => {
         container.style.display = 'block';
-        container2.style.display = 'none'; // Ocultar el formulario de jinete al mostrar el de socio
     });
-
-    JineteBtn.addEventListener('click', () => {
-        container2.style.display = 'block';
-        container.style.display = 'none'; // Ocultar el formulario de socio al mostrar el de jinete
-    })
 
     document.addEventListener('click', (e) => {
         if (!container.contains(e.target) && e.target !== loginBtn) {
             container.style.display = 'none';
-        }
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!container2.contains(e.target) && e.target !== JineteBtn) {
-            container2.style.display = 'none';
         }
     });
 
@@ -316,10 +268,7 @@
     signInButton.addEventListener('click', () => {
         container.classList.remove("right-panel-active");
     });
-</script>
 
-
-<script>
     const signupForm = document.getElementById('signupForm');
     const step1 = document.getElementById('step1');
     const step2 = document.getElementById('step2');
@@ -349,5 +298,61 @@
         step2.style.display = 'block';
     });
 </script>
+
+<script>
+    const JineteBtn = document.getElementById('JineteBtn');
+    const container2 = document.getElementById('container2');
+
+    JineteBtn.addEventListener('click', () => {
+        container2.style.display = 'block';
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!container2.contains(e.target) && e.target !== JineteBtn) {
+            container2.style.display = 'none';
+        }
+    });
+
+    const signUp2Button = document.getElementById('signUp2');
+    const signIn2Button = document.getElementById('signIn2');
+
+    signUp2Button.addEventListener('click', () => {
+        container2.classList.add("right-panel-active");
+    });
+
+    signIn2Button.addEventListener('click', () => {
+        container2.classList.remove("right-panel-active");
+    });
+
+    const signupFormJinete = document.getElementById('signupFormJinete');
+    const step1Jinete = document.getElementById('step1Jinete');
+    const step2Jinete = document.getElementById('step2Jinete');
+    const step3Jinete = document.getElementById('step3Jinete');
+    const nextStep1Jinete = document.getElementById('nextStep1Jinete');
+    const nextStep2Jinete = document.getElementById('nextStep2Jinete');
+    const prevStep2Jinete = document.getElementById('prevStep2Jinete');
+    const prevStep3Jinete = document.getElementById('prevStep3Jinete');
+
+    nextStep1Jinete.addEventListener('click', () => {
+        step1Jinete.style.display = 'none';
+        step2Jinete.style.display = 'block';
+    });
+
+    nextStep2Jinete.addEventListener('click', () => {
+        step2Jinete.style.display = 'none';
+        step3Jinete.style.display = 'block';
+    });
+
+    prevStep2Jinete.addEventListener('click', () => {
+        step2Jinete.style.display = 'none';
+        step1Jinete.style.display = 'block';
+    });
+
+    prevStep3Jinete.addEventListener('click', () => {
+        step3Jinete.style.display = 'none';
+        step2Jinete.style.display = 'block';
+    });
+</script>
+
 
 </html>

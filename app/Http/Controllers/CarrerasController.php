@@ -45,8 +45,22 @@ class CarrerasController extends Controller
 
     public function mostrarCarrerasClientes()
     {
-        $carreras = Carrera::all();
-        return view('Enlaces.tickets', compact('carreras'));
+        $fechaActual = Carbon::now()->toDateString();
+
+        if (session()->has('socio_id') && session()->has('socio_name')) {
+            $socioId = session('socio_id');
+            $socioName = session('socio_name');
+            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
+            return view('Enlaces.tickets', compact('carreras', 'socioId', 'socioName'));
+        } elseif (session()->has('jinete_id') && session()->has('jinete_name')) {
+            $jineteId = session('jinete_id');
+            $jineteName = session('jinete_name');
+            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
+            return view('Enlaces.tickets', compact('carreras', 'jineteId', 'jineteName'));
+        } else {
+            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
+            return view('Enlaces.tickets', compact('carreras'));
+        }
     }
 
     public function create()
@@ -150,10 +164,10 @@ class CarrerasController extends Controller
             'nombre' => 'required',
             'descripcion' => 'required',
             'tipo' => 'required',
-            'lugar_foto' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'lugar_foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'km' => 'required|integer',
             'fechaHora' => 'required',
-            'cartel' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'cartel' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'precio' => 'required|integer'
         ]);
 
@@ -206,12 +220,22 @@ class CarrerasController extends Controller
 
     public function mostrarCarrerasAntiguas()
     {
-        // Obtenemos la fecha actual
         $fechaActual = Carbon::now()->toDateString();
 
-        $carreras = Carrera::whereDate('fechaHora', '<', $fechaActual)->where('activo', true)->get();
-
-        return view('Enlaces.record', compact('carreras'));
+        if (session()->has('socio_id') && session()->has('socio_name')) {
+            $socioId = session('socio_id');
+            $socioName = session('socio_name');
+            $carreras = Carrera::whereDate('fechaHora', '<', $fechaActual)->where('activo', true)->get();
+            return view('Enlaces.record', compact('carreras', 'socioId', 'socioName'));
+        } elseif (session()->has('jinete_id') && session()->has('jinete_name')) {
+            $jineteId = session('jinete_id');
+            $jineteName = session('jinete_name');
+            $carreras = Carrera::whereDate('fechaHora', '<', $fechaActual)->where('activo', true)->get();
+            return view('Enlaces.record', compact('carreras', 'jineteId', 'jineteName'));
+        } else {
+            $carreras = Carrera::whereDate('fechaHora', '<', $fechaActual)->where('activo', true)->get();
+            return view('Enlaces.record', compact('carreras'));
+        }
     }
 
     public function carreraAntigua($id)
@@ -219,16 +243,36 @@ class CarrerasController extends Controller
         $carrera = Carrera::findOrFail($id);
         $fotos = Foto::where('id_carrera', $id)->with('carrera')->get();
 
-        return view('Enlaces.CarreraAntigua', compact('carrera', 'fotos'));
+        if (session()->has('socio_id') && session()->has('socio_name')) {
+            $socioId = session('socio_id');
+            $socioName = session('socio_name');
+            return view('Enlaces.CarreraAntigua', compact('carrera', 'fotos', 'socioId', 'socioName'));
+        } elseif (session()->has('jinete_id') && session()->has('jinete_name')) {
+            $jineteId = session('jinete_id');
+            $jineteName = session('jinete_name');
+            return view('Enlaces.CarreraAntigua', compact('carrera', 'fotos', 'jineteId', 'jineteName'));
+        } else {
+            return view('Enlaces.CarreraAntigua', compact('carrera', 'fotos'));
+        }
     }
 
     public function mostrarCarrerasJinetes()
     {
-        // Obtenemos la fecha actual
         $fechaActual = Carbon::now()->toDateString();
 
-        $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
-
-        return view('Enlaces.carreras', compact('carreras'));
+        if (session()->has('socio_id') && session()->has('socio_name')) {
+            $socioId = session('socio_id');
+            $socioName = session('socio_name');
+            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
+            return view('Enlaces.carreras', compact('carreras', 'socioId', 'socioName'));
+        } elseif (session()->has('jinete_id') && session()->has('jinete_name')) {
+            $jineteId = session('jinete_id');
+            $jineteName = session('jinete_name');
+            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
+            return view('Enlaces.carreras', compact('carreras', 'jineteId', 'jineteName'));
+        } else {
+            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
+            return view('Enlaces.carreras', compact('carreras'));
+        }
     }
 }

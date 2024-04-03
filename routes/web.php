@@ -49,6 +49,9 @@ Route::get('/carreraAntigua/{id}', [CarrerasController::class, 'carreraAntigua']
 //CARRERAS: mostrar carreras posteriores
 Route::get('/carreras', [CarrerasController::class, 'mostrarCarrerasJinetes'])->name('carreras');
 
+
+
+
 // ADMIN
 Route::get('/loginAdmin', function () {return view('Admin.loginAdmin');})->name('loginAdmin');
 Route::post('/admin-iniciar', [AdminController::class, 'AdminIniciar'])->name('admin.iniciar');
@@ -59,7 +62,6 @@ Route::post('/admin-cerrar', [AdminController::class, 'CerrarSesion'])->name('ad
 Route::get('/adminSocio', [SocioController::class, 'mostrarSocio'])->name('adminSocio');
 Route::get('/formularioSocio', [SocioController::class, 'formularioSocio'])->name('formularioSocio');
 Route::post('/guardarSocio', [SocioController::class, 'guardarSocio'])->name('guardar.socio');
-
 
 //jinetes
 Route::get('/formularioJinete', [JineteController::class, 'formularioJinete'])->name('formularioJinete');

@@ -29,7 +29,7 @@
     <div class="contenedor-tickets">
         @foreach ($carreras as $carrera)
             <div class="carrera">
-                <div>
+                <div class="carrera-img">
                     <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" width="378px" height="342px"
                         alt="">
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Carrera;
 use App\Models\Sponsor;
+use App\Models\Jinete;
 use App\Models\Participante;
 use App\Models\Foto;
 use App\Models\SponsorCarrera;
@@ -315,5 +316,17 @@ class CarrerasController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('carreras')->with('ERROR', 'Hubo un problema al procesar la solicitud.');
         }
+    }
+
+    public function listaJinetes($id)
+    {
+        $participantes = Participante::where('id_carrera', $id)->get();
+        $jinetes = collect(); // Crear una colección vacía de jinetes
+        
+        foreach ($participantes as $participante) {
+            $jinetes->push($participante->jinete);
+        }
+
+        return view('Enlaces.ListaJinetes', compact('jinetes'));
     }
 }

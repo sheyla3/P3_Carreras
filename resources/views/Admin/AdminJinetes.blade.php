@@ -84,7 +84,7 @@ use App\Http\Controllers\JineteController;
                         <td>{{ $jinete->telf }}</td>
                         <td>{{ $jinete->calle }}</td>
                         <td>{{ $jinete->num_federat }}</td>
-                        <td>{{ $jinete->formatted_edad }}</td>
+                        <td>{{ \Carbon\Carbon::parse($jinete->edad)->format('d-m-Y') }}</td>
                         <td>
                             @if ($jinete->activo)
                                 <a class="btn btn-success" href="{{ route('inactivoJinete', $jinete->id_jinete) }}">Sí</a>

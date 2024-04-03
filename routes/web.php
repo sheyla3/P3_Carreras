@@ -41,6 +41,7 @@ Route::post('/usuario-cerrar', [UsuarioController::class, 'cerrarSesion'])->name
 
 //TICKETS: mostrar tickets
 Route::get('/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');
+Route::get('/listaJinetes/{id}', [CarrerasController::class, 'listaJinetes'])->name('listaJinetes');
 
 //RECORD: mostrar carreras antiguas
 Route::get('/record', [CarrerasController::class, 'mostrarCarrerasAntiguas'])->name('record');

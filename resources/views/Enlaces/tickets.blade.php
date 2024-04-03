@@ -39,7 +39,7 @@
                         <h3>{{ $carrera->nombre }}</h3>
                     </div>
                     <div>
-                        <p>Lugar: {{ $carrera->descripcion }}</p>
+                        <p>{{ $carrera->descripcion }}</p>
                     </div>
                     <div>
                         <p>{{ $carrera->precio }} €</p>
@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="jinetes">
-                    <a href="">Jinetes</a>
+                    <a href="{{ route('listaJinetes', $carrera->id_carrera) }}">Jinetes</a>
                 </div>
 
                 <div class="clasificacion">

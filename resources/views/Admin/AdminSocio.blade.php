@@ -68,7 +68,7 @@ use App\Http\Controllers\SocioController;
                         <td>**********</td>
                         <td>{{ $socio->telf }}</td>
                         <td>{{ $socio->dni }}</td>
-                        <td>{{ $socio->edad }}</td>
+                        <td>{{ \Carbon\Carbon::parse($socio->fechaHora)->format('d-m-Y') }}</td>
                         <td>{{ $socio->formatted_edad }}</td>
                     </tr>
                 @endforeach

@@ -75,7 +75,7 @@
                         </td>
                         <td>{{ $carrera->aforo }}</td>
                         <td>{{ $carrera->km }}</td>
-                        <td>{{ $carrera->fechaHora }}</td>
+                        <td>{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y h:i') }}</td>
                         <td>
                             @if ($carrera->cartel)
                                 <img src="{{ asset('storage/' . $carrera->cartel) }}" width="30" height="40"

@@ -65,7 +65,7 @@ use App\Http\Controllers\SocioController;
                         <td>{{ $socio->nombre }}</td>
                         <td>{{ $socio->apellido }}</td>
                         <td>{{ $socio->correo }}</td>
-                        <td>{{ $socio->contrasena }}</td>
+                        <td>**********</td>
                         <td>{{ $socio->telf }}</td>
                         <td>{{ $socio->dni }}</td>
                         <td>{{ $socio->edad }}</td>

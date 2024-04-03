@@ -150,10 +150,10 @@ class CarrerasController extends Controller
             'nombre' => 'required',
             'descripcion' => 'required',
             'tipo' => 'required',
-            'lugar_foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'lugar_foto' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'km' => 'required|integer',
             'fechaHora' => 'required',
-            'cartel' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'cartel' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'precio' => 'required|integer'
         ]);
 

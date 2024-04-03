@@ -39,8 +39,8 @@ use App\Http\Controllers\JineteController;
                 {!! $errors->first('correo', '<small class="text-danger">:message</small>') !!}
             </div>
             <div class="mb-3">
-                <label for="contra" class="form-label">Contraseña:</label>
-                <input type="text" id="contra" name="contra" value="{{ $jinete->contrasena ?? '' }}" class="form-control">
+                <label for="contra" class="form-label">Nueva contraseña:</label>
+                <input type="text" id="contra" name="contra" placeholder="contraseña" class="form-control">
                 {!! $errors->first('contra', '<small class="text-danger">:message</small>') !!}
             </div>
             <div class="mb-3">

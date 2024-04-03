@@ -83,7 +83,7 @@
             </div>
             <div class="mb-3">
                 <label for="cartel" class="form-label">Nuevo Cartel:</label>
-                <input type="file" id="cartel" name="cartel" class="form-control">
+                <input type="file" id="cartel" name="cartel" class="form-control" value="{{ asset($carrera->cartel) }}">
             </div>
 
             <div class="form-group">

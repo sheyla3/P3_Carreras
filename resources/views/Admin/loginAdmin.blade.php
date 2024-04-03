@@ -32,9 +32,9 @@ use App\Http\Controllers\AseguradoraController;
                         <h6 class="card-subtitle mb-2 text-muted">Pon tu usuario y contraseña:</h6>
                         <form action="{{ route('admin.iniciar') }}" method="POST">
                             @csrf
-                            <input type="text" id="usuario" name="usuario" value="{{ old('usuario') }}" placeholder="Usuario" class="form-control rounded-0">
+                            <input type="text" id="usuario" name="usuario" value="{{ old('usuario') }}" placeholder="Usuario" class="form-control form-control-admin rounded-0">
                             <p>{!! $errors->first('usuario', '<small>:message</small>') !!}</p>
-                            <input type="password" id="contra" name="contra" value="{{ old('contra') }}" placeholder="Contraseña" class="form-control rounded-0">
+                            <input type="password" id="contra" name="contra" value="{{ old('contra') }}" placeholder="Contraseña" class="form-control form-control-admin rounded-0">
                             <p>{!! $errors->first('contra', '<small>:message</small>') !!}</p>
                             <input type="submit" value="Iniciar" class="btn btn-iniciar text-white">
                         </form>

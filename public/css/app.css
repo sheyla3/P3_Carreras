@@ -61,14 +61,14 @@ nav a {
     /* Ajusta el tamaño del fondo */
 }
 
-.form-control {
+.form-control-admin {
     background-color: transparent !important;
     border: none !important;
     border-bottom: 3px solid #ffffff !important;
     color: #ffffff !important;
     margin-bottom: 10px;
 }
-.form-control:focus {
+.form-control-admin:focus {
     border-bottom: 3px solid #8B4513 !important;
 }
 

@@ -73,7 +73,7 @@ use App\Http\Controllers\JineteController;
                         <td>{{ $jinete->nombre }}</td>
                         <td>{{ $jinete->apellido }}</td>
                         <td>{{ $jinete->correo }}</td>
-                        <td>{{ $jinete->contrasena }}</td>
+                        <td>**********</td>
                         <td>
                             @if ($jinete->foto)
                                 <img src="{{ asset('storage/' . $jinete->foto) }}" width="30" height="40" alt="{{ $jinete->nombre }}">

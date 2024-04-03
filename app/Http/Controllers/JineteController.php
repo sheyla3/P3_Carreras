@@ -106,7 +106,7 @@ class JineteController extends Controller
                 'nombre' => $request->input('nombre'),
                 'apellido' => $request->input('apellido'),
                 'correo' => $request->input('correo'),
-                'contrasena' => $request->input('contra'),
+                'contrasena' => Hash::make($request->input('contra')),
                 'telf' => $request->input('telf'),
                 'calle' => $request->input('calle'),
                 'num_federat' => $request->input('num_fede'),

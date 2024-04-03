@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class SocioController extends Controller
@@ -32,7 +33,7 @@ class SocioController extends Controller
 
         $nuevoSocio = new Usuario([
             'correo' => $validatedData['correo'],
-            'contrasena' => $validatedData['contrasena'],
+            'contrasena' => Hash::make($validatedData['contrasena']),
             'nombre' => $validatedData['nombre'],
             'apellido' => $validatedData['apellido'],
             'telf' => $validatedData['telf'],

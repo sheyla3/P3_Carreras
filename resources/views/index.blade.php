@@ -46,7 +46,8 @@
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero exercitationem consequatur voluptatem
                 soluta reprehenderit repudiandae eveniet explicabo reiciendis. Praesentium quia explicabo maiores
                 accusamus nostrum ex fugiat quaerat! Suscipit maxime eaque adipisci reprehenderit quos natus!</p>
-            <button href="{{ route('tickets') }}" type="button" class="btn btn-primary" style="background:#1F323F; width: 20%">READ MORE</button>
+            <button href="{{ route('tickets') }}" type="button" class="btn btn-primary"
+                style="background:#1F323F; width: 20%">READ MORE</button>
         </div>
     </div>
 
@@ -55,61 +56,61 @@
             <h1>LAS MEJORES CARRERAS EN LAS MEJORES CIUDADES!</h1>
         </div>
     </nav>
-
     <div class="Maestro-2">
-    <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        @foreach($carreras->chunk(3) as $chunk)
-            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                <div class="row">
-                    @foreach($chunk as $carrera)
-                        <div class="col">
-                            <div class="lugares">
-                                <img src="{{ asset('storage/'.$carrera->lugar_foto) }}" alt="Lugar de {{ $carrera->nombre }}">
-                                <h3>{{ $carrera->nombre }}</h3>
-                            </div>
+        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                @foreach ($carreras->chunk(3) as $chunk)
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                        <div class="row">
+                            @foreach ($chunk as $carrera)
+                                <div class="col">
+                                    <div class="lugares">
+                                        <img src="{{ asset('storage/' . $carrera->lugar_foto) }}"
+                                            alt="Lugar de {{ $carrera->nombre }}">
+                                        <h3>{{ $carrera->nombre }}</h3>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
             </div>
-        @endforeach
-    </div>
-    <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
+            <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
     </div>
 
-    <script>$(document).ready(function(){
-    $('#carouselExampleInterval').slick({
-        slidesToShow: 3, // Número de carreras a mostrar simultáneamente
-        slidesToScroll: 1, // Número de carreras a avanzar
-        autoplay: true, // Habilita el autoplay
-        autoplaySpeed: 2000, // Velocidad del autoplay en milisegundos
-        prevArrow: $('.carousel-control-prev'), // Selector del botón previo
-        nextArrow: $('.carousel-control-next'), // Selector del botón siguiente
-        responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2 // Cambia el número de carreras mostradas en dispositivos de tamaño medio
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1 // Cambia el número de carreras mostradas en dispositivos pequeños
-                }
-            }
-        ]
-    });
-});
-</script>
+    <script>
+        $(document).ready(function() {
+            $('#carouselExampleInterval').slick({
+                slidesToShow: 3, // Número de carreras a mostrar simultáneamente
+                slidesToScroll: 1, // Número de carreras a avanzar
+                autoplay: true, // Habilita el autoplay
+                autoplaySpeed: 2000, // Velocidad del autoplay en milisegundos
+                prevArrow: $('.carousel-control-prev'), // Selector del botón previo
+                nextArrow: $('.carousel-control-next'), // Selector del botón siguiente
+                responsive: [{
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2 // Cambia el número de carreras mostradas en dispositivos de tamaño medio
+                        }
+                    },
+                    {
+                        breakpoint: 576,
+                        settings: {
+                            slidesToShow: 1 // Cambia el número de carreras mostradas en dispositivos pequeños
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
 
     <div class="Maestro-3">
         <div class="container-4">
@@ -118,10 +119,21 @@
             </p>
         </div>
         <div class="container-3">
-            <img src="{{ asset('img/master3.png') }}" alt="">
+            <img src="{{ asset('img/master3.png') }}" alt="caballo">
         </div>
     </div>
-    <!-- <a class="linkAdminLogin" href="{{ route('loginAdmin') }}"> Panel Administrador</a> -->
+
+    <div class="Maestro-4 mb-5">
+        <h1 class="text-center my-4">Sponsors</h1>
+        <div class="collage">
+            @foreach ($sponsorsDestacados as $sponsor)
+                <div class="collage-item">
+                    <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="{{ $sponsor->nombre }}" width="300"
+                        height="300">
+                </div>
+            @endforeach
+        </div>
+    </div>
 </body>
 @include('layouts.footer')
 
@@ -133,7 +145,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#carouselExampleInterval').slick({
             slidesToShow: 3, // Número de carreras a mostrar simultáneamente
             slidesToScroll: 1, // Número de carreras a avanzar
@@ -141,8 +153,7 @@
             autoplaySpeed: 5000, // Velocidad del autoplay en milisegundos
             prevArrow: '<span class="carousel-control-prev-icon" aria-hidden="true"></span>',
             nextArrow: '<span class="carousel-control-next-icon" aria-hidden="true"></span>',
-            responsive: [
-                {
+            responsive: [{
                     breakpoint: 768,
                     settings: {
                         slidesToShow: 2 // Cambia el número de carreras mostradas en dispositivos de tamaño medio
@@ -158,4 +169,5 @@
         });
     });
 </script>
+
 </html>

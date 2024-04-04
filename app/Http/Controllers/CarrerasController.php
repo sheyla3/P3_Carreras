@@ -28,22 +28,24 @@ class CarrerasController extends Controller
 
     public function index2()
     {
+        $fechaActual = Carbon::now()->toDateString();
+        $sponsorsDestacados = Sponsor::where('destacado', true)->where('activo', true)->get();
+
         if (session()->has('socio_id') && session()->has('socio_name')) {
             $socioId = session('socio_id');
             $socioName = session('socio_name');
-            $carreras = Carrera::all();
-            return view('index', compact('carreras', 'socioId', 'socioName'));
+            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
+            return view('index', compact('carreras', 'sponsorsDestacados', 'socioId', 'socioName'));
         } elseif (session()->has('jinete_id') && session()->has('jinete_name')) {
             $jineteId = session('jinete_id');
             $jineteName = session('jinete_name');
-            $carreras = Carrera::all();
-            return view('index', compact('carreras', 'jineteId', 'jineteName'));
+            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
+            return view('index', compact('carreras', 'sponsorsDestacados', 'jineteId', 'jineteName'));
         } else {
-            $carreras = Carrera::all();
-            return view('index', compact('carreras'));
+            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
+            return view('index', compact('carreras', 'sponsorsDestacados'));
         }
     }
-
 
     public function mostrarCarrerasClientes()
     {

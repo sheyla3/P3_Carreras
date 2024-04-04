@@ -241,17 +241,18 @@ class CarrerasController extends Controller
     {
         $carrera = Carrera::findOrFail($id);
         $fotos = Foto::where('id_carrera', $id)->with('carrera')->get();
+        $participantes = Participante::where('id_carrera', $id)->orderBy('tiempo')->take(10)->with('jinete')->get();
 
         if (session()->has('socio_id') && session()->has('socio_name')) {
             $socioId = session('socio_id');
             $socioName = session('socio_name');
-            return view('Enlaces.CarreraAntigua', compact('carrera', 'fotos', 'socioId', 'socioName'));
+            return view('Enlaces.CarreraAntigua', compact('carrera', 'participantes', 'fotos', 'socioId', 'socioName'));
         } elseif (session()->has('jinete_id') && session()->has('jinete_name')) {
             $jineteId = session('jinete_id');
             $jineteName = session('jinete_name');
-            return view('Enlaces.CarreraAntigua', compact('carrera', 'fotos', 'jineteId', 'jineteName'));
+            return view('Enlaces.CarreraAntigua', compact('carrera', 'participantes', 'fotos', 'jineteId', 'jineteName'));
         } else {
-            return view('Enlaces.CarreraAntigua', compact('carrera', 'fotos'));
+            return view('Enlaces.CarreraAntigua', compact('carrera', 'participantes', 'fotos'));
         }
     }
 

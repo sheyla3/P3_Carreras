@@ -71,6 +71,62 @@
             </tbody>
         </table>
     </div>
+
+    @if (session('Añadido'))
+        <div class="modal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{ session('Añadido') }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $('#successModal').modal('show');
+            });
+        </script>
+    @endif
+
+    @if ($errors->any())
+        <div class="modal" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $('#errorModal').modal('show');
+            });
+        </script>
+    @endif
     <!-- Agrega los enlaces a los archivos JavaScript de Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -91,7 +147,7 @@
                         @csrf
                         <input type="hidden" name="carrera_id" id="carreraIdInput">
                         <div id="dropArea" class="drop-area" style="height: 200px">
-                            <p id="uploadStatus">Arrastra y suelta tus imágenes aquí o haz clic para seleccionarlas.</p>
+                            <p id="numImagenes">Arrastra y suelta tus imágenes aquí o haz clic para seleccionarlas.</p>
                             <input type="file" name="fotos[]" id="fileInput" multiple style="display: none;">
                         </div>
                         <br>
@@ -99,12 +155,11 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">Subir Fotos</button>
                         </div>
-                    </form>                    
+                    </form>
                 </div>
             </div>
         </div>
     </div>    
-    
 </body>
 <script>
     //Abrir modal
@@ -120,7 +175,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         const dropArea = document.getElementById("dropArea");
         const fileInput = document.getElementById("fileInput");
-        const uploadStatus = document.getElementById("uploadStatus");
+        const numImagenes = document.getElementById("numImagenes");
 
         dropArea.addEventListener("dragover", function (e) {
             e.preventDefault();
@@ -135,7 +190,8 @@
             e.preventDefault();
             dropArea.classList.remove("dragover");
             const files = e.dataTransfer.files;
-            updateUploadStatus(files);
+            fileInput.files = files;
+            ActulalizarNumImagenes(files);
         });
 
         dropArea.addEventListener("click", function () {
@@ -144,15 +200,15 @@
 
         fileInput.addEventListener("change", function () {
             const files = fileInput.files;
-            updateUploadStatus(files);
+            ActulalizarNumImagenes(files);
         });
 
-        function updateUploadStatus(files) {
+        function ActulalizarNumImagenes(files) {
             if (files.length > 0) {
                 const fileNames = Array.from(files).map(file => file.name);
-                uploadStatus.innerText = `Se han seleccionado ${files.length} imágenes: ${fileNames.join(", ")}`;
+                numImagenes.innerText = `Se han seleccionado ${files.length} imágenes: ${fileNames.join(", ")}`;
             } else {
-                uploadStatus.innerText = "Arrastra y suelta tus imágenes aquí o haz clic para seleccionarlas.";
+                numImagenes.innerText = "Arrastra y suelta tus imágenes aquí o haz clic para seleccionarlas.";
             }
         }
     });

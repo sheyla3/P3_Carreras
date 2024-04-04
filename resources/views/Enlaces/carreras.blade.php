@@ -140,5 +140,5 @@
         </script>
     @endif
 </body>
-
+@include('layouts.footer')
 </html>

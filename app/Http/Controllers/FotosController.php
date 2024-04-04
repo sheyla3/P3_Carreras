@@ -22,17 +22,26 @@ class FotosController extends Controller
 
     public function anadirFoto(Request $request)
     {
+        $request->validate([
+            'fotos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
         $carreraId = $request->input('carrera_id');
         $fotos = $request->file('fotos');
 
         foreach ($fotos as $foto) {
-            // Guardar la foto en la carpeta de almacenamiento y registrarla en la base de datos con el ID de la carrera
-            $ruta = $foto->store('FotoCarreras', 'public');
-            Foto::create(['id_carrera' => $carreraId, 'foto' => $ruta]);
+            if ($foto->isValid()) {
+                // Guarda la foto en la carpeta de almacenamiento y registra en la base de datos con el ID de la carrera
+                $ruta = $foto->store('FotoCarreras', 'public');
+                Foto::create(['id_carrera' => $carreraId, 'foto' => $ruta]);
+            } else {
+                return redirect()->back()->withErrors(['error' => 'Uno o más archivos no son imágenes.']);
+            }
         }
 
-        return redirect()->back()->with('success', 'Fotos subidas con éxito');
+        return redirect()->back()->with('Añadido', 'Fotos subidas con éxito');
     }
+
 
     public function verFotos($id)
     {

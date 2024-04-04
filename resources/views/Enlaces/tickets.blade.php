@@ -36,13 +36,16 @@
 
                 <div class="datos">
                     <div id="datos-title">
-                        <h3>{{ $carrera->nombre }}</h3>
+                        <h2>{{ $carrera->nombre }}</h2>
                     </div>
                     <div>
-                        <p>{{ $carrera->descripcion }}</p>
+                        <p class="text-break">{{ $carrera->descripcion }}</p>
                     </div>
                     <div>
-                        <p>{{ $carrera->precio }} €</p>
+                        <p>{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}</p>
+                    </div>
+                    <div>
+                        <h3>{{ $carrera->precio }} €</h3>
                     </div>
                 </div>
 
@@ -51,7 +54,7 @@
                 </div>
 
                 <div class="clasificacion">
-                    <button>Ver clasificacion</button>
+                    <button>Comprar</button>
                 </div>
             </div>
         @endforeach
@@ -62,5 +65,5 @@
     paypal.Buttons().render('#paypal-button-container')
 </script>
 </body>
-
+@include('layouts.footer')
 </html>

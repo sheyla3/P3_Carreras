@@ -353,6 +353,4 @@
         step2Jinete.style.display = 'block';
     });
 </script>
-
-
 </html>

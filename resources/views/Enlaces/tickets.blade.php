@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="app.css">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    <script src="https://www.paypal.com/sdk/js?client-id=AWbHTcaJ9_9CZ3ZREICbLJos0DmP1hnmv9pIg3jX-Qj9XAY5IGuiaakjVWdsGIyHcyhX7cs3Jqv8OVGo&currency=USD"></script>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AWbHTcaJ9_9CZ3ZREICbLJos0DmP1hnmv9pIg3jX-Qj9XAY5IGuiaakjVWdsGIyHcyhX7cs3Jqv8OVGo&currency=USD">
+    </script>
 </head>
 
 <body>
@@ -35,16 +37,17 @@
 
                 <div class="datos">
                     <div id="datos-title">
-                        <h2>{{ $carrera->nombre }}</h2>
+                        <h2 class="text-break">{{ $carrera->nombre }}</h2>
                     </div>
                     <div>
                         <p class="text-break">{{ $carrera->descripcion }}</p>
                     </div>
                     <div>
-                        <p>{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}</p>
+                        <p class="text-break">{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}
+                        </p>
                     </div>
                     <div>
-                        <h3>{{ $carrera->precio }} €</h3>
+                        <h3 class="text-break">{{ $carrera->precio }} €</h3>
                     </div>
                 </div>
 
@@ -58,12 +61,22 @@
             </div>
         @endforeach
     </div>
-    <nav aria-label="Page navigation" class="paginacion text-dark">
-        <ul class="pagination justify-content-center pagination-sm">
-            {{ $carreras->links() }}
-        </ul>
-    </nav>
-    <div></div>
+    <div class="my-4">
+        <nav aria-label="Page navigation" class="paginacion text-dark">
+            <ul class="pagination justify-content-center pagination-sm">
+                @if ($carreras->lastPage() > 1)
+                    @for ($i = 1; $i <= $carreras->lastPage(); $i++)
+                        <li class="page-item {{ $carreras->currentPage() == $i ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $carreras->url($i) }}">{{ $i }}</a>
+                        </li>
+                    @endfor
+                @endif
+            </ul>
+        </nav>
+        <div class="text-center">
+            Mostrando {{ $carreras->firstItem() }} a {{ $carreras->lastItem() }} de {{ $carreras->total() }} carreras
+        </div>
+    </div>
     <script>
         paypal.Buttons().render('#paypal-button-container')
     </script>

@@ -11,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <script src="https://www.paypal.com/sdk/js?client-id=AWbHTcaJ9_9CZ3ZREICbLJos0DmP1hnmv9pIg3jX-Qj9XAY5IGuiaakjVWdsGIyHcyhX7cs3Jqv8OVGo&currency=USD"></script>
-
 </head>
 
 <body>
@@ -59,11 +58,16 @@
             </div>
         @endforeach
     </div>
-
-<div></div>
-<script>
-    paypal.Buttons().render('#paypal-button-container')
-</script>
+    <nav aria-label="Page navigation" class="paginacion text-dark">
+        <ul class="pagination justify-content-center pagination-sm">
+            {{ $carreras->links() }}
+        </ul>
+    </nav>
+    <div></div>
+    <script>
+        paypal.Buttons().render('#paypal-button-container')
+    </script>
 </body>
 @include('layouts.footer')
+
 </html>

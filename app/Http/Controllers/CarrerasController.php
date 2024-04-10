@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Carrera;
 use App\Models\Sponsor;
-use App\Models\Jinete;
 use App\Models\Participante;
 use App\Models\Foto;
 use App\Models\SponsorCarrera;
@@ -28,21 +27,18 @@ class CarrerasController extends Controller
 
     public function index2()
     {
-        $fechaActual = Carbon::now()->toDateString();
         $sponsorsDestacados = Sponsor::where('destacado', true)->where('activo', true)->get();
+        $carreras = Carrera::carrerasPost();
 
         if (session()->has('socio_id') && session()->has('socio_name')) {
             $socioId = session('socio_id');
             $socioName = session('socio_name');
-            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
             return view('index', compact('carreras', 'sponsorsDestacados', 'socioId', 'socioName'));
         } elseif (session()->has('jinete_id') && session()->has('jinete_name')) {
             $jineteId = session('jinete_id');
             $jineteName = session('jinete_name');
-            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
             return view('index', compact('carreras', 'sponsorsDestacados', 'jineteId', 'jineteName'));
         } else {
-            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
             return view('index', compact('carreras', 'sponsorsDestacados'));
         }
     }
@@ -50,19 +46,17 @@ class CarrerasController extends Controller
     public function mostrarCarrerasClientes()
     {
         $fechaActual = Carbon::now()->toDateString();
+        $carreras = Carrera::carrerasPostPag();
 
         if (session()->has('socio_id') && session()->has('socio_name')) {
             $socioId = session('socio_id');
             $socioName = session('socio_name');
-            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
             return view('Enlaces.tickets', compact('carreras', 'socioId', 'socioName'));
         } elseif (session()->has('jinete_id') && session()->has('jinete_name')) {
             $jineteId = session('jinete_id');
             $jineteName = session('jinete_name');
-            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
             return view('Enlaces.tickets', compact('carreras', 'jineteId', 'jineteName'));
         } else {
-            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
             return view('Enlaces.tickets', compact('carreras'));
         }
     }
@@ -136,8 +130,8 @@ class CarrerasController extends Controller
         $idCarrera = $id;
         $adminId = session('admin_id');
         $adminName = session('admin_name');
-        $sponsorCarreras = SponsorCarrera::where('id_carrera', $id)->with('carrera')->get();
-        $sponsorsActivos = Sponsor::where('activo', true)->get(); // Obtén todos los carreras activos
+        $sponsorCarreras = SponsorCarrera::SponsorCarreras($id);
+        $sponsorsActivos = Sponsor::SponsorActivo();
 
         return view('admin.patrocinioCarrera', compact('sponsorCarreras', 'sponsorsActivos', 'adminId', 'adminName', 'idCarrera'));
     }
@@ -222,19 +216,17 @@ class CarrerasController extends Controller
     public function mostrarCarrerasAntiguas()
     {
         $fechaActual = Carbon::now()->toDateString();
+        $carreras = Carrera::carrerasAntiguas();
 
         if (session()->has('socio_id') && session()->has('socio_name')) {
             $socioId = session('socio_id');
             $socioName = session('socio_name');
-            $carreras = Carrera::whereDate('fechaHora', '<', $fechaActual)->where('activo', true)->get();
             return view('Enlaces.record', compact('carreras', 'socioId', 'socioName'));
         } elseif (session()->has('jinete_id') && session()->has('jinete_name')) {
             $jineteId = session('jinete_id');
             $jineteName = session('jinete_name');
-            $carreras = Carrera::whereDate('fechaHora', '<', $fechaActual)->where('activo', true)->get();
             return view('Enlaces.record', compact('carreras', 'jineteId', 'jineteName'));
         } else {
-            $carreras = Carrera::whereDate('fechaHora', '<', $fechaActual)->where('activo', true)->get();
             return view('Enlaces.record', compact('carreras'));
         }
     }
@@ -242,8 +234,8 @@ class CarrerasController extends Controller
     public function carreraAntigua($id)
     {
         $carrera = Carrera::findOrFail($id);
-        $fotos = Foto::where('id_carrera', $id)->with('carrera')->get();
-        $participantes = Participante::where('id_carrera', $id)->orderBy('tiempo')->take(10)->with('jinete')->get();
+        $fotos = Foto::FotoCarrera($id);
+        $participantes = Participante::Classificacion($id);
 
         if (session()->has('socio_id') && session()->has('socio_name')) {
             $socioId = session('socio_id');
@@ -261,12 +253,11 @@ class CarrerasController extends Controller
     public function mostrarCarrerasJinetes()
     {
         $fechaActual = Carbon::now()->toDateString();
+        $carreras = Carrera::carrerasPost();
 
         if (session()->has('jinete_id') && session()->has('jinete_name')) {
             $jineteId = session('jinete_id');
             $jineteName = session('jinete_name');
-
-            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
 
             // Obtener el número de participantes actuales para cada carrera
             $participantesActuales = [];
@@ -276,7 +267,6 @@ class CarrerasController extends Controller
 
             return view('Enlaces.carreras', compact('carreras', 'participantesActuales', 'jineteId', 'jineteName'));
         } else {
-            $carreras = Carrera::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
             return view('Enlaces.carreras', compact('carreras'));
         }
     }
@@ -311,8 +301,7 @@ class CarrerasController extends Controller
     public function desinscribirse($id_carrera, $id_jinete)
     {
         try {
-            $eliminar_participante = Participante::where('id_carrera', $id_carrera)->where('id_jinete', $id_jinete)->firstOrFail();
-
+            $eliminar_participante = Participante::DesinscribirseCarrera($id_carrera, $id_jinete);
             $eliminar_participante->delete();
 
             return redirect()->route('carreras')->with('Desinscrito', 'Te has desinscrito exitosamente de la carrera.');
@@ -323,9 +312,9 @@ class CarrerasController extends Controller
 
     public function listaJinetes($id)
     {
-        $participantes = Participante::where('id_carrera', $id)->get();
+        $participantes = Participante::listaParticipantes($id);
         $jinetes = collect(); // Crear una colección vacía de jinetes
-        
+
         foreach ($participantes as $participante) {
             $jinetes->push($participante->jinete);
         }

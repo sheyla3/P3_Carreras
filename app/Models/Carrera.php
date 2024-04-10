@@ -70,9 +70,8 @@ class Carrera extends Model
 
 	public function sponsors()
 	{
-		return $this->belongsToMany(Sponsor::class, '_sponsor_carrera', 'id_carrera', 'id_sponsor')
-					->withPivot('id_sponsorCarrera', 'patrocinio', 'remember_token')
-					->withTimestamps();
+		return $this->belongsToMany(Sponsor::class, '_sponsor_carrera', 'id_carrera', 'id_sponsor')->withPivot('id_sponsorCarrera', 'patrocinio', 'remember_token')
+			->withTimestamps();
 	}
 
 	public function fotos()
@@ -84,4 +83,24 @@ class Carrera extends Model
 	{
 		return $this->hasMany(Participante::class, 'id_carrera');
 	}
+
+	public static function carrerasPost()
+	{
+		$fechaActual = Carbon::now()->toDateString();
+		return self::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->get();
+	}
+
+	public static function carrerasPostPag()
+	{
+		$fechaActual = Carbon::now()->toDateString();
+		return self::whereDate('fechaHora', '>', $fechaActual)->where('activo', true)->paginate(5);
+	}
+
+	public static function carrerasAntiguas()
+	{
+		$fechaActual = Carbon::now()->toDateString();
+		return self::whereDate('fechaHora', '<', $fechaActual)->where('activo', true)->get();
+	}
+
+	
 }

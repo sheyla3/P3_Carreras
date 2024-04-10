@@ -68,6 +68,7 @@ nav a {
     color: #ffffff !important;
     margin-bottom: 10px;
 }
+
 .form-control-admin:focus {
     border-bottom: 3px solid #8B4513 !important;
 }
@@ -265,6 +266,11 @@ header button {
     width: 80%;
     height: auto;
     margin-left: 10%;
+}
+
+/*PAGINACION */
+.paginacion:hover {
+    color: #8B4513;
 }
 
 .carrera {
@@ -664,25 +670,17 @@ section .social-container a {
     background-color: rgba(0, 0, 0, 0.5);
     /* Agrega un color de fondo a los botones */
     color: white;
-    /* Color del texto de los botones */
-    font-size: 20px;
-    /* Tamaño del texto de los botones */
     border: none;
-    /* Elimina el borde de los botones */
     cursor: pointer;
-    /* Cambia el cursor al pasar sobre los botones */
     z-index: 1;
-    /* Asegura que los botones estén por encima de las imágenes */
 }
 
 .carousel-control-prev {
     left: 0;
-    /* Posiciona el botón "Anterior" a la izquierda */
 }
 
 .carousel-control-next {
     right: 0;
-    /* Posiciona el botón "Siguiente" a la derecha */
 }
 
 

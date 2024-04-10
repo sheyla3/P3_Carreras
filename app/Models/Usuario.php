@@ -50,4 +50,9 @@ class Usuario extends Model
 		'edad',
 		'remember_token'
 	];
+
+	public static function loginUsuario($email)
+	{
+		return self::where('correo', $email)->first();
+	}
 }

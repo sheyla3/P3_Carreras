@@ -24,7 +24,7 @@ class AdminController extends Controller
         $usuario = $request->input("usuario");
         $contra = $request->get("contra");
 
-        $confUsu = Admin::where('usuario', $usuario)->first();
+        $confUsu = Admin::loginAdmin($usuario);
 
         if (!$confUsu) {
             return redirect()->back()->withErrors(['usuario' => 'El usuario no existe']);

@@ -63,4 +63,20 @@ class Participante extends Model
 	{
 		return $this->belongsTo(Jinete::class, 'id_jinete');
 	}
+
+	public static function Classificacion($id)
+	{
+		return self::where('id_carrera', $id)->orderBy('tiempo')->take(10)->with('jinete')->get();
+	}
+
+	public static function DesinscribirseCarrera($id_carrera, $id_jinete)
+	{
+		return self::where('id_carrera', $id_carrera)->where('id_jinete', $id_jinete)->firstOrFail();
+	}
+
+	public static function listaParticipantes($id)
+	{
+		return self::where('id_carrera', $id)->get();
+	}
+
 }

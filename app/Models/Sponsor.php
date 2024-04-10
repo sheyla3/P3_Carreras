@@ -57,4 +57,9 @@ class Sponsor extends Model
 					->withPivot('id_sponsorCarrera', 'patrocinio', 'remember_token')
 					->withTimestamps();
 	}
+
+	public static function SponsorActivo()
+	{
+		return self::where('activo', true)->get();
+	}
 }

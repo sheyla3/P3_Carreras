@@ -65,4 +65,9 @@ class Jinete extends Model
 	{
 		return $this->hasMany(Participante::class, 'id_jinete');
 	}
+
+	public static function loginJinete($email)
+	{
+		return self::where('correo', $email)->first();
+	}
 }

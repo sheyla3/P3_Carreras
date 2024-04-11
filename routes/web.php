@@ -42,6 +42,7 @@ Route::post('/usuario-cerrar', [UsuarioController::class, 'cerrarSesion'])->name
 //TICKETS: mostrar tickets
 Route::get('/tickets', [CarrerasController::class, 'mostrarCarrerasClientes'])->name('tickets');
 Route::get('/listaJinetes/{id}', [CarrerasController::class, 'listaJinetes'])->name('listaJinetes');
+Route::get('/factura/{subtotal}/{total_quantity}/{carrera_id}', [CarrerasController::class, 'FacturaPDF'])->name('FacturaPDF');
 
 //RECORD: mostrar carreras antiguas
 Route::get('/record', [CarrerasController::class, 'mostrarCarrerasAntiguas'])->name('record');

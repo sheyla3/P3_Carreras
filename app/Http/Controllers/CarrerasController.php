@@ -356,4 +356,34 @@ class CarrerasController extends Controller
         // Descarga el PDF
         return $pdf->stream('calsificacion.pdf');
     }
+
+    public function FacturaPDF($subtotal, $total_quantity, $carrera_id)
+    {
+        $carrera = Carrera::findOrFail($carrera_id);
+        // Crea una instancia de Dompdf
+        $pdf = new Dompdf();
+        // Contenido HTML para el PDF
+        $html = '<h1 style="text-align: center; ">' . $carrera->nombre . '</h1>';
+        $html = '<p class="text-break">' . $carrera->descripcion . '</p>';
+        $html .= '<style>';
+        $html .= 'table { width: 100%; border-collapse: collapse; }';
+        $html .= 'th, td { padding: 10px; text-align: center; }';
+        $html .= 'thead { background-color: #423333; color: white; }';
+        $html .= '</style>';
+        $html .= '<table>';
+        $html .= '<thead><tr><th>Precio</th><th>Cantidad</th><th>Total</th></tr></thead>';
+        $html .= '<tbody>';
+        $html .= '<tr>';
+        $html .= '<td>' . $carrera->precio . '</td>';
+        $html .= '<td>' . $total_quantity . '</td>';
+        $html .= '<td>' . $subtotal . '</td>';
+        $html .= '</tr>';
+        $html .= '</tbody></table>';
+        // Carga el HTML en Dompdf
+        $pdf->loadHtml($html);
+        // Renderiza el PDF
+        $pdf->render();
+        // Descarga el PDF
+        return $pdf->stream('factura.pdf');
+    }
 }

@@ -124,7 +124,8 @@
         @foreach ($carreras as $carrera)
             <div class="carrera">
                 <div class="carrera-img">
-                    <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" width="378px" height="342px" alt="{{ $carrera->nombre }}">
+                    <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" width="378px" height="342px"
+                        alt="{{ $carrera->nombre }}">
                 </div>
 
                 <div class="datos">
@@ -184,9 +185,11 @@
                 </div>
                 <div class="modal-incrementor ml-5">
                     <!-- Aumentador -->
-                    <button id="decrement" class="btn bg-transparent"><img src="{{ asset('img/decrementa.svg') }}" width="30" height="30" alt="-"></button>
+                    <button id="decrement" class="btn bg-transparent"><img src="{{ asset('img/decrementa.svg') }}"
+                            width="30" height="30" alt="-"></button>
                     <span id="quantity" class="h4">1</span>
-                    <button id="increment" class="btn bg-transparent"><img src="{{ asset('img/incrementa.svg') }}" width="30" height="30" alt="+"></button>
+                    <button id="increment" class="btn bg-transparent"><img src="{{ asset('img/incrementa.svg') }}"
+                            width="30" height="30" alt="+"></button>
                 </div>
             </div>
             <div class="right-section">
@@ -203,8 +206,8 @@
             <span class="close" onclick="closePaymentModal()">&times;</span>
             <div class="vertical-content">
                 <p>Pago completado con éxito</p>
-                <div id="purchaseDetails"></div>
-                <button onclick="imprimirFactura()">Imprimir Factura</button>
+                <div id="purchaseDetails"></div> <!-- Div para mostrar los detalles de la compra -->
+                <button><a id="invoiceLink" class="text-decoration-none">Imprimir Factura</a></button>
             </div>
         </div>
     </div>
@@ -236,6 +239,17 @@
             purchaseDetailsDiv.innerHTML = "<p><strong>Título:</strong> " + title + "</p>" +
                 "<p><strong>Descripción:</strong> " + description + "</p>" +
                 "<p><strong>Precio:</strong> " + price + "</p>";
+
+            // Construir la URL de la factura PDF
+            var invoiceUrl =
+                "{{ route('FacturaPDF', ['subtotal' => 'subtotal_placeholder', 'total_quantity' => 'total_quantity_placeholder', 'carrera_id' => 'carrera_id_placeholder']) }}";
+            invoiceUrl = invoiceUrl.replace('subtotal_placeholder', subtotal);
+            invoiceUrl = invoiceUrl.replace('total_quantity_placeholder', totalQuantity);
+            invoiceUrl = invoiceUrl.replace('carrera_id_placeholder', carreraId);
+
+            // Actualizar el enlace del botón de la factura PDF
+            var invoiceLink = document.getElementById("invoiceLink");
+            invoiceLink.href = invoiceUrl;
         }
 
         function closePaymentModal() {

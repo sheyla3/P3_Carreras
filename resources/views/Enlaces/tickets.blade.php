@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="app.css">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    <script src="https://www.paypal.com/sdk/js?client-id=AUZKr_7whtWWgrCWVv9uufg_7qoUhlutwgnkv2P-xjtl6FM3g0WGZG_7bMO_hVoRxsR5Bjr9_XcOhXhM&currency=EUR"></script>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AUZKr_7whtWWgrCWVv9uufg_7qoUhlutwgnkv2P-xjtl6FM3g0WGZG_7bMO_hVoRxsR5Bjr9_XcOhXhM&currency=EUR">
+    </script>
     <style>
         .vertical-content {
             display: flex;
@@ -122,8 +124,7 @@
         @foreach ($carreras as $carrera)
             <div class="carrera">
                 <div class="carrera-img">
-                    <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" width="378px" height="342px"
-                        alt="">
+                    <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" width="378px" height="342px" alt="{{ $carrera->nombre }}">
                 </div>
 
                 <div class="datos">
@@ -149,6 +150,7 @@
                 <div class="clasificacion">
                     <!-- Agregar un atributo data-title al botón para obtener el título de la carrera -->
                     <button class="buy-btn" data-title="{{ $carrera->nombre }}"
+                        data-description="{{ $carrera->descripcion }}"
                         data-price="{{ $carrera->precio }}">Comprar</button>
                 </div>
             </div>
@@ -175,16 +177,16 @@
             <span class="close">&times;</span>
             <div class="left-section">
                 <!-- Sección izquierda del modal -->
-                <div class="modal-details">
+                <div class="modal-details ml-5 mt-4">
                     <h2 id="modal-title"></h2>
-                    <p id="modal-description"></p>
+                    <p id="modal-description" class="text-break"></p>
                     <h3 id="modal-price"></h3>
                 </div>
-                <div class="modal-incrementor">
+                <div class="modal-incrementor ml-5">
                     <!-- Aumentador -->
-                    <button id="decrement">-</button>
-                    <span id="quantity">1</span>
-                    <button id="increment">+</button>
+                    <button id="decrement" class="btn bg-transparent"><img src="{{ asset('img/decrementa.svg') }}" width="30" height="30" alt="-"></button>
+                    <span id="quantity" class="h4">1</span>
+                    <button id="increment" class="btn bg-transparent"><img src="{{ asset('img/incrementa.svg') }}" width="30" height="30" alt="+"></button>
                 </div>
             </div>
             <div class="right-section">
@@ -201,7 +203,7 @@
             <span class="close" onclick="closePaymentModal()">&times;</span>
             <div class="vertical-content">
                 <p>Pago completado con éxito</p>
-                <div id="purchaseDetails"></div> <!-- Div para mostrar los detalles de la compra -->
+                <div id="purchaseDetails"></div>
                 <button onclick="imprimirFactura()">Imprimir Factura</button>
             </div>
         </div>
@@ -275,7 +277,6 @@
         function calculateTotalPrice() {
             var quantity = parseInt(quantitySpan.innerText);
             var totalPrice = originalPrice * quantity;
-            priceSpan.innerText = totalPrice + " €";
             document.getElementById('subtotal').innerText = totalPrice + " €";
         }
 

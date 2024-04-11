@@ -102,5 +102,9 @@ class Carrera extends Model
 		return self::whereDate('fechaHora', '<', $fechaActual)->where('activo', true)->get();
 	}
 
-	
+	public static function carrerasAntiguasPag()
+	{
+		$fechaActual = Carbon::now()->toDateString();
+		return self::whereDate('fechaHora', '<', $fechaActual)->where('activo', true)->paginate(5);
+	}
 }

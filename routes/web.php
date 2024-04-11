@@ -46,6 +46,7 @@ Route::get('/listaJinetes/{id}', [CarrerasController::class, 'listaJinetes'])->n
 //RECORD: mostrar carreras antiguas
 Route::get('/record', [CarrerasController::class, 'mostrarCarrerasAntiguas'])->name('record');
 Route::get('/carreraAntigua/{id}', [CarrerasController::class, 'carreraAntigua'])->name('carreraAntigua');
+Route::get('/ClasiPDF/{id}', [CarrerasController::class, 'ImprimirClasiPDF'])->name('ClasiPDF');
 
 //CARRERAS: mostrar carreras posteriores
 Route::get('/carreras', [CarrerasController::class, 'mostrarCarrerasJinetes'])->name('carreras');

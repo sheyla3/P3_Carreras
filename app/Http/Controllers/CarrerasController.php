@@ -10,6 +10,7 @@ use App\Models\SponsorCarrera;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Dompdf\Dompdf;
 
 class CarrerasController extends Controller
 {
@@ -216,7 +217,7 @@ class CarrerasController extends Controller
     public function mostrarCarrerasAntiguas()
     {
         $fechaActual = Carbon::now()->toDateString();
-        $carreras = Carrera::carrerasAntiguas();
+        $carreras = Carrera::carrerasAntiguasPag();
 
         if (session()->has('socio_id') && session()->has('socio_name')) {
             $socioId = session('socio_id');
@@ -253,7 +254,7 @@ class CarrerasController extends Controller
     public function mostrarCarrerasJinetes()
     {
         $fechaActual = Carbon::now()->toDateString();
-        $carreras = Carrera::carrerasPost();
+        $carreras = Carrera::carrerasPostPag();
 
         if (session()->has('jinete_id') && session()->has('jinete_name')) {
             $jineteId = session('jinete_id');
@@ -320,5 +321,39 @@ class CarrerasController extends Controller
         }
 
         return view('Enlaces.ListaJinetes', compact('jinetes'));
+    }
+
+    public function ImprimirClasiPDF($id)
+    {
+        $carrera = Carrera::findOrFail($id);
+        $participantes = Participante::where('id_carrera', $id)->orderBy('tiempo')->with('jinete')->get();
+        // Crea una instancia de Dompdf
+        $pdf = new Dompdf();
+        // Contenido HTML para el PDF
+        $html = '<h1 style="text-align: center; ">' . $carrera->nombre . '</h1>';
+        $html .= '<style>';
+        $html .= 'table { width: 100%; border-collapse: collapse; }';
+        $html .= 'th, td { padding: 10px; text-align: center; }';
+        $html .= 'thead { background-color: #423333; color: white; }';
+        $html .= '</style>';
+        $html .= '<table>';
+        $html .= '<thead><tr><th>Puesto</th><th>Nombre</th><th>Apellido</th></tr></thead>';
+        $html .= '<tbody>';
+        $contador = 1;
+        foreach ($participantes as $participante) {
+            $html .= '<tr>';
+            $html .= '<td>' . $contador . '</td>';
+            $html .= '<td>' . $participante->jinete->nombre . '</td>';
+            $html .= '<td>' . $participante->jinete->apellido . '</td>';
+            $html .= '</tr>';
+            $contador++;
+        }
+        $html .= '</tbody></table>';
+        // Carga el HTML en Dompdf
+        $pdf->loadHtml($html);
+        // Renderiza el PDF
+        $pdf->render();
+        // Descarga el PDF
+        return $pdf->stream('calsificacion.pdf');
     }
 }

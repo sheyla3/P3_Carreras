@@ -50,7 +50,22 @@
             </div>
         @endforeach
     </div>
-
+    <div>
+        <nav aria-label="Page navigation" class="paginacion text-dark">
+            <ul class="pagination justify-content-center pagination-sm">
+                @if ($carreras->lastPage() > 1)
+                    @for ($i = 1; $i <= $carreras->lastPage(); $i++)
+                        <li class="page-item {{ $carreras->currentPage() == $i ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $carreras->url($i) }}">{{ $i }}</a>
+                        </li>
+                    @endfor
+                @endif
+            </ul>
+        </nav>
+        <div class="text-center">
+            {{ $carreras->firstItem() }} / {{ $carreras->lastItem() }} de {{ $carreras->total() }} carreras
+        </div>
+    </div>
 </body>
 @include('layouts.footer')
 </html>

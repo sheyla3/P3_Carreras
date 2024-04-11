@@ -141,6 +141,9 @@
             </div>
         </div>
         <div class="tab-pane fade my-3" id="nav-classi" role="tabpanel" aria-labelledby="nav-classi-tab">
+            <p class="text-center"><a href="{{ route('ClasiPDF', $carrera->id_carrera) }}"
+                    class="text-decoration-none">Imprimir Clasificacion</a></p>
+            <hr>
             <div class="row my-1 mx-0 d-flex justify-content-center">
                 @php
                     $contador = 1;

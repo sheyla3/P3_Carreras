@@ -16,7 +16,7 @@ class FotosController extends Controller
 
         $adminId = session('admin_id');
         $adminName = session('admin_name');
-        $carreras = Carrera::where('activo', true)->get();
+        $carreras = Carrera::carrerasAntiguas();
         return view('admin.AdminFotos', compact('carreras', 'adminId', 'adminName'));
     }
 
@@ -42,7 +42,6 @@ class FotosController extends Controller
         return redirect()->back()->with('Añadido', 'Fotos subidas con éxito');
     }
 
-
     public function verFotos($id)
     {
         if (!session()->has('admin_id') || !session()->has('admin_name')) {
@@ -51,7 +50,7 @@ class FotosController extends Controller
         $idCarrera = $id;
         $adminId = session('admin_id');
         $adminName = session('admin_name');
-        $carreraFotos = Foto::where('id_carrera', $id)->with('carrera')->get();
+        $carreraFotos = Foto::FotoCarrera($id);
         return view('admin.fotosCarrera', compact('carreraFotos', 'idCarrera', 'adminId', 'adminName'));
     }
 
@@ -67,13 +66,11 @@ class FotosController extends Controller
 
     public function eliminarTodasFotos($id)
     {
-        $idCarrera = $id;
-        // Obtener todas las fotos asociadas a la carrera
-        $fotosEliminar = Foto::where('id_carrera', $idCarrera)->get();
+        $fotosEliminar = Foto::ELiminarFotos($id);
         foreach ($fotosEliminar as $foto) {
             $foto->delete();
         }
 
-        return redirect()->route('verFotos', $idCarrera);
+        return redirect()->route('verFotos', $id);
     }
 }

@@ -11,6 +11,10 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <style>
+        .foto-flecha {
+            width: 100px;
+        }
+
         #slider {
             margin: 0 auto;
             width: 800px;
@@ -19,7 +23,6 @@
             background-color: black;
         }
 
-        /*Valores de las imagenes*/
         #slider img {
             margin: 0 auto;
             -moz-transition: opacity 2s;
@@ -31,7 +34,6 @@
             opacity: 0;
         }
 
-        /*Para que la primera imagen este activa al inicio*/
         #slider img:nth-child(1) {
             opacity: 1;
         }
@@ -51,10 +53,6 @@
 
         #derecha {
             text-align: left;
-        }
-
-        .flecha-slider {
-            width: 100px;
         }
     </style>
 </head>
@@ -97,13 +95,15 @@
             </div>
             <div class="row my-1 mx-0 d-flex justify-content-center">
                 <div class="card mr-5">
-                    <img src="{{ asset('storage/' . $carrera->cartel) }}" alt="Cartel de {{ $carrera->nombre }}" width="500" height="500">
+                    <img src="{{ asset('storage/' . $carrera->cartel) }}" alt="Cartel de {{ $carrera->nombre }}"
+                        width="500" height="500">
                     <div class="card-body">
                         <h3 class="text-center">Cartel</h3>
                     </div>
                 </div>
                 <div class="card ml-5">
-                    <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" alt="Lugar de {{ $carrera->nombre }}" width="500" height="500">
+                    <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" alt="Lugar de {{ $carrera->nombre }}"
+                        width="500" height="500">
                     <div class="card-body">
                         <h3 class="text-center">Foto del Lugar</h3>
                     </div>
@@ -118,8 +118,8 @@
                     <div>
                         <table>
                             <tr>
-                                <td id="izquierda">
-                                    <input type="image" class="btn bg-transparent flecha-slider"
+                                <td id="izquierda" class="flecha-slider">
+                                    <input type="image" class="btn bg-transparent foto-flecha"
                                         src="{{ asset('img/felcha-izquierda.svg') }}" onclick="cambiarManual('IZQ')">
                                 </td>
                                 <td>
@@ -130,8 +130,8 @@
                                         @endforeach
                                     </div>
                                 </td>
-                                <td id="derecha">
-                                    <input type="image" class="btn bg-transparent flecha-slider"
+                                <td id="derecha" class="flecha-slider">
+                                    <input type="image" class="btn bg-transparent foto-flecha"
                                         src="{{ asset('img/felcha-derecha.svg') }}" onclick="cambiarManual('DER')">
                                 </td>
                             </tr>
@@ -147,9 +147,11 @@
                 @endphp
                 @foreach ($participantes as $participante)
                     <div class="card mr-5">
-                        <img src="{{ asset('storage/' . $participante->jinete->foto) }}" alt="{{ $participante->jinete->id_jinete }}" width="500" height="500">
+                        <img src="{{ asset('storage/' . $participante->jinete->foto) }}"
+                            alt="{{ $participante->jinete->id_jinete }}" width="500" height="500">
                         <div class="card-body">
-                            <h3 class="text-center">{{ $contador }}. {{ $participante->jinete->nombre }} {{ $participante->jinete->apellido }}</h3>
+                            <h3 class="text-center">{{ $contador }}. {{ $participante->jinete->nombre }}
+                                {{ $participante->jinete->apellido }}</h3>
                         </div>
                     </div>
                     @php
@@ -157,7 +159,7 @@
                     @endphp
                 @endforeach
             </div>
-        </div>   
+        </div>
     </div>
 
     <script>

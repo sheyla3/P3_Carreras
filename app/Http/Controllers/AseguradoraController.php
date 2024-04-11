@@ -44,7 +44,6 @@ class AseguradoraController extends Controller
         return view('Admin.Formularios.NuevaAseguradora', compact('adminId', 'adminName'));
     }
 
-
     public function mostrarAseguradoras()
     {
         if (!session()->has('admin_id') || !session()->has('admin_name')) {

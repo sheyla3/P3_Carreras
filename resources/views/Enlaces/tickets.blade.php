@@ -127,16 +127,17 @@
 
                 <div class="datos">
                     <div id="datos-title">
-                        <h2>{{ $carrera->nombre }}</h2>
+                        <h2 class="text-break">{{ $carrera->nombre }}</h2>
                     </div>
                     <div>
                         <p class="text-break">{{ $carrera->descripcion }}</p>
                     </div>
                     <div>
-                        <p>{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}</p>
+                        <p class="text-break">{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}
+                        </p>
                     </div>
                     <div>
-                        <h3>{{ $carrera->precio }} €</h3>
+                        <h3 class="text-break">{{ $carrera->precio }} €</h3>
                     </div>
                 </div>
 
@@ -306,4 +307,5 @@
 
 </body>
 @include('layouts.footer')
+
 </html>

@@ -68,6 +68,7 @@ nav a {
     color: #ffffff !important;
     margin-bottom: 10px;
 }
+
 .form-control-admin:focus {
     border-bottom: 3px solid #8B4513 !important;
 }
@@ -265,6 +266,11 @@ header button {
     width: 80%;
     height: auto;
     margin-left: 10%;
+}
+
+/*PAGINACION */
+.paginacion:hover {
+    color: #8B4513;
 }
 
 .carrera {
@@ -664,25 +670,17 @@ section .social-container a {
     background-color: rgba(0, 0, 0, 0.5);
     /* Agrega un color de fondo a los botones */
     color: white;
-    /* Color del texto de los botones */
-    font-size: 20px;
-    /* Tamaño del texto de los botones */
     border: none;
-    /* Elimina el borde de los botones */
     cursor: pointer;
-    /* Cambia el cursor al pasar sobre los botones */
     z-index: 1;
-    /* Asegura que los botones estén por encima de las imágenes */
 }
 
 .carousel-control-prev {
     left: 0;
-    /* Posiciona el botón "Anterior" a la izquierda */
 }
 
 .carousel-control-next {
     right: 0;
-    /* Posiciona el botón "Siguiente" a la derecha */
 }
 
 
@@ -729,6 +727,50 @@ section .social-container a {
     margin-left: 4%;
 }
 
+/* SLIDER */
+.foto-flecha {
+    width: 100px;
+}
+
+#slider {
+    margin: 0 auto;
+    width: 800px;
+    height: 500px;
+    overflow: hidden;
+    background-color: black;
+}
+
+#slider img {
+    margin: 0 auto;
+    -moz-transition: opacity 2s;
+    -webkit-transition: opacity 2s;
+    transition: opacity 2s;
+    width: 800px;
+    height: 500px;
+    position: absolute;
+    opacity: 0;
+}
+
+#slider img:nth-child(1) {
+    opacity: 1;
+}
+
+table {
+    margin: 0 auto;
+    width: 800px;
+    height: auto;
+    overflow: hidden;
+    background-color: white;
+    border: 0;
+}
+
+#izquierda {
+    text-align: right;
+}
+
+#derecha {
+    text-align: left;
+}
 
 /* DISEÑO RESPONSIVE PARA MOVIL */
 @media screen and (max-width: 700px) {

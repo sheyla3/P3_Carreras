@@ -38,7 +38,6 @@ class SponsorController extends Controller
             return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
         }
     }
-
     public function formularioSponsor()
     {
         if (!session()->has('admin_id') || !session()->has('admin_name')) {
@@ -49,7 +48,6 @@ class SponsorController extends Controller
         $adminName = session('admin_name');
         return view('Admin.Formularios.NuevoSponsor',  compact('adminId', 'adminName'));
     }
-
 
     public function mostrarSponsors()
     {
@@ -115,7 +113,6 @@ class SponsorController extends Controller
         
         return redirect()->route('adminSponsors');
     }
-
 
     public function activo($id)
     {

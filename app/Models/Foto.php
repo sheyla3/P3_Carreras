@@ -46,4 +46,14 @@ class Foto extends Model
 	{
 		return $this->belongsTo(Carrera::class, 'id_carrera');
 	}
+
+	public static function FotoCarrera($id)
+	{
+		return self::where('id_carrera', $id)->with('carrera')->get();
+	}
+
+	public static function ELiminarFotos($id)
+	{
+		return self::where('id_carrera', $id)->get();
+	}
 }

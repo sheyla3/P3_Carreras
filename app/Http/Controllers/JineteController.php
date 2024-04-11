@@ -128,7 +128,6 @@ class JineteController extends Controller
         return redirect()->route('adminJinetes')->with('success', 'El estado de la carrera ha sido actualizado correctamente.');
     }
 
-
     public function activo($id)
     {
         $jinete = Jinete::findOrFail($id);
@@ -138,7 +137,6 @@ class JineteController extends Controller
         return redirect()->route('adminJinetes');
     }
 
-    
     public function loginJinete(Request $request)
     {
         $request->validate([
@@ -149,7 +147,7 @@ class JineteController extends Controller
         $email = $request->input("correo");
         $password = $request->input("password");
 
-        $confUsu = Jinete::where('correo', $email)->first();
+        $confUsu = Jinete::loginJinete($email);
 
         if ($confUsu && Hash::check($password, $confUsu->contrasena)) {
             session(['jinete_id' => $confUsu->id_jinete, 'jinete_name' => $confUsu->correo]);

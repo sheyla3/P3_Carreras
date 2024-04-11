@@ -37,4 +37,9 @@ class Admin extends Model
 		'firma',
 		'remember_token'
 	];
+
+	public static function loginAdmin($usuario)
+	{
+		return self::where('usuario', $usuario)->first();
+	}
 }

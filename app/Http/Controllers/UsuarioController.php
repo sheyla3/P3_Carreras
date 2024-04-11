@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
-    public function formularioInicio()
-    {
-        return view("Usuario.loginUsuario");
-    }
-
     public function loginUsuario(Request $request)
     {
         $request->validate([
@@ -24,7 +19,7 @@ class UsuarioController extends Controller
         $email = $request->input("correo");
         $password = $request->input("password");
 
-        $confUsu = Usuario::where('correo', $email)->first();
+        $confUsu = Usuario::loginUsuario($email);
 
         if ($confUsu && Hash::check($password, $confUsu->contrasena)) {
             session(['socio_id' => $confUsu->id_usuario, 'socio_name' => $confUsu->correo]);

@@ -74,6 +74,8 @@
         <div class="nav nav-tabs mt-2" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active text-dark" id="nav-info-tab" data-toggle="tab" href="#nav-info"
                 role="tab" aria-controls="nav-info" aria-selected="true">Informacion</a>
+            <a class="nav-item nav-link text-dark" id="nav-sponsors-tab" data-toggle="tab" href="#nav-sponsors"
+                role="tab" aria-controls="nav-sponsors" aria-selected="false">Sponsors</a>
             <a class="nav-item nav-link text-dark" id="nav-imagenes-tab" data-toggle="tab" href="#nav-imagenes"
                 role="tab" aria-controls="nav-imagenes" aria-selected="false">Imagenes</a>
             <a class="nav-item nav-link text-dark" id="nav-classi-tab" data-toggle="tab" href="#nav-classi"
@@ -96,18 +98,31 @@
             <div class="row my-1 mx-0 d-flex justify-content-center">
                 <div class="card mr-5">
                     <img src="{{ asset('storage/' . $carrera->cartel) }}" alt="Cartel de {{ $carrera->nombre }}"
-                        width="500" height="500">
+                        width="400" height="400">
                     <div class="card-body">
                         <h3 class="text-center">Cartel</h3>
                     </div>
                 </div>
                 <div class="card ml-5">
                     <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" alt="Lugar de {{ $carrera->nombre }}"
-                        width="500" height="500">
+                        width="400" height="400">
                     <div class="card-body">
                         <h3 class="text-center">Foto del Lugar</h3>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="tab-pane fade my-3" id="nav-sponsors" role="tabpanel" aria-labelledby="nav-sponsors-tab">
+            <div class="row my-1 mx-0 d-flex justify-content-center">
+                @foreach ($sponsorCarreras as $sponsors)
+                    <div class="card mr-5">
+                        <img src="{{ asset('storage/' . $sponsors->sponsor->logo) }}"
+                            alt="{{ $sponsors->sponsor->id_sponsor }}" width="300" height="200">
+                        <div class="card-body">
+                            <h3 class="text-center">{{ $sponsors->sponsor->nombre }}</h3>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
         <div class="tab-pane fade my-3" id="nav-imagenes" role="tabpanel" aria-labelledby="nav-imagenes-tab">
@@ -151,7 +166,7 @@
                 @foreach ($participantes as $participante)
                     <div class="card mr-5">
                         <img src="{{ asset('storage/' . $participante->jinete->foto) }}"
-                            alt="{{ $participante->jinete->id_jinete }}" width="500" height="500">
+                            alt="{{ $participante->jinete->id_jinete }}" width="400" height="400">
                         <div class="card-body">
                             <h3 class="text-center">{{ $contador }}. {{ $participante->jinete->nombre }}
                                 {{ $participante->jinete->apellido }}</h3>

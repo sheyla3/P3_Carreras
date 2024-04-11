@@ -125,7 +125,7 @@
 
     <div class="Maestro-4 mb-5">
         <h1 class="text-center my-4">Sponsors</h1>
-        <div class="collage">
+        <div class="row my-1 mx-0 d-flex justify-content-center">
             @foreach ($sponsorsDestacados as $sponsor)
                 <div class="collage-item">
                     <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="{{ $sponsor->nombre }}" width="300"

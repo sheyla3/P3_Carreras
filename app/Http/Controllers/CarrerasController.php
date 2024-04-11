@@ -237,17 +237,18 @@ class CarrerasController extends Controller
         $carrera = Carrera::findOrFail($id);
         $fotos = Foto::FotoCarrera($id);
         $participantes = Participante::Classificacion($id);
+        $sponsorCarreras = SponsorCarrera::MostrarSponsor($id);
 
         if (session()->has('socio_id') && session()->has('socio_name')) {
             $socioId = session('socio_id');
             $socioName = session('socio_name');
-            return view('Enlaces.CarreraAntigua', compact('carrera', 'participantes', 'fotos', 'socioId', 'socioName'));
+            return view('Enlaces.CarreraAntigua', compact('carrera', 'participantes', 'fotos', 'socioId', 'socioName', 'sponsorCarreras'));
         } elseif (session()->has('jinete_id') && session()->has('jinete_name')) {
             $jineteId = session('jinete_id');
             $jineteName = session('jinete_name');
-            return view('Enlaces.CarreraAntigua', compact('carrera', 'participantes', 'fotos', 'jineteId', 'jineteName'));
+            return view('Enlaces.CarreraAntigua', compact('carrera', 'participantes', 'fotos', 'jineteId', 'jineteName', 'sponsorCarreras'));
         } else {
-            return view('Enlaces.CarreraAntigua', compact('carrera', 'participantes', 'fotos'));
+            return view('Enlaces.CarreraAntigua', compact('carrera', 'participantes', 'fotos', 'sponsorCarreras'));
         }
     }
 
@@ -337,7 +338,7 @@ class CarrerasController extends Controller
         $html .= 'thead { background-color: #423333; color: white; }';
         $html .= '</style>';
         $html .= '<table>';
-        $html .= '<thead><tr><th>Puesto</th><th>Nombre</th><th>Apellido</th></tr></thead>';
+        $html .= '<thead><tr><th>Puesto</th><th>Nombre</th><th>Apellido</th><th>Tiempo</th></tr></thead>';
         $html .= '<tbody>';
         $contador = 1;
         foreach ($participantes as $participante) {
@@ -345,6 +346,7 @@ class CarrerasController extends Controller
             $html .= '<td>' . $contador . '</td>';
             $html .= '<td>' . $participante->jinete->nombre . '</td>';
             $html .= '<td>' . $participante->jinete->apellido . '</td>';
+            $html .= '<td>' . Carbon::parse($participante->tiempo)->format('H:i:s') . '</td>';
             $html .= '</tr>';
             $contador++;
         }

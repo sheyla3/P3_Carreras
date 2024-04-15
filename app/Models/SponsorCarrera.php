@@ -54,11 +54,16 @@ class SponsorCarrera extends Model
 
 	public function sponsor()
 	{
-		return $this->belongsTo(Sponsor::class, 'id_sponsor');
+		return $this->belongsTo(Sponsor::class, 'id_sponsor', 'id_sponsor');
 	}
 
 	public static function SponsorCarreras($id)
 	{
 		return self::where('id_carrera', $id)->with('carrera')->get();
+	}
+
+	public static function MostrarSponsor($id)
+	{
+		return self::where('id_carrera', $id)->with('sponsor')->get();
 	}
 }

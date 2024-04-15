@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Dompdf\Dompdf;
 
 class SponsorController extends Controller
 {
@@ -121,5 +122,35 @@ class SponsorController extends Controller
         $sponsor->save();
 
         return redirect()->route('adminSponsors');
+    }
+
+    public function FacturaSponsor($id)
+    {
+        $sponsor = Sponsor::findOrFail($id);
+        // Crea una instancia de Dompdf
+        $pdf = new Dompdf();
+        // Contenido HTML para el PDF
+        $html = '<h1 style="text-align: center; ">' . $sponsor->nombre . '</h1>';
+        $html = '<p class="text-break">' . $sponsor->id_sponsor . '</p>';
+        $html .= '<style>';
+        $html .= 'table { width: 100%; border-collapse: collapse; }';
+        $html .= 'th, td { padding: 10px; text-align: center; }';
+        $html .= 'thead { background-color: #423333; color: white; }';
+        $html .= '</style>';
+        $html .= '<table>';
+        $html .= '<thead><tr><th>ID</th><th>Cantidad</th><th>Total</th></tr></thead>';
+        $html .= '<tbody>';
+        $html .= '<tr>';
+        $html .= '<td>' . $sponsor->id_sponsor . '</td>';
+        $html .= '<td>' . $sponsor . '</td>';
+        $html .= '<td>' . $sponsor . '</td>';
+        $html .= '</tr>';
+        $html .= '</tbody></table>';
+        // Carga el HTML en Dompdf
+        $pdf->loadHtml($html);
+        // Renderiza el PDF
+        $pdf->render();
+        // Descarga el PDF
+        return $pdf->stream('factura.pdf');
     }
 }

@@ -85,6 +85,7 @@ Route::get('/editarSponsor/{id}', [SponsorController::class, 'editarSponsor'])->
 Route::post('/sponsor-editar/{id}', [SponsorController::class, 'editar'])->name('sponsor.editar');
 Route::get('/inactivo-sponsor/{id}', [SponsorController::class, 'inactivo'])->name('inactivoSponsor');
 Route::get('/activo-sponsor/{id}', [SponsorController::class, 'activo'])->name('activoSponsor');
+Route::get('/facturaSponsor/{id}', [SponsorController::class, 'FacturaSponsor'])->name('FacturaSponsor');
 
 //carreras
 Route::get('/carreras-create', [CarrerasController::class, 'create'])->name('carreras.create');
@@ -96,6 +97,7 @@ Route::get('/patrocinioCarrera/{id}', [CarrerasController::class, 'patrocinioCar
 Route::post('/carrera-patrocinio/{id}', [CarrerasController::class, 'nuevoPatrocinio'])->name('carrera.patrocinio');
 Route::get('/inactivo-carrera/{id}', [CarrerasController::class, 'inactivo'])->name('inactivoCarrera');
 Route::get('/activo-carrera/{id}', [CarrerasController::class, 'activo'])->name('activoCarrera');
+Route::get('/facturaSponsorCarrera/{id}', [CarrerasController::class, 'FacturaSponsorCarrera'])->name('FacturaSponsorCarrera');
 
 //aseguradoras
 Route::get('/formularioAseguradora', [AseguradoraController::class, 'formularioAseguradora'])->name('formularioAseguradora');

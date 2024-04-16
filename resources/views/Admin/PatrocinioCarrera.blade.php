@@ -32,6 +32,7 @@
                     <th>Id</th>
                     <th>Sponsor</th>
                     <th>Patrocinio</th>
+                    <th>Factura</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +41,7 @@
                         <td>{{ $sponsorCarrera->id_sponsorCarrera }}</td>
                         <td>{{ $sponsorCarrera->sponsor->nombre }}</td>
                         <td>{{ $sponsorCarrera->patrocinio }}</td>
+                        <td><a href="{{ route('FacturaSponsorCarrera', $sponsorCarrera->id_sponsorCarrera) }}" class="btn btn-info">Imprimir</a></td>
                     </tr>
                 @endforeach
             </tbody>

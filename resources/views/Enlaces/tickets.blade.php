@@ -151,7 +151,7 @@
                 <div class="clasificacion">
                     <!-- Agregar un atributo data-title al botón para obtener el título de la carrera -->
                     <button class="buy-btn" data-title="{{ $carrera->nombre }}"
-                        data-description="{{ $carrera->descripcion }}"
+                        data-description="{{ $carrera->descripcion }}" data-id="{{ $carrera->id_carrera }}"
                         data-price="{{ $carrera->precio }}">Comprar</button>
                 </div>
             </div>
@@ -207,7 +207,7 @@
             <div class="vertical-content">
                 <p>Pago completado con éxito</p>
                 <div id="purchaseDetails"></div> <!-- Div para mostrar los detalles de la compra -->
-                <button><a id="invoiceLink" class="text-decoration-none">Imprimir Factura</a></button>
+                <a id="invoiceLink" onclick="generateInvoiceUrl()" class="btn btn-info">Imprimir Factura</a>
             </div>
         </div>
     </div>
@@ -222,7 +222,7 @@
             calculateTotalPrice();
         }
 
-        // Función para mostrar el modal de pago realizado y ocultar el modal de detalles
+        // Función para mostrar el modal de pago realizado y construir la URL de la factura PDF
         function showPaymentSuccessModal() {
             var detailsModal = document.getElementById("myModal");
             detailsModal.style.display = "none";
@@ -239,17 +239,16 @@
             purchaseDetailsDiv.innerHTML = "<p><strong>Título:</strong> " + title + "</p>" +
                 "<p><strong>Descripción:</strong> " + description + "</p>" +
                 "<p><strong>Precio:</strong> " + price + "</p>";
+        }
 
-            // Construir la URL de la factura PDF
-            var invoiceUrl =
-                "{{ route('FacturaPDF', ['subtotal' => 'subtotal_placeholder', 'total_quantity' => 'total_quantity_placeholder', 'carrera_id' => 'carrera_id_placeholder']) }}";
-            invoiceUrl = invoiceUrl.replace('subtotal_placeholder', subtotal);
-            invoiceUrl = invoiceUrl.replace('total_quantity_placeholder', totalQuantity);
-            invoiceUrl = invoiceUrl.replace('carrera_id_placeholder', carreraId);
+        function generateInvoiceUrl() {
+            var invoiceUrl = "{{ route('FacturaPDF', ['subtotal' => ':subtotal', 'total_quantity' => ':total_quantity', 'carrera_id' => ':carrera_id']) }}";
+            invoiceUrl = invoiceUrl.replace(':subtotal', PrecioTotal);
+            invoiceUrl = invoiceUrl.replace(':total_quantity', cantidad);
+            invoiceUrl = invoiceUrl.replace(':carrera_id', carreraId);
 
-            // Actualizar el enlace del botón de la factura PDF
-            var invoiceLink = document.getElementById("invoiceLink");
-            invoiceLink.href = invoiceUrl;
+            // Redirigir a la URL de la factura PDF
+            window.location.href = invoiceUrl;
         }
 
         function closePaymentModal() {
@@ -292,15 +291,21 @@
             var quantity = parseInt(quantitySpan.innerText);
             var totalPrice = originalPrice * quantity;
             document.getElementById('subtotal').innerText = totalPrice + " €";
+            PrecioTotal = totalPrice;
+            cantidad = quantity;
         }
 
+        // Guardar datos de la carrera y factura
+        var carreraId, PrecioTotal, cantidad;
         // Cuando se hace clic en el botón, abrir el modal de detalles
         for (var i = 0; i < btns.length; i++) {
             btns[i].onclick = function() {
                 var title = this.getAttribute('data-title');
                 var description = this.getAttribute('data-description');
+                var id = this.getAttribute('data-id');
                 var price = parseFloat(this.getAttribute('data-price')); // Convertir el precio a un número flotante
                 originalPrice = price; // Guardar el precio original de la carrera
+                carreraId = id; // darle el valor del id
                 showDetailsModal(title, description, price);
             }
         }

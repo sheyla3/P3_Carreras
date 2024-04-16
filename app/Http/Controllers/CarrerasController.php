@@ -362,23 +362,60 @@ class CarrerasController extends Controller
     public function FacturaPDF($subtotal, $total_quantity, $carrera_id)
     {
         $carrera = Carrera::findOrFail($carrera_id);
-        // Crea una instancia de Dompdf
+        $pdf = new Dompdf();
+
+        $html = '<h1 style="text-align: center;">' . $carrera->nombre . '</h1>';
+        $html .= '<p class="text-break">' . $carrera->descripcion . '</p>';
+        $html .= '<style>';
+        $html .= 'table { width: 100%; border-collapse: collapse; }';
+        $html .= 'th, td { padding: 10px; text-align: center; }';
+        $html .= 'thead { background-color: #423333; color: white; }';
+        $html .= 'img { display: block; }';
+        $html .= '</style>';
+        $html .= '<table>';
+        $html .= '<thead><tr><th>Precio</th><th>Cantidad</th><th>Total</th></tr></thead>';
+        $html .= '<tbody>';
+        $html .= '<tr>';
+        $html .= '<td>' . $carrera->precio . '€</td>';
+        $html .= '<td>' . $total_quantity . '</td>';
+        $html .= '<td>' . $subtotal . '€</td>';
+        $html .= '</tr>';
+        $html .= '</tbody></table>';
+        $html .= '<br><br><br><hl><br>';
+        for ($i = 0; $i < $total_quantity; $i++) {
+            $html .= '<img src="{{ ' . asset("public/img/entrada.png") . ' }}" alt="entrada" width="180" height="130">';
+        }
+        // Carga el HTML en Dompdf
+        $pdf->loadHtml($html);
+        // Renderiza el PDF
+        $pdf->render();
+        // Descarga el PDF
+        return $pdf->stream('factura.pdf');
+    }
+
+    public function FacturaSponsorCarrera($id)
+    {
+        $fechaActual = Carbon::now()->toDateString();
+        $sponsorCarrera = SponsorCarrera::findOrFail($id);
+        $sponsor = Sponsor::findOrFail($sponsorCarrera->id_sponsor);
+        $carrera = Carrera::findOrFail($sponsorCarrera->id_carrera);
+        // Crear una instancia de Dompdf
         $pdf = new Dompdf();
         // Contenido HTML para el PDF
-        $html = '<h1 style="text-align: center; ">' . $carrera->nombre . '</h1>';
-        $html = '<p class="text-break">' . $carrera->descripcion . '</p>';
+        $html = '<h1 style="text-align: center;">' . $sponsor->nombre . '</h1>';
         $html .= '<style>';
         $html .= 'table { width: 100%; border-collapse: collapse; }';
         $html .= 'th, td { padding: 10px; text-align: center; }';
         $html .= 'thead { background-color: #423333; color: white; }';
         $html .= '</style>';
         $html .= '<table>';
-        $html .= '<thead><tr><th>Precio</th><th>Cantidad</th><th>Total</th></tr></thead>';
+        $html .= '<thead><tr><th>ID</th><th>Carrera</th><th>Fecha</th><th>Total</th></tr></thead>';
         $html .= '<tbody>';
         $html .= '<tr>';
-        $html .= '<td>' . $carrera->precio . '</td>';
-        $html .= '<td>' . $total_quantity . '</td>';
-        $html .= '<td>' . $subtotal . '</td>';
+        $html .= '<td>' . $sponsorCarrera->id_sponsorCarrera . '</td>';
+        $html .= '<td>' . $carrera->nombre . '</td>';
+        $html .= '<td>' . $fechaActual . '</td>';
+        $html .= '<td>' . $sponsorCarrera->patrocinio . '€</td>';
         $html .= '</tr>';
         $html .= '</tbody></table>';
         // Carga el HTML en Dompdf

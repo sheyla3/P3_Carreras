@@ -74,7 +74,11 @@ use App\Http\Controllers\sponsorController;
                             @endif
                         </td>
                         <td>{{ $sponsor->calle }}</td>
-                        <td>{{ $sponsor->destacado ? 'Sí' : 'No' }}</td>
+                        <td>{{ $sponsor->destacado ? 'Sí' : 'No' }}
+                            @if ($sponsor->destacado == true)
+                                <a href="{{ route('FacturaSponsor', $sponsor->id_sponsor) }}" class="btn btn-info ml-2">Factura</a>
+                            @endif
+                        </td>
                         <td>
                             @if ($sponsor->activo)
                                 <a class="btn btn-success" href="{{ route('inactivoSponsor', $sponsor->id_sponsor) }}">Sí</a>

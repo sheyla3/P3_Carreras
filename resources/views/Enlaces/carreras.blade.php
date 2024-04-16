@@ -59,7 +59,7 @@
         </div>
         @endforeach
     </div>
-    <div>
+    <div class="my-3">
         <nav aria-label="Page navigation" class="paginacion text-dark">
             <ul class="pagination justify-content-center pagination-sm">
                 @if ($carreras->lastPage() > 1)

@@ -18,6 +18,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('node_modules/slick-carousel/slick/slick.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('node_modules/slick-carousel/slick/slick-theme.css') }}">
     <script src="{{ asset('node_modules/slick-carousel/slick/slick.min.js') }}"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -122,22 +125,23 @@
             <img src="{{ asset('img/master3.png') }}" alt="caballo">
         </div>
     </div>
-
     <div class="Maestro-4 mb-5">
-        <h1 class="text-center my-4">Sponsors</h1>
-        <div class="row my-1 mx-0 d-flex justify-content-center">
-            @foreach ($sponsorsDestacados as $sponsor)
-                <div class="collage-item">
-                    <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="{{ $sponsor->nombre }}" width="300"
-                        height="300">
-                </div>
-            @endforeach
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+        <div class="container">
+            <div class="text-center my-3">
+                <h2>Sponsors</h2>
+            </div>
+            <section class="sponsors-home slider">
+                @foreach ($sponsorsDestacados as $sponsor)
+                    <div class="slide">
+                        <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="{{ $sponsor->nombre }}" height="100" class="px-2 w-100">
+                    </div>
+                @endforeach
+            </section>
         </div>
     </div>
 </body>
 @include('layouts.footer')
-
-<!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
@@ -166,6 +170,29 @@
                     }
                 }
             ]
+        });
+    });
+    // CARUSEL SPONSORS
+    $(document).ready(function() {
+        $('.sponsors-home').slick({
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 1500,
+            arrows: false,
+            dots: false,
+            pauseOnHover: false,
+            responsive: [{
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 4
+                }
+            }, {
+                breakpoint: 520,
+                settings: {
+                    slidesToShow: 3
+                }
+            }]
         });
     });
 </script>

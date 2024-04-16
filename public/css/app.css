@@ -344,6 +344,22 @@ thead th {
 
 }
 
+.clasificacion3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.clasificacion3 button {
+    background: #562100;
+    color: white;
+    width: 200px;
+    height: 60px;
+    font-size: large;
+
+}
+
 .form_container {
     position: absolute;
     max-width: 320px;

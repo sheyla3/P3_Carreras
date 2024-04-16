@@ -13,15 +13,11 @@
 </head>
 
 <body>
-    @if (isset($socioId) && isset($socioName))
-        @include('layouts.CHSocio')
-    @elseif (isset($jineteId) && isset($jineteName))
+    @if (isset($jineteId) && isset($jineteName))
         @include('layouts.CHJinete')
-    @else
-        @include('layouts.CaballoHeader')
     @endif
     <div class="enlacesHeader">
-        <h1 class="float-left tituloHeader2">Carreras</h1>
+        <h1 class="float-left tituloHeader2">Mis carreras</h1>
         @include('layouts.2Header')
     </div>
     <div class="contenedor-tickets">
@@ -42,15 +38,13 @@
                     <div>
                         <p>Carrera {{ $carrera->tipo }} de {{ $carrera->km }}km</p>
                     </div>
-                    <div>
-                        <p class="text-break">{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}</p>
-                    </div>
-                    <div>
-                        <p>Participantes: {{ $participantesActuales[$carrera->id_carrera] }} / {{ $carrera->max_participantes }}</p>
-                    </div>
                 </div>
 
-                @if (isset($jineteId) && $carrera->participantes()->where('id_jinete', $jineteId)->exists())
+                @if ($carrera->fechaHora < now())
+                    <div class="clasificacion3">
+                        <button>Terminado</button>
+                    </div>
+                @elseif (isset($jineteId) && $carrera->participantes()->where('id_jinete', $jineteId)->exists())
                     <div class="clasificacion2">
                         <a href="{{ route('desinscribirse', ['id_carrera' => $carrera->id_carrera, 'id_jinete' => $jineteId]) }}"><button>Inscrito</button></a>
                     </div>
@@ -59,7 +53,7 @@
                         <a href="{{ route('inscribirse', ['id_carrera' => $carrera->id_carrera, 'id_jinete' => $jineteId]) }}"><button>Inscribirse</button></a>
                     </div>
                 @endif
-        </div>
+            </div>
         @endforeach
     </div>
     <div class="my-3">

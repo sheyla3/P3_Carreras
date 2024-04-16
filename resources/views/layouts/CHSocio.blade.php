@@ -31,11 +31,6 @@
         .dropdown-menu button {
             color: #ffffff;
         }
-
-        .dropdown-menu button:hover {
-            background-color: #ffffff;
-            color: #1C1C1C;
-        }
     </style>
 </head>
 
@@ -51,8 +46,11 @@
                     <img src="{{ asset('img/menu.svg') }}" alt="menu" height="30" width="30">
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" style="background-color: #1C1C1C">
-                    <button class="dropdown-item" type="button">Perfil</button>
-                    <button class="dropdown-item" type="button">Foto</button>
+                    @if (session()->has('socio_id') && session()->has('socio_name'))
+                        <button class="dropdown-item" type="button">
+                            <a href="{{ route('socioPerfil', ['id' => session('socio_id')]) }}">Perfil</a>
+                        </button>
+                    @endif
                     <form method="POST" action="{{ route('admin.cerrar') }}">
                         @csrf
                         <a href="{{ route('admin.cerrar') }}"

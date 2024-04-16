@@ -28,7 +28,7 @@
         </ul>
         <br><br>
         @if ($carreraFotos->isEmpty())
-            <p>No hay fotos</p>
+            <p class="text-center">No hay fotos</p>
         @else
             <div class="collage">
                 @foreach ($carreraFotos as $carrera)

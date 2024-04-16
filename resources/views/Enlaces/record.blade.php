@@ -42,6 +42,9 @@
                     <div>
                         <p>{{ $carrera->tipo }} de {{ $carrera->km }}km</p>
                     </div>
+                    <div>
+                        <p class="text-break">{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}</p>
+                    </div>
                 </div>
 
                 <div class="clasificacion">

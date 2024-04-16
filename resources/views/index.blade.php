@@ -131,13 +131,17 @@
             <div class="text-center my-3">
                 <h2>Sponsors</h2>
             </div>
-            <section class="sponsors-home slider">
-                @foreach ($sponsorsDestacados as $sponsor)
-                    <div class="slide">
-                        <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="{{ $sponsor->nombre }}" height="100" class="px-2 w-100">
-                    </div>
-                @endforeach
-            </section>
+            @if ($sponsorsDestacados->isEmpty())
+                <p class="text-center">De momento no hay sponsors destacados</p>
+            @else
+                <section class="sponsors-home slider">
+                    @foreach ($sponsorsDestacados as $sponsor)
+                        <div class="slide">
+                            <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="{{ $sponsor->nombre }}" height="100" class="px-2 w-100">
+                        </div>
+                    @endforeach
+                </section>
+            @endif
         </div>
     </div>
 </body>

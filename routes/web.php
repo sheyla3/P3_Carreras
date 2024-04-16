@@ -116,5 +116,9 @@ Route::get('/verFotos/{id}', [FotosController::class, 'verFotos'])->name('verFot
 Route::get('/eliminarFoto/{id}', [FotosController::class, 'eliminarFoto'])->name('eliminarFoto');
 Route::get('/eliminarTodasFotos/{id}', [FotosController::class, 'eliminarTodasFotos'])->name('eliminarTodasFotos');
 
-//perfil
+// MENU JINETE / SOCIO
 Route::get('/perfil/{id}', [PerfilController::class, 'mostrarPerfil'])->name('perfil.mostrar');
+Route::get('/misCarreras/{id}', [PerfilController::class, 'misCarreras'])->name('misCarreras');
+Route::get('/socioPerfil/{id}', [PerfilController::class, 'socioPerfil'])->name('socioPerfil');
+Route::get('/editarSocio/{id_usuario}', [PerfilController::class, 'editarSocioVista'])->name('editarSocio');
+Route::post('/socio-editar/{id_usuario}', [PerfilController::class, 'editarSocio'])->name('editar.socio');

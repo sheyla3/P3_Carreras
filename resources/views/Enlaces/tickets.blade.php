@@ -193,8 +193,7 @@
                         <p class="text-break">{{ $carrera->descripcion }}</p>
                     </div>
                     <div>
-                        <p class="text-break">{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}
-                        </p>
+                        <p class="text-break">{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}</p>
                     </div>
                     <div>
                         <h3 class="text-break">{{ $carrera->precio }} €</h3>

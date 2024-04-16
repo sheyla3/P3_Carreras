@@ -31,11 +31,6 @@
         .dropdown-menu button {
             color: #ffffff;
         }
-
-        .dropdown-menu button:hover {
-            background-color: #ffffff;
-            color: #1C1C1C;
-        }
     </style>
 </head>
 
@@ -52,10 +47,12 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" style="background-color: #1C1C1C">
                     @if (session()->has('jinete_id') && session()->has('jinete_name'))
-                        <button class="dropdown-item">
+                        <button class="dropdown-item" type="button">
                             <a href="{{ route('perfil.mostrar', ['id' => session('jinete_id')]) }}">Perfil</a>
                         </button>
-                        <button class="dropdown-item" type="button">Mis carreras</button>
+                        <button class="dropdown-item" type="button">
+                            <a href="{{ route('misCarreras', ['id' => session('jinete_id')]) }}">Mis carreras</a>
+                        </button>
                     @endif
                     <form method="POST" action="{{ route('admin.cerrar') }}">
                         @csrf

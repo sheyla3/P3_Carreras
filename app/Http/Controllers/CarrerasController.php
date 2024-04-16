@@ -296,7 +296,7 @@ class CarrerasController extends Controller
                 return redirect()->route('carreras')->with('ERROR', 'Lo siento, la carrera ya está completa.');
             }
         } catch (\Exception $e) {
-            return redirect()->route('carreras')->with('ERROR', 'Hubo un problema al procesar la solicitud.');
+            return redirect()->route('carreras')->with('ERROR', 'Hubo un problema al procesar la solicitud: ' . $e->getMessage());
         }
     }
 

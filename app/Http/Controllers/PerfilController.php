@@ -11,9 +11,13 @@ class PerfilController extends Controller
     public function mostrarPerfil($id)
     {
         // Encuentra al jinete por su ID
-        // $jinete = Jinete::findOrFail($id);
+        $jinete = Jinete::findOrFail($id);
         
         // Pasar los datos del jinete a la vista
-        return view('perfil', compact('jinete'));
+        if (session()->has('jinete_id') && session()->has('jinete_name')) {
+            $jineteId = session('jinete_id');
+            $jineteName = session('jinete_name');
+            return view('Enlaces.perfil', compact('jinete', 'jineteId', 'jineteName'));
+        }
     }
 }

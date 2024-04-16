@@ -362,7 +362,10 @@ class CarrerasController extends Controller
     public function FacturaPDF($subtotal, $total_quantity, $carrera_id)
     {
         $carrera = Carrera::findOrFail($carrera_id);
-        $pdf = new Dompdf();
+        $pdf = new Dompdf([
+            'isPhpEnabled' => true,
+            'isHtml5ParserEnabled' => true,
+        ]);
 
         $html = '<h1 style="text-align: center;">' . $carrera->nombre . '</h1>';
         $html .= '<p class="text-break">' . $carrera->descripcion . '</p>';
@@ -381,15 +384,23 @@ class CarrerasController extends Controller
         $html .= '<td>' . $subtotal . '€</td>';
         $html .= '</tr>';
         $html .= '</tbody></table>';
-        $html .= '<br><br><br><hl><br>';
+        $html .= '<pagebreak>';
+        $html .= '<h3 style="text-align: center;">Entradas</h3>';
+
+        // Convertir la imagen a base64 y añadirla al HTML
+        $entrada_image = file_get_contents(public_path("img/entrada.png"));
+        $entrada_base64 = 'data:image/png;base64,' . base64_encode($entrada_image);
         for ($i = 0; $i < $total_quantity; $i++) {
-            $html .= '<img src="{{ ' . asset("public/img/entrada.png") . ' }}" alt="entrada" width="180" height="130">';
+            $html .= '<img src="' . $entrada_base64 . '" alt="entrada" width="500" height="250"><br>';
+
+            // Agregar un salto de página después de cada imagen
+            if (($i + 1) % 3 == 0) {
+                $html .= '<pagebreak>';
+            }
         }
-        // Carga el HTML en Dompdf
+
         $pdf->loadHtml($html);
-        // Renderiza el PDF
         $pdf->render();
-        // Descarga el PDF
         return $pdf->stream('factura.pdf');
     }
 

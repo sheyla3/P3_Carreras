@@ -207,7 +207,7 @@
             <div class="vertical-content">
                 <p>Pago completado con éxito</p>
                 <div id="purchaseDetails"></div> <!-- Div para mostrar los detalles de la compra -->
-                <a id="invoiceLink" onclick="generateInvoiceUrl()" class="btn btn-info">Imprimir Factura</a>
+                <a id="invoiceLink" onclick="generateInvoiceUrl()" class="btn btn-info">Imprimir Factura & Entradas</a>
             </div>
         </div>
     </div>

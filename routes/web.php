@@ -9,6 +9,7 @@ use App\Http\Controllers\FotosController;
 use App\Http\Controllers\AseguradoraController;
 use App\Http\Controllers\SocioController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\PerfilController;
 
 
 /*
@@ -112,3 +113,6 @@ Route::post('/anadirFoto', [FotosController::class, 'anadirFoto'])->name('anadir
 Route::get('/verFotos/{id}', [FotosController::class, 'verFotos'])->name('verFotos');
 Route::get('/eliminarFoto/{id}', [FotosController::class, 'eliminarFoto'])->name('eliminarFoto');
 Route::get('/eliminarTodasFotos/{id}', [FotosController::class, 'eliminarTodasFotos'])->name('eliminarTodasFotos');
+
+//perfil
+Route::get('/perfil/{id}', [PerfilController::class, 'mostrarPerfil'])->name('perfil.mostrar');

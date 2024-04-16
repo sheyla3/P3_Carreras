@@ -51,7 +51,8 @@
                     <img src="{{ asset('img/menu.svg') }}" alt="menu" height="30" width="30">
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" style="background-color: #1C1C1C">
-                    <button class="dropdown-item" type="button">Perfil</button>
+                <button class="dropdown-item">Perfil</button>
+                <!-- <a href="{{ route('perfil.mostrar') }}"></a> -->
                     <button class="dropdown-item" type="button">Mis carreras</button>
                     <form method="POST" action="{{ route('admin.cerrar') }}">
                         @csrf

@@ -158,6 +158,44 @@
             });
         </script>
     @endif
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#qrModal">
+        Ver mi QR
+    </button>
+
+    
+    <div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="qrModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="qrModalLabel">Mi Código QR</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @foreach ($carreras as $carrera)
+                    <!-- Aquí tu código para mostrar la información de la carrera -->
+                
+                    <!-- Obtener información del jinete -->
+                    <?php
+                    $jinete = App\Models\Jinete::find($carrera->id_jinete);
+                    ?>
+                
+                    <!-- Verificar si se encontró el jinete -->
+                    @if ($jinete)
+                        <!-- Aquí tu código para mostrar la imagen del código QR -->
+                        <img src="{{ route('qr', ['id_carrera' => $carrera->id, 'id_jinete' => $jinete->id, 'dorsal' => $dorsal, 'fechaHora' => $fechaHora]) }}" alt="Código QR">
+                    @else
+                        <!-- Manejar el caso donde no se encuentra el jinete -->
+                        <p>No se encontró información del jinete para esta carrera.</p>
+                    @endif
+                @endforeach
+                                </div>
+            </div>
+        </div>
+    </div>
+    
 </body>
 @include('layouts.footer')
 </html>

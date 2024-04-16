@@ -64,12 +64,12 @@
             <div class="carousel-inner">
                 @foreach ($carreras->chunk(3) as $chunk)
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                        <div class="row">
+                        <div class="row justify-content-center">
                             @foreach ($chunk as $carrera)
-                                <div class="col">
-                                    <div class="lugares">
+                                <div class="col-md-4">
+                                    <div class="lugares text-center mb-6">
                                         <img src="{{ asset('storage/' . $carrera->lugar_foto) }}"
-                                            alt="Lugar de {{ $carrera->nombre }}">
+                                            alt="Lugar de {{ $carrera->nombre }}" class="img-fluid">
                                         <h3>{{ $carrera->nombre }}</h3>
                                     </div>
                                 </div>
@@ -88,6 +88,7 @@
             </a>
         </div>
     </div>
+    
 
     <script>
         $(document).ready(function() {

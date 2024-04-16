@@ -63,8 +63,8 @@ class PerfilController extends Controller
         $socio = Usuario::findOrFail($id_usuario);
         $request->validate([
             'nombre' => 'required',
-            'descripcion' => 'required',
-            'tipo' => 'required',
+            'apellido' => 'required',
+            'telf' => 'required',
             'lugar_foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'km' => 'required|integer',
             'fechaHora' => 'required',

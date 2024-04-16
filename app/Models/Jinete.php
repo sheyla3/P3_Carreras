@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $num_federat
  * @property Carbon $edad
  * @property bool $activo
+ * @property int $dorsal
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -58,6 +59,7 @@ class Jinete extends Model
 		'num_federat',
 		'edad',
 		'activo',
+		'dorsal',
 		'remember_token'
 	];
 

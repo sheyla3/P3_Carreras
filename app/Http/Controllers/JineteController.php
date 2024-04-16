@@ -23,6 +23,9 @@ class JineteController extends Controller
             'edad' => 'required',
         ]);
 
+                // Generar dorsal aleatorio del 1 al 50
+                $dorsalAleatorio = rand(1, 50);
+
         if ($request->hasFile('foto')) {
             $rutaArchivo = $request->file('foto')->store('JinetesFoto', 'public');
         }
@@ -37,6 +40,7 @@ class JineteController extends Controller
             $nuevoJinete->calle = $request->input('calle');
             $nuevoJinete->num_federat = $request->input('num_fede');
             $nuevoJinete->edad = $request->input('edad');
+            $nuevoJinete->dorsal = $dorsalAleatorio;
             $nuevoJinete->activo = true;
             $nuevoJinete->save();
 

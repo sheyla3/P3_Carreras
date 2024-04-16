@@ -55,6 +55,8 @@ Route::get('/carreras', [CarrerasController::class, 'mostrarCarrerasJinetes'])->
 Route::get('/inscribirse/{id_carrera}/{id_jinete}', [CarrerasController::class, 'inscribirse'])->name('inscribirse');
 Route::get('/desinscribirse/{id_carrera}/{id_jinete}', [CarrerasController::class, 'desinscribirse'])->name('desinscribirse');
 
+// QR
+Route::get('qr/{id_carrera}/{id_jinete}/{dorsal}/{fechaHora}', 'QRController@generarQR');
 
 
 

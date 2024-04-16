@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('calle');
             $table->string('num_federat')->unique();
             $table->date('edad');
+            $table->integer('dorsal');
             $table->boolean('activo')->default(true);
             $table->rememberToken();
             $table->timestamps();

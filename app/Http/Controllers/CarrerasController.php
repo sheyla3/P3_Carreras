@@ -383,7 +383,7 @@ class CarrerasController extends Controller
         $html .= '</tbody></table>';
         $html .= '<br><br><br><hl><br>';
         for ($i = 0; $i < $total_quantity; $i++) {
-            $html .= '<img src="{{ ' . asset("public/img/entrada.png") . ' }}" alt="entrada" width="180" height="130">';
+            $html .= '<img src="' . asset("/img/entrada.png") . '" alt="entrada" width="180" height="130">';
         }
         // Carga el HTML en Dompdf
         $pdf->loadHtml($html);

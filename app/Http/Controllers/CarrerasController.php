@@ -436,4 +436,25 @@ class CarrerasController extends Controller
         // Descarga el PDF
         return $pdf->stream('factura.pdf');
     }
+
+    public function buscarHome()
+    {
+        $fechaActual = Carbon::now()->toDateString();
+        $carreras = Carrera::get();
+        $carreras->each(function ($carrera) {
+            $carrera->esAntigua = $carrera->fechaHora < now();
+        });
+        return view('Buscadores.BuscaHome', compact('carreras'));
+    }
+    public function buscarCarreras(Request $request)
+    {
+        $nombreCarrera = $request->input('BcarreraHome');
+        $fechaActual = Carbon::now()->toDateString();
+        $carreras = Carrera::where('nombre', 'LIKE', "%$nombreCarrera%")->get();
+
+        $carreras->each(function ($carrera) {
+            $carrera->esAntigua = $carrera->fechaHora < now();
+        });
+        return view('Buscadores.BuscaHome', compact('carreras'));
+    }
 }

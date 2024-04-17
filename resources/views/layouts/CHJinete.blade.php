@@ -48,16 +48,19 @@
                 <div class="dropdown-menu dropdown-menu-right" style="background-color: #1C1C1C">
                     @if (session()->has('jinete_id') && session()->has('jinete_name'))
                         <button class="dropdown-item" type="button">
-                            <a href="{{ route('perfil.mostrar', ['id' => session('jinete_id')]) }}">Perfil</a>
+                            <a href="{{ route('perfil.mostrar', ['id' => session('jinete_id')]) }}" class="p-1">Perfil</a>
                         </button>
                         <button class="dropdown-item" type="button">
-                            <a href="{{ route('misCarreras', ['id' => session('jinete_id')]) }}">Mis carreras</a>
+                            <a href="{{ route('misCarreras', ['id' => session('jinete_id')]) }}" class="p-1">Mis carreras</a>
                         </button>
                     @endif
+                    <button class="dropdown-item" type="button">
+                        <a href="{{ route('/') }}" class="p-1">Buscar Carrera</a>
+                    </button>
                     <form method="POST" action="{{ route('admin.cerrar') }}">
                         @csrf
                         <a href="{{ route('admin.cerrar') }}"
-                            onclick="event.preventDefault(); this.closest('form').submit();">Cerrar sesión</a>
+                            onclick="event.preventDefault(); this.closest('form').submit();" class="p-1 ml-4">Cerrar sesión</a>
                     </form>
                 </div>
             </div>

@@ -43,23 +43,27 @@
                         <p>Carrera {{ $carrera->tipo }} de {{ $carrera->km }}km</p>
                     </div>
                     <div>
-                        <p class="text-break">{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}</p>
+                        <p class="text-break">{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}
+                        </p>
                     </div>
                     <div>
-                        <p>Participantes: {{ $participantesActuales[$carrera->id_carrera] }} / {{ $carrera->max_participantes }}</p>
+                        <p>Participantes: {{ $participantesActuales[$carrera->id_carrera] }} /
+                            {{ $carrera->max_participantes }}</p>
                     </div>
                 </div>
 
                 @if (isset($jineteId) && $carrera->participantes()->where('id_jinete', $jineteId)->exists())
                     <div class="clasificacion2">
-                        <a href="{{ route('desinscribirse', ['id_carrera' => $carrera->id_carrera, 'id_jinete' => $jineteId]) }}"><button>Inscrito</button></a>
+                        <a
+                            href="{{ route('desinscribirse', ['id_carrera' => $carrera->id_carrera, 'id_jinete' => $jineteId]) }}"><button>Inscrito</button></a>
                     </div>
                 @else
                     <div class="clasificacion">
-                        <a href="{{ route('inscribirse', ['id_carrera' => $carrera->id_carrera, 'id_jinete' => $jineteId]) }}"><button>Inscribirse</button></a>
+                        <a
+                            href="{{ route('inscribirse', ['id_carrera' => $carrera->id_carrera, 'id_jinete' => $jineteId]) }}"><button>Inscribirse</button></a>
                     </div>
                 @endif
-        </div>
+            </div>
         @endforeach
     </div>
     <div class="my-3">
@@ -106,30 +110,30 @@
     @endif
 
     @if (session('Desinscrito'))
-    <div class="modal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{ session('Desinscrito') }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <div class="modal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{ session('Desinscrito') }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        $(document).ready(function() {
-            $('#successModal').modal('show');
-        });
-    </script>
+        <script>
+            $(document).ready(function() {
+                $('#successModal').modal('show');
+            });
+        </script>
     @endif
 
     @if (session('ERROR'))
@@ -163,8 +167,9 @@
         Ver mi QR
     </button>
 
-    
-    <div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="qrModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="qrModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -175,27 +180,29 @@
                 </div>
                 <div class="modal-body">
                     @foreach ($carreras as $carrera)
-                    <!-- Aquí tu código para mostrar la información de la carrera -->
-                
-                    <!-- Obtener información del jinete -->
-                    <?php
-                    $jinete = App\Models\Jinete::find($carrera->id_jinete);
-                    ?>
-                
-                    <!-- Verificar si se encontró el jinete -->
-                    @if ($jinete)
-                        <!-- Aquí tu código para mostrar la imagen del código QR -->
-                        <img src="{{ route('qr', ['id_carrera' => $carrera->id, 'id_jinete' => $jinete->id, 'dorsal' => $dorsal, 'fechaHora' => $fechaHora]) }}" alt="Código QR">
-                    @else
-                        <!-- Manejar el caso donde no se encuentra el jinete -->
-                        <p>No se encontró información del jinete para esta carrera.</p>
-                    @endif
-                @endforeach
-                                </div>
+                        <!-- Aquí tu código para mostrar la información de la carrera -->
+
+                        <!-- Obtener información del jinete -->
+                        <?php
+                        $jinete = App\Models\Jinete::find($carrera->id_jinete);
+                        ?>
+
+                        <!-- Verificar si se encontró el jinete -->
+                        @if ($jinete)
+                            <!-- Aquí tu código para mostrar la imagen del código QR -->
+                            <img src="{{ route('qr', ['id_carrera' => $carrera->id, 'id_jinete' => $jinete->id, 'dorsal' => $dorsal, 'fechaHora' => $fechaHora]) }}"
+                                alt="Código QR">
+                        @else
+                            <!-- Manejar el caso donde no se encuentra el jinete -->
+                            <p>No se encontró información del jinete para esta carrera.</p>
+                        @endif
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
-    
+
 </body>
 @include('layouts.footer')
+
 </html>

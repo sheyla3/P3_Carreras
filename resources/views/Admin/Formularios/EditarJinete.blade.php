@@ -60,7 +60,7 @@ use App\Http\Controllers\JineteController;
             </div>
             <div class="mb-3">
                 <label for="edad" class="form-label">Edad:</label>
-                <input type="text" id="edad" name="edad" value="{{ $jinete->formatted_edad ?? '' }}" class="form-control">
+                <input type="date" class="form-control" id="edad" name="edad" value="{{ isset($jinete->edad) ? \Carbon\Carbon::parse($jinete->edad)->format('Y-m-d') : '' }}">
                 {!! $errors->first('edad', '<small class="text-danger">:message</small>') !!}
             </div>
             <button type="submit" class="btn btn-primary">Guardar</button>

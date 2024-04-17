@@ -62,27 +62,25 @@ class PerfilController extends Controller
     {
         $socio = Usuario::findOrFail($id_usuario);
         $request->validate([
+            'correo' => 'required',
             'nombre' => 'required',
             'apellido' => 'required',
             'telf' => 'required',
-            'lugar_foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            'km' => 'required|integer',
-            'fechaHora' => 'required',
-            'cartel' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            'precio' => 'required|integer'
+            'dni' => 'required',
+            'edad' => 'required'
         ]);
 
         try {
+            $socio->correo = $request->input('correo');
+            $socio->contrasena = $request->input('contrasena');
             $socio->nombre = $request->input('nombre');
-            $socio->descripcion = $request->input('descripcion');
-            $socio->tipo = $request->input('tipo');
-            $socio->km = $request->input('km');
-            $socio->fechaHora = $request->input('fechaHora');
-            $socio->precio = $request->input('precio');
-            $socio->activo = true;
+            $socio->apellido = $request->input('apellido');
+            $socio->telf = $request->input('telf');
+            $socio->dni = $request->input('dni');
+            $socio->edad = $request->input('edad');
             $socio->save();
 
-            return redirect()->route('editarSocio', $id_usuario);
+            return redirect()->route('editSocioPerfil', $id_usuario);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
         }

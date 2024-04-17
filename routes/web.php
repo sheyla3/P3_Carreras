@@ -49,6 +49,7 @@ Route::get('/factura/{subtotal}/{total_quantity}/{carrera_id}', [CarrerasControl
 Route::get('/record', [CarrerasController::class, 'mostrarCarrerasAntiguas'])->name('record');
 Route::get('/carreraAntigua/{id}', [CarrerasController::class, 'carreraAntigua'])->name('carreraAntigua');
 Route::get('/ClasiPDF/{id}', [CarrerasController::class, 'ImprimirClasiPDF'])->name('ClasiPDF');
+//Route::get('/buscarPorNombre', [CarrerasController::class, 'buscar'])->name('buscarPorNombre');
 
 //CARRERAS: mostrar carreras posteriores
 Route::get('/carreras', [CarrerasController::class, 'mostrarCarrerasJinetes'])->name('carreras');

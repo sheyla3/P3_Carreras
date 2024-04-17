@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="app.css">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" /> <!-- iconos -->
     <style>
         .perfil-item {
             width: 48%; /* El 48% para dejar un pequeño espacio entre las dos columnas */
@@ -38,7 +38,7 @@
             <input type="email" class="form-control" id="correo" name="correo" value="{{ $socio->correo ?? '' }}">
         </div>
         <div class="form-group">
-            <label for="contrasena">Nueva contraseña:</label>
+            <label for="contrasena">Contraseña:</label>
             <div class="input-group">
                 <input type="password" class="form-control" id="contrasena" name="contrasena">
                 <div class="input-group-append">

@@ -32,7 +32,10 @@ Route::get('/peliculas/{titulo}', function ($titulo) {
 
 // INICIO
 Route::get('/', [CarrerasController::class, 'index2'])->name('/');
-
+Route::get('/buscarHome', [CarrerasController::class, 'buscarHome'])->name('buscarHome');
+Route::post('/buscarCarreras', [CarrerasController::class, 'buscarCarreras'])->name('buscarCarreras');
+Route::get('/buscarJinete', [CarrerasController::class, 'buscarJinete'])->name('buscarJinete');
+Route::post('/buscarCarrerasJ', [CarrerasController::class, 'buscarCarrerasJ'])->name('buscarCarrerasJ');
 
 // USUARIOS: Socios / Jinetes
 Route::post('/loginJinete', [JineteController::class, 'loginJinete'])->name('loginJinete');

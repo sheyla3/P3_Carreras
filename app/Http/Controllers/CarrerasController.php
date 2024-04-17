@@ -436,4 +436,68 @@ class CarrerasController extends Controller
         // Descarga el PDF
         return $pdf->stream('factura.pdf');
     }
+
+    public function buscarHome()
+    {
+        $fechaActual = Carbon::now()->toDateString();
+        $carreras = Carrera::get();
+        $carreras->each(function ($carrera) {
+            $carrera->esAntigua = $carrera->fechaHora < now();
+        });
+        if (session()->has('socio_id') && session()->has('socio_name')) {
+            $socioId = session('socio_id');
+            $socioName = session('socio_name');
+            return view('Buscadores.BuscaHome', compact('carreras', 'socioId', 'socioName'));
+        }  else {
+            return view('Buscadores.BuscaHome', compact('carreras'));
+        }
+    }
+
+    public function buscarJinete()
+    {
+        $fechaActual = Carbon::now()->toDateString();
+        $carreras = Carrera::get();
+        $carreras->each(function ($carrera) {
+            $carrera->esAntigua = $carrera->fechaHora < now();
+        });
+        if (session()->has('jinete_id') && session()->has('jinete_name')) {
+            $jineteId = session('jinete_id');
+            $jineteName = session('jinete_name');
+            return view('Buscadores.BuscaJinete', compact('carreras', 'jineteId', 'jineteName'));
+        }
+    }
+
+    public function buscarCarreras(Request $request)
+    {
+        $nombreCarrera = $request->input('BcarreraHome');
+        $fechaActual = Carbon::now()->toDateString();
+        $carreras = Carrera::where('nombre', 'LIKE', "%$nombreCarrera%")->get();
+
+        $carreras->each(function ($carrera) {
+            $carrera->esAntigua = $carrera->fechaHora < now();
+        });
+        if (session()->has('socio_id') && session()->has('socio_name')) {
+            $socioId = session('socio_id');
+            $socioName = session('socio_name');
+            return view('Buscadores.BuscaHome', compact('carreras', 'socioId', 'socioName'));
+        }  else {
+            return view('Buscadores.BuscaHome', compact('carreras'));
+        }
+    }
+
+    public function buscarCarrerasJ(Request $request)
+    {
+        $nombreCarrera = $request->input('BcarreraHome');
+        $fechaActual = Carbon::now()->toDateString();
+        $carreras = Carrera::where('nombre', 'LIKE', "%$nombreCarrera%")->get();
+
+        $carreras->each(function ($carrera) {
+            $carrera->esAntigua = $carrera->fechaHora < now();
+        });
+        if (session()->has('jinete_id') && session()->has('jinete_name')) {
+            $jineteId = session('jinete_id');
+            $jineteName = session('jinete_name');
+            return view('Buscadores.BuscaJinete', compact('carreras', 'jineteId', 'jineteName'));
+        }
+    }
 }

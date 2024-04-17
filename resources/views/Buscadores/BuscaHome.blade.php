@@ -10,159 +10,6 @@
     <link rel="stylesheet" href="app.css">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=AUZKr_7whtWWgrCWVv9uufg_7qoUhlutwgnkv2P-xjtl6FM3g0WGZG_7bMO_hVoRxsR5Bjr9_XcOhXhM&currency=EUR">
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        .vertical-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #paymentSuccessModal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 50%;
-            top: 60%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            border: 1px solid #ccc;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            max-width: 400px;
-            z-index: 999;
-        }
-
-        #paymentSuccessModal p {
-            font-size: 18px;
-        }
-
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        /* Estilos para el modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .modal-content-3 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content-2 {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            display: flex;
-            /* Establecer la visualización en modo flex */
-        }
-
-        .left-section {
-            background: white;
-            flex: 1;
-            /* Hacer que la sección izquierda ocupe el 50% del ancho */
-            padding-right: 20px;
-            box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
-        }
-
-        .right-section {
-            flex: 1;
-            /* Hacer que la sección derecha ocupe el 50% del ancho */
-            padding-left: 20px;
-        }
-
-        /* Estilos para el botón de cerrar */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .piece {
-            width: 150px;
-            height: 150px;
-            cursor: pointer;
-            margin-left: 6px;
-            margin-top: 6px;
-            position: absolute;
-            background-color: red;
-            background-size: cover;
-        }
-
-        .drop-zone {
-            width: 150px;
-            height: 150px;
-            padding: 5px;
-            border: 1px dashed #000;
-            position: absolute;
-        }
-
-        .row1 {
-            top: 0;
-        }
-
-        .row2 {
-            top: 155px;
-        }
-
-        .row3 {
-            top: 310px;
-        }
-
-        .col1 {
-            left: 0;
-        }
-
-        .col2 {
-            left: 155px;
-        }
-
-        .col3 {
-            left: 310px;
-
-        }
-
-        .container-drak-and-drop {
-            position: absolute;
-            top: 25%;
-            left: 30%;
-            width: 700px;
-            height: 500px;
-            border: 5px black;
-            background: rgb(255, 255, 255);
-            box-shadow: 10px 5px 10px rgb(0 0 0 / 25%);
-
-        }
-    </style>
 </head>
 
 <body>
@@ -174,17 +21,22 @@
         @include('layouts.CaballoHeader')
     @endif
     <div class="enlacesHeader">
-        <h1 class="float-left tituloHeader2">Tickets</h1>
+        <h1 class="float-left tituloHeader2">Buscar</h1>
         @include('layouts.2Header')
+    </div>
+    <div class="buscador">
+        <form method="POST" action="{{ route('buscarCarreras') }}">
+            @csrf
+            <input type="search" name="BcarreraHome" id="">
+        </form>
     </div>
     <div class="contenedor-tickets">
         @foreach ($carreras as $carrera)
             <div class="carrera">
                 <div class="carrera-img">
-                    <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" width="378px" height="342px"
+                    <img src="{{ asset('storage/' . $carrera->cartel) }}" width="378px" height="342px"
                         alt="{{ $carrera->nombre }}">
                 </div>
-
                 <div class="datos">
                     <div id="datos-title">
                         <h2 class="text-break">{{ $carrera->nombre }}</h2>
@@ -200,34 +52,20 @@
                         <h3 class="text-break">{{ $carrera->precio }} €</h3>
                     </div>
                 </div>
-
-                <div class="jinetes">
-                    <a href="{{ route('listaJinetes', $carrera->id_carrera) }}">Jinetes</a>
-                </div>
-
-                <div class="clasificacion">
-                    <button class="buy-btn" data-title="{{ $carrera->nombre }}"
-                        data-description="{{ $carrera->descripcion }}" data-id="{{ $carrera->id_carrera }}"
-                        data-price="{{ $carrera->precio }}">Comprar</button>
-                </div>
+                @if ($carrera->esAntigua)
+                    <div class="clasificacion">
+                        <a href="{{ route('carreraAntigua', $carrera->id_carrera) }}"><button>Ver
+                                clasificacion</button></a>
+                    </div>
+                @else
+                    <div class="clasificacion">
+                        <button class="buy-btn" data-title="{{ $carrera->nombre }}"
+                            data-description="{{ $carrera->descripcion }}" data-id="{{ $carrera->id }}"
+                            data-price="{{ $carrera->precio }}">Comprar</button>
+                    </div>
+                @endif
             </div>
         @endforeach
-    </div>
-    <div class="my-3">
-        <nav aria-label="Page navigation" class="paginacion text-dark">
-            <ul class="pagination justify-content-center pagination-sm">
-                @if ($carreras->lastPage() > 1)
-                    @for ($i = 1; $i <= $carreras->lastPage(); $i++)
-                        <li class="page-item {{ $carreras->currentPage() == $i ? 'active' : '' }}">
-                            <a class="page-link" href="{{ $carreras->url($i) }}">{{ $i }}</a>
-                        </li>
-                    @endfor
-                @endif
-            </ul>
-        </nav>
-        <div class="text-center">
-            {{ $carreras->firstItem() }} / {{ $carreras->lastItem() }} de {{ $carreras->total() }} carreras
-        </div>
     </div>
     <div id="myModal" class="modal" onclick="closeDetailsModal(event)">
         <div class="modal-content-2">

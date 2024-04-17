@@ -88,7 +88,6 @@
             </a>
         </div>
     </div>
-    
 
     <script>
         $(document).ready(function() {
@@ -138,7 +137,8 @@
                 <section class="sponsors-home slider">
                     @foreach ($sponsorsDestacados as $sponsor)
                         <div class="slide">
-                            <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="{{ $sponsor->nombre }}" height="100" class="px-2 w-100">
+                            <img src="{{ asset('storage/' . $sponsor->logo) }}" alt="{{ $sponsor->nombre }}"
+                                height="100" class="px-2 w-100">
                         </div>
                     @endforeach
                 </section>

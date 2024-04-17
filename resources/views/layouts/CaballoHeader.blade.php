@@ -92,6 +92,7 @@
         <div class="right-links">
             <a href="#" class="btn p-0 mr-4" id="loginBtn">Socio</a>
             <a href="#" class="btn p-0 mr-3" id="JineteBtn">Jinete</a>
+            <a href="{{ route('buscarHome') }}" class="p-0 mr-3"><img src="{{ asset('img/lupa-blanca.svg') }}" alt="buscar" width="20" height="20"></a>
         </div>
     </nav>
 

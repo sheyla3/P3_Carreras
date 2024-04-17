@@ -43,10 +43,12 @@
                         <p>Carrera {{ $carrera->tipo }} de {{ $carrera->km }}km</p>
                     </div>
                     <div>
-                        <p class="text-break">{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}</p>
+                        <p class="text-break">{{ \Carbon\Carbon::parse($carrera->fechaHora)->format('d-m-Y - H:i') }}
+                        </p>
                     </div>
                     <div>
-                        <p>Participantes: {{ $participantesActuales[$carrera->id_carrera] }} / {{ $carrera->max_participantes }}</p>
+                        <p>Participantes: {{ $participantesActuales[$carrera->id_carrera] }} /
+                            {{ $carrera->max_participantes }}</p>
                     </div>
                 </div>
 
@@ -108,30 +110,30 @@
     @endif
 
     @if (session('Desinscrito'))
-    <div class="modal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{ session('Desinscrito') }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <div class="modal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{ session('Desinscrito') }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        $(document).ready(function() {
-            $('#successModal').modal('show');
-        });
-    </script>
+        <script>
+            $(document).ready(function() {
+                $('#successModal').modal('show');
+            });
+        </script>
     @endif
 
     @if (session('ERROR'))
@@ -196,4 +198,5 @@
 </script>
 </body>
 @include('layouts.footer')
+
 </html>

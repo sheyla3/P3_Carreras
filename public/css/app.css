@@ -699,6 +699,11 @@ section .social-container a {
     right: 0;
 }
 
+.navbar bg-body-tertiary .container-fluid {
+    display: flex;
+    justify-content: center;
+}
+
 
 .Maestro-2 {
     display: flex;

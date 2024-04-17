@@ -55,7 +55,7 @@
                         </button>
                     @endif
                     <button class="dropdown-item" type="button">
-                        <a href="{{ route('/') }}" class="p-1">Buscar Carrera</a>
+                        <a href="{{ route('buscarJinete') }}" class="p-1">Buscar Carrera</a>
                     </button>
                     <form method="POST" action="{{ route('admin.cerrar') }}">
                         @csrf

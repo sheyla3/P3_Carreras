@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use PHPUnit\Framework\TestCase;
 use App\Models\Carrera;
 use App\Models\Sponsor;
 use App\Models\Participante;
@@ -46,7 +46,6 @@ class CarrerasController extends Controller
 
     public function mostrarCarrerasClientes()
     {
-        $fechaActual = Carbon::now()->toDateString();
         $carreras = Carrera::carrerasPostPag();
 
         if (session()->has('socio_id') && session()->has('socio_name')) {
@@ -216,7 +215,6 @@ class CarrerasController extends Controller
 
     public function mostrarCarrerasAntiguas()
     {
-        $fechaActual = Carbon::now()->toDateString();
         $carreras = Carrera::carrerasAntiguasPag();
 
         if (session()->has('socio_id') && session()->has('socio_name')) {
@@ -254,7 +252,6 @@ class CarrerasController extends Controller
 
     public function mostrarCarrerasJinetes()
     {
-        $fechaActual = Carbon::now()->toDateString();
         $carreras = Carrera::carrerasPostPag();
 
         if (session()->has('jinete_id') && session()->has('jinete_name')) {
@@ -338,15 +335,16 @@ class CarrerasController extends Controller
         $html .= 'thead { background-color: #423333; color: white; }';
         $html .= '</style>';
         $html .= '<table>';
-        $html .= '<thead><tr><th>Puesto</th><th>Nombre</th><th>Apellido</th><th>Tiempo</th></tr></thead>';
+        $html .= '<thead><tr><th>Puesto</th><th>Participante</th><th>Dorsal</th><th>Tiempo</th><th>Puntos</th></tr></thead>';
         $html .= '<tbody>';
         $contador = 1;
         foreach ($participantes as $participante) {
             $html .= '<tr>';
             $html .= '<td>' . $contador . '</td>';
-            $html .= '<td>' . $participante->jinete->nombre . '</td>';
-            $html .= '<td>' . $participante->jinete->apellido . '</td>';
+            $html .= '<td>' . $participante->jinete->nombre .' '. $participante->jinete->apellido . '</td>';
+            $html .= '<td>' . $participante->dorsal . '</td>';
             $html .= '<td>' . Carbon::parse($participante->tiempo)->format('H:i:s') . '</td>';
+            $html .= '<td>' . $participante->puntos . '</td>';
             $html .= '</tr>';
             $contador++;
         }
@@ -406,7 +404,7 @@ class CarrerasController extends Controller
 
     public function FacturaSponsorCarrera($id)
     {
-        $fechaActual = Carbon::now()->toDateString();
+        $fechaActual = Carbon::now()->format('d-m-Y');
         $sponsorCarrera = SponsorCarrera::findOrFail($id);
         $sponsor = Sponsor::findOrFail($sponsorCarrera->id_sponsor);
         $carrera = Carrera::findOrFail($sponsorCarrera->id_carrera);
@@ -439,7 +437,6 @@ class CarrerasController extends Controller
 
     public function buscarHome()
     {
-        $fechaActual = Carbon::now()->toDateString();
         $carreras = Carrera::get();
         $carreras->each(function ($carrera) {
             $carrera->esAntigua = $carrera->fechaHora < now();
@@ -455,7 +452,6 @@ class CarrerasController extends Controller
 
     public function buscarJinete()
     {
-        $fechaActual = Carbon::now()->toDateString();
         $carreras = Carrera::get();
         $carreras->each(function ($carrera) {
             $carrera->esAntigua = $carrera->fechaHora < now();
@@ -488,7 +484,6 @@ class CarrerasController extends Controller
     public function buscarCarrerasJ(Request $request)
     {
         $nombreCarrera = $request->input('BcarreraHome');
-        $fechaActual = Carbon::now()->toDateString();
         $carreras = Carrera::where('nombre', 'LIKE', "%$nombreCarrera%")->get();
 
         $carreras->each(function ($carrera) {

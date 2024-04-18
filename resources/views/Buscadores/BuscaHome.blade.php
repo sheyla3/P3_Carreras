@@ -21,13 +21,13 @@
         @include('layouts.CaballoHeader')
     @endif
     <div class="enlacesHeader">
-        <h1 class="float-left tituloHeader2">Buscar</h1>
+        <h1 class="float-left tituloHeader2">Carreras</h1>
         @include('layouts.2Header')
     </div>
-    <div class="buscador">
-        <form method="POST" action="{{ route('buscarCarreras') }}">
+    <div class="buscador w-100">
+        <form method="POST" action="{{ route('buscarCarreras') }}" class="w-100">
             @csrf
-            <input type="search" name="BcarreraHome" id="">
+            <input type="search" name="BcarreraHome" class="w-75 p-1 input-bucar" placeholder="Carrera...">
         </form>
     </div>
     <div class="contenedor-tickets">

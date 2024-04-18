@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('num_federat')->unique();
             $table->date('edad');
             $table->integer('dorsal');
+            $table->integer('puntos')->nullable();
             $table->boolean('activo')->default(true);
             $table->rememberToken();
             $table->timestamps();

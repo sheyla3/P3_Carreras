@@ -10,51 +10,6 @@
     <link rel="stylesheet" href="app.css">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    <style>
-        .foto-flecha {
-            width: 100px;
-        }
-
-        #slider {
-            margin: 0 auto;
-            width: 800px;
-            height: 500px;
-            overflow: hidden;
-            background-color: black;
-        }
-
-        #slider img {
-            margin: 0 auto;
-            -moz-transition: opacity 2s;
-            -webkit-transition: opacity 2s;
-            transition: opacity 2s;
-            width: 800px;
-            height: 500px;
-            position: absolute;
-            opacity: 0;
-        }
-
-        #slider img:nth-child(1) {
-            opacity: 1;
-        }
-
-        table {
-            margin: 0 auto;
-            width: 800px;
-            height: auto;
-            overflow: hidden;
-            background-color: white;
-            border: 0;
-        }
-
-        #izquierda {
-            text-align: right;
-        }
-
-        #derecha {
-            text-align: left;
-        }
-    </style>
 </head>
 
 <body>

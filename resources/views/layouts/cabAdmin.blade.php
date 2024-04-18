@@ -19,7 +19,7 @@
     <nav class="navbar bg-body-tertiary" id="navbar">
         <div class="container-fluid">
             <img src="{{ asset('img/logoCaballo.png') }}" alt="caballo" id="caballoAdmin">
-            <div class="float-right">
+            <div class="float-right" tabindex="1">
                 <form method="POST" action="{{ route('admin.cerrar') }}">
                     @csrf
                     <a href="{{ route('admin.cerrar') }}"
@@ -30,18 +30,18 @@
     </nav>
 
     <nav class="navbar bg-body-tertiary" id="navbar2">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('AdminCarreras') }}">Carreras</a>
-            <a class="navbar-brand" href="{{ route('adminSponsors') }}">Sponsors</a>
-            <a class="navbar-brand" href="{{ route('adminAseguradoras') }}">Aseguradoras</a>
+        <div class="container-fluid" tabindex="2">
+            <a class="navbar-brand" href="{{ route('AdminCarreras') }}" tabindex="3">Carreras</a>
+            <a class="navbar-brand" href="{{ route('adminSponsors') }}" tabindex="4">Sponsors</a>
+            <a class="navbar-brand" href="{{ route('adminAseguradoras') }}" tabindex="5">Aseguradoras</a>
         </div>
     </nav>
 
     <nav class="navbar bg-body-tertiary" id="navbar3">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('adminJinetes') }}">Jinetes</a>
-            <a class="navbar-brand" href="{{ route('adminSocio') }}">Socios</a>
-            <a class="navbar-brand" href="{{ route('adminFotos') }}">Fotos</a>
+        <div class="container-fluid"tabindex="6">
+            <a class="navbar-brand" href="{{ route('adminJinetes') }}" tabindex="7">Jinetes</a>
+            <a class="navbar-brand" href="{{ route('adminSocio') }}" tabindex="8">Socios</a>
+            <a class="navbar-brand" href="{{ route('adminFotos') }}" tabindex="9">Fotos</a>
         </div>
     </nav>
     <!-- Bootstrap JS -->

@@ -1040,6 +1040,30 @@ li a {
     .ImgAdmin {
         height: 40em;
     }
+
+    .Maestro-1 {
+        display: block !important;
+        width: 100%;
+    }
+
+    .container-1 {
+        margin-left: 0;
+        display: block;
+    }
+
+    .container-1 img {
+        width: auto;
+        height: 280px;
+    }
+
+    .container-2 {
+        display: block;
+        width: 340px;
+        margin-left: 20px;
+        height: auto;
+        box-shadow: none;
+        flex-direction: row; 
+    }
 }
 
 /* DISEÑO RESPONSIVE ENTRE MEDIO */

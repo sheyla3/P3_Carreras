@@ -23,77 +23,83 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <style>
-.Maestro-2 .slider-container {
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    display: flex; /* Añadir display flex para centrar los slides */
-    justify-content: center; /* Centrar los slides horizontalmente */
-}
-.Maestro-2 .slider {
-    display: flex;
-    transition: transform 0.5s ease;
-}
+    .Maestro-2 .slider-container {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        display: flex;
+        /* Añadir display flex para centrar los slides */
+        justify-content: center;
+        /* Centrar los slides horizontalmente */
+    }
 
-.Maestro-2 .slide {
-    margin-top: 10px;
-    margin-left: 5%;
-    flex: 0% 0 100%; /* Cada slide ocupa el 100% del contenedor */
-    display: flex;
-}
+    .Maestro-2 .slider {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
 
-.Maestro-2 .carrera {
-    flex: 0 0 30%; /* Cada carrera ocupa 1/4 del ancho del slide */
-    max-width: 30%;
-    padding: 0 0;
-    box-sizing: border-box;
-    position: relative; /* Añadir posición relativa */
-}
+    .Maestro-2 .slide {
+        margin-top: 10px;
+        margin-left: 5%;
+        flex: 0% 0 100%;
+        /* Cada slide ocupa el 100% del contenedor */
+        display: flex;
+    }
 
-.Maestro-2 .carrera img {
-    width: 100%; /* Ajustar el ancho de la imagen al 100% */
-    height: auto; /* Mantener la proporción */
-}
+    .Maestro-2 .carrera {
+        flex: 0 0 30%;
+        /* Cada carrera ocupa 1/4 del ancho del slide */
+        max-width: 30%;
+        padding: 0 0;
+        box-sizing: border-box;
+        position: relative;
+        /* Añadir posición relativa */
+    }
 
-.Maestro-2 .carrera h3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    width: 100%;
-    height: 400px;
-    bottom: 0px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin: 0;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 5px;
-}
-.Maestro-2 .prev-btn,
-.Maestro-2 .next-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.5);
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1;
-}
+    .Maestro-2 .carrera img {
+        width: 100%;
+        /* Ajustar el ancho de la imagen al 100% */
+        height: auto;
+        /* Mantener la proporción */
+    }
 
-.Maestro-2 .prev-btn {
-    left: 0;
-}
+    .Maestro-2 .carrera h3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        height: 400px;
+        bottom: 0px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin: 0;
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 5px;
+    }
 
-.Maestro-2 .next-btn {
-    right: 0;
-}
+    .Maestro-2 .prev-btn,
+    .Maestro-2 .next-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.5);
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 1;
+    }
 
+    .Maestro-2 .prev-btn {
+        left: 0;
+    }
+
+    .Maestro-2 .next-btn {
+        right: 0;
+    }
 </style>
-
-
 <body>
     @if (isset($socioId) && isset($socioName))
         @include('layouts.CHSocio')
@@ -110,7 +116,7 @@
     </style>
     <div class="Maestro-1 d-flex justify-content-center">
         <div class="container-1">
-            <img src="{{ asset('img/horseblack.png') }}" alt="">
+            <img src="{{ asset('img/horseblack.png') }}" alt="caballo">
         </div>
         <div class="container-2">
             <h1>¡Caballos en acción! ¡Compra ya!</h1>
@@ -137,7 +143,8 @@
                     <div class="slide">
                         @foreach ($chunk as $carrera)
                             <div class="carrera">
-                                <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" alt="Lugar de {{ $carrera->nombre }}" class="img-fluid">
+                                <img src="{{ asset('storage/' . $carrera->lugar_foto) }}"
+                                    alt="Lugar de {{ $carrera->nombre }}" class="img-fluid">
                                 <h3>{{ $carrera->nombre }}</h3>
                             </div>
                         @endforeach
@@ -148,7 +155,7 @@
             <button class="next-btn">&#10095;</button>
         </div>
     </div>
-    
+
     <script>
         $(document).ready(function() {
             $('#carouselExampleInterval').slick({
@@ -265,25 +272,24 @@
     // MAestro 2
 
     $(document).ready(function() {
-    var slider = $(".Maestro-2 .slider");
-    var sliderWidth = $(".Maestro-2 .slider").width();
-    var slideIndex = 0;
+        var slider = $(".Maestro-2 .slider");
+        var sliderWidth = $(".Maestro-2 .slider").width();
+        var slideIndex = 0;
 
-    $(".Maestro-2 .prev-btn").click(function() {
-        if (slideIndex > 0) {
-            slideIndex--;
-            slider.css("transform", "translateX(-" + (slideIndex * sliderWidth) + "px)");
-        }
+        $(".Maestro-2 .prev-btn").click(function() {
+            if (slideIndex > 0) {
+                slideIndex--;
+                slider.css("transform", "translateX(-" + (slideIndex * sliderWidth) + "px)");
+            }
+        });
+
+        $(".Maestro-2 .next-btn").click(function() {
+            if (slideIndex < $(".Maestro-2 .slide").length - 1) {
+                slideIndex++;
+                slider.css("transform", "translateX(-" + (slideIndex * sliderWidth) + "px)");
+            }
+        });
     });
-
-    $(".Maestro-2 .next-btn").click(function() {
-        if (slideIndex < $(".Maestro-2 .slide").length - 1) {
-            slideIndex++;
-            slider.css("transform", "translateX(-" + (slideIndex * sliderWidth) + "px)");
-        }
-    });
-});
-
 </script>
 
 </html>

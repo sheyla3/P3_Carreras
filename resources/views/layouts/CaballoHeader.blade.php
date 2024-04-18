@@ -86,13 +86,13 @@
 
 <body>
     <nav class="navbar bg-body-tertiary p-0" id="navbar">
-        <div class="p-0">
+        <div class="p-0" tabindex="1">
             <a href="{{ route('/') }}"><img src="{{ asset('img/logoCaballo.png') }}" alt="Caballo"></a>
         </div>
-        <div class="right-links">
-            <a href="#" class="btn p-0 mr-4" id="loginBtn">Socio</a>
-            <a href="#" class="btn p-0 mr-3" id="JineteBtn">Jinete</a>
-            <a href="{{ route('buscarHome') }}" class="p-0 mr-3"><img src="{{ asset('img/lupa-blanca.svg') }}" alt="buscar" width="20" height="20"></a>
+        <div class="right-links" tabindex="2">
+            <a href="#" class="btn p-0 mr-4" id="loginBtn" tabindex="3">Socio</a>
+            <a href="#" class="btn p-0 mr-3" id="JineteBtn" tabindex="4">Jinete</a>
+            <a href="{{ route('buscarHome') }}" class="p-0 mr-3" tabindex="5"><img src="{{ asset('img/lupa-blanca.svg') }}" alt="buscar" width="20" height="20"></a>
         </div>
     </nav>
 
@@ -104,18 +104,18 @@
                     <h1>¡Quiero Ser Socio!</h1>
                     <div id="step1">
                         <input type="text" placeholder="Nombre" name="nombre" pattern="^[a-zA-Z]+$" required
-                            title="El nombre no puede contener espacios ni caracteres especiales" />
+                            title="El nombre no puede contener espacios ni caracteres especiales" tabindex="6"/>
                         <input type="text" placeholder="Apellido" name="apellido" pattern="^[a-zA-Z]+$" required
-                            title="El apellido no puede contener espacios ni caracteres especiales" />
+                            title="El apellido no puede contener espacios ni caracteres especiales" tabindex="7"/>
                         <input type="tel" placeholder="Teléfono" name="telf" pattern="^\d{9}$" required
-                            title="El teléfono debe tener 9 dígitos" />
-                        <button type="button" id="nextStep1">siguiente</button>
+                            title="El teléfono debe tener 9 dígitos" tabindex="8"/>
+                        <button type="button" id="nextStep1" tabindex="9">siguiente</button>
                     </div>
                     <div id="step2" style="display: none;">
                         <input type="text" placeholder="DNI" name="dni" pattern="^\d{8}[A-Za-z]$" required
-                            title="Formato de DNI incorrecto" />
+                            title="Formato de DNI incorrecto" tabindex="10"/>
                         <input type="date" placeholder="Fecha de Nacimiento" name="edad" id="edad" required
-                            max="{{ date('Y-m-d') }}" title="La fecha de nacimiento no puede ser posterior a hoy" />
+                            max="{{ date('Y-m-d') }}" title="La fecha de nacimiento no puede ser posterior a hoy" tabindex="11"/>
                         <script>
                             function validarFecha() {
                                 var fechaNacimiento = document.getElementById("edad").value;
@@ -128,18 +128,18 @@
                                 return true;
                             }
                         </script>
-                        <button type="button" id="prevStep2">anterior</button>
-                        <button type="button" id="nextStep2">siguiente</button>
+                        <button type="button" id="prevStep2" tabindex="12">anterior</button>
+                        <button type="button" id="nextStep2" tabindex="13">siguiente</button>
                     </div>
                     <div id="step3" style="display: none;">
                         <input type="email" placeholder="Correo" name="correo" pattern="^\S+@\S+\.\S+$" required
-                            title="Formato de correo electrónico incorrecto" />
+                            title="Formato de correo electrónico incorrecto" tabindex="14"/>
                         <input type="password" placeholder="Contraseña" name="contrasena" required
-                            title="La contraseña no puede estar vacía" />
+                            title="La contraseña no puede estar vacía" tabindex="15"/>
                         <input type="password" placeholder="Confirmar Contraseña" name="contrasena_confirmacion"
-                            required title="La contraseña de confirmación no puede estar vacía" />
-                        <button type="button" id="prevStep3">anterior</button>
-                        <button type="submit">Registrar</button>
+                            required title="La contraseña de confirmación no puede estar vacía" tabindex="16"/>
+                        <button type="button" id="prevStep3" tabindex="17">anterior</button>
+                        <button type="submit" tabindex="18">Registrar</button>
                     </div>
                 </form>
             </div>
@@ -147,10 +147,10 @@
                 <form action="{{ route('loginUser') }}" method="POST">
                     @csrf
                     <h1>Iniciar Sesion</h1>
-                    <input type="email" name="correo" placeholder="Correo" required />
-                    <input type="password" name="password" placeholder="Contraseña" required />
-                    <a href="#">Has olvidado tu contraseña?</a>
-                    <button type="submit">Entrar</button>
+                    <input type="email" name="correo" placeholder="Correo" tabindex="19" required />
+                    <input type="password" name="password" placeholder="Contraseña" tabindex="20" required />
+                    <a href="#" tabindex="21">Has olvidado tu contraseña?</a>
+                    <button type="submit" tabindex="22">Entrar</button>
                 </form>
             </div>
             <div class="overlay-container">
@@ -158,12 +158,12 @@
                     <div class="overlay-panel overlay-left">
                         <h1>Bienvenido de vuelta socio!</h1>
                         <p>Conectate y visualiza todas las novedades.</p>
-                        <button class="ghost" id="signIn">Entrar</button>
+                        <button class="ghost" id="signIn" tabindex="23">Entrar</button>
                     </div>
                     <div class="overlay-panel overlay-right">
                         <h1>Hola Futuro Socio!</h1>
                         <p>Registrate para ver las mejores carreras de caballos!</p>
-                        <button class="ghost" id="signUp">Registrarme</button>
+                        <button class="ghost" id="signUp" tabindex="24">Registrarme</button>
                     </div>
                 </div>
             </div>

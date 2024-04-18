@@ -10,24 +10,6 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
-    <style>
-        .header-slider-container {
-            position: relative;
-            width: 100%;
-            z-index: -1;
-            height: auto;
-            padding-top: 24px;
-        }
-
-        #carouselExampleIndicators {
-            width: 100%;
-        }
-
-        .header-container {
-            position: absolute;
-            width: 100%;
-        }
-    </style>
 </head>
 
 <body>

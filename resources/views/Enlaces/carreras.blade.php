@@ -31,7 +31,6 @@
                     <img src="{{ asset('storage/' . $carrera->lugar_foto) }}" width="378px" height="342px"
                         alt="{{ $carrera->nombre }}">
                 </div>
-
                 <div class="datos">
                     <div id="datos-title">
                         <h3>{{ $carrera->nombre }}</h3>

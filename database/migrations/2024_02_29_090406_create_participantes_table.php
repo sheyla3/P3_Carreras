@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('num_partcipante');
             $table->string('dorsal')->nullable();
             $table->string('qr')->nullable();
+            $table->integer('puntos')->nullable();
             $table->time('tiempo')->nullable();
             $table->rememberToken();
             $table->timestamps();

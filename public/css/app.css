@@ -793,6 +793,210 @@ table {
     text-align: left;
 }
 
+.input-bucar {
+    margin: 20px 12.5% !important;
+}
+
+/* CARRERA ANTIGUA */
+.foto-flecha {
+    width: 100px;
+}
+
+#slider {
+    margin: 0 auto;
+    width: 800px;
+    height: 500px;
+    overflow: hidden;
+    background-color: black;
+}
+
+#slider img {
+    margin: 0 auto;
+    -moz-transition: opacity 2s;
+    -webkit-transition: opacity 2s;
+    transition: opacity 2s;
+    width: 800px;
+    height: 500px;
+    position: absolute;
+    opacity: 0;
+}
+
+#slider img:nth-child(1) {
+    opacity: 1;
+}
+
+table {
+    margin: 0 auto;
+    width: 800px;
+    height: auto;
+    overflow: hidden;
+    background-color: white;
+    border: 0;
+}
+
+#izquierda {
+    text-align: right;
+}
+
+#derecha {
+    text-align: left;
+}
+
+/* PERFIL */
+.perfil-item-socio {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+/* CSS TICKETS */
+.vertical-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#paymentSuccessModal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 400px;
+    z-index: 999;
+}
+
+#paymentSuccessModal p {
+    font-size: 18px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content-2 {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    display: flex;
+    /* Establecer la visualización en modo flex */
+}
+
+.left-section {
+    background: white;
+    flex: 1;
+    /* Hacer que la sección izquierda ocupe el 50% del ancho */
+    padding-right: 20px;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+}
+
+.right-section {
+    flex: 1;
+    /* Hacer que la sección derecha ocupe el 50% del ancho */
+    padding-left: 20px;
+}
+
+/* Estilos para el botón de cerrar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.piece {
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    margin-left: 6px;
+    margin-top: 6px;
+    position: absolute;
+    background-color: red;
+    background-size: cover;
+}
+
+.drop-zone {
+    width: 150px;
+    height: 150px;
+    padding: 5px;
+    border: 1px dashed #000;
+    position: absolute;
+}
+
+.row1 {
+    top: 0;
+}
+
+.row2 {
+    top: 155px;
+}
+
+.row3 {
+    top: 310px;
+}
+
+.col1 {
+    left: 0;
+}
+
+.col2 {
+    left: 155px;
+}
+
+.col3 {
+    left: 310px;
+
+}
+
+.container-drak-and-drop {
+    position: absolute;
+    top: 25%;
+    left: 30%;
+    width: 700px;
+    height: 500px;
+    border: 5px black;
+    background: rgb(255, 255, 255);
+    box-shadow: 10px 5px 10px rgb(0 0 0 / 25%);
+
+}
+
 /* DISEÑO RESPONSIVE PARA MOVIL */
 @media screen and (max-width: 700px) {
     .ImgAdmin {

@@ -10,13 +10,6 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" /> <!-- iconos -->
-    <style>
-        .perfil-item {
-            width: 48%; /* El 48% para dejar un pequeño espacio entre las dos columnas */
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-    </style>
 </head>
 <body>
     @if (isset($socioId) && isset($socioName))
@@ -29,8 +22,8 @@
         <h2 class="float-left tituloHeader2">Editar {{ $socio->nombre}}</h2>
     </div>
 
-    <div class="perfil-container d-flex justify-content-center my-4">
-        <div class="perfil-item">
+    <div class="perfil-container d-flex justify-content-center my-4 w-100">
+        <div class="perfil-item-socio w-50">
             <form action="{{ route('editar.socio', $socio->id_usuario) }}" method="POST">
         @csrf
         <div class="form-group">

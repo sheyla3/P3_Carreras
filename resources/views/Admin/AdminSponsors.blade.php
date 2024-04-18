@@ -32,15 +32,14 @@ use App\Http\Controllers\sponsorController;
                 </form>
             </li>
             <li class="float-right">
-                <form>
+                <form action="{{ route('buscarSponsors') }}" method="GET">
                     @csrf
                     <div class="form-group row">
                         <button type="submit" class="btn btn-white">
                             <img src="{{ asset('img/lupa.svg') }}" alt="Buscar" width="20" height="20">
                         </button>
                         <div>
-                            <input type="text" id="buscar" name="buscar" placeholder="Buscar"
-                                class="form-control">
+                            <input type="text" id="buscar" name="buscar" placeholder="Buscar" class="form-control">
                         </div>
                     </div>
                 </form>

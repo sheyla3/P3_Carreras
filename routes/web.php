@@ -35,6 +35,11 @@ Route::get('/', [CarrerasController::class, 'index2'])->name('/');
 Route::get('/buscarHome', [CarrerasController::class, 'buscarHome'])->name('buscarHome');
 Route::post('/buscarCarreras', [CarrerasController::class, 'buscarCarreras'])->name('buscarCarreras');
 Route::get('/buscarJinete', [CarrerasController::class, 'buscarJinete'])->name('buscarJinete');
+Route::get('/buscar-jinetes', [JineteController::class, 'buscar'])->name('bJinetes');
+Route::get('/buscar-sponsors', [SponsorController::class, 'buscarSponsor'])->name('buscarSponsors');
+Route::get('/buscar-socios', [SocioController::class, 'buscarSocios'])->name('buscarSocios');
+Route::get('/buscar-fotos', [FotosController::class, 'buscarFoto'])->name('buscarFoto');
+Route::get('/buscar-aseguradoras', [AseguradoraController::class, 'buscarAseguradora'])->name('buscarAseguradora');
 Route::post('/buscarCarrerasJ', [CarrerasController::class, 'buscarCarrerasJ'])->name('buscarCarrerasJ');
 
 // USUARIOS: Socios / Jinetes
@@ -127,3 +132,6 @@ Route::get('/misCarreras/{id}', [PerfilController::class, 'misCarreras'])->name(
 Route::get('/socioPerfil/{id}', [PerfilController::class, 'socioPerfil'])->name('socioPerfil');
 Route::get('/editarSocio/{id_usuario}', [PerfilController::class, 'editarSocioVista'])->name('editarSocio');
 Route::post('/socio-editar/{id_usuario}', [PerfilController::class, 'editarSocio'])->name('editar.socio');
+
+
+// carreras buscador

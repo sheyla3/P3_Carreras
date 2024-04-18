@@ -14,6 +14,19 @@ class SocioController extends Controller
         return view('admin.adminSocio', compact('socios'));
     }
 
+    public function buscarSocios(Request $request) {
+
+        $search = $request->input('buscar');
+
+        $socios = Usuario::where('id_usuario', 'LIKE', "%$search%")
+                        ->orWhere('apellido', 'LIKE', "%$search%")
+                        ->orWhere('correo', 'LIKE', "%$search%")
+                        ->get();
+
+        return view('admin.adminSocio', compact('socios'));
+    }
+
+
     public function formularioSocio()
     {
         return view('Admin.Formularios.NuevoSocio');

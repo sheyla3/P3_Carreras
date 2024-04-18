@@ -148,8 +148,7 @@
             <button class="next-btn">&#10095;</button>
         </div>
     </div>
-
-
+    
     <script>
         $(document).ready(function() {
             $('#carouselExampleInterval').slick({

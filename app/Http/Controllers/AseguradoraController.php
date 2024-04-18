@@ -32,6 +32,18 @@ class AseguradoraController extends Controller
         }
     }
 
+    public function buscarAseguradora(Request $request) {
+        $search = $request->input('buscar');
+    
+        $aseguradoras = Aseguradora::where('nombre', 'LIKE', "%$search%")
+        ->orWhere('CIF', 'LIKE', "%$search%")
+        ->get();
+
+    
+        return view('admin.adminAseguradoras', compact('aseguradoras'));
+    }
+    
+
     public function formularioAseguradora()
     {
         if (!session()->has('admin_id') || !session()->has('admin_name')) {

@@ -14,7 +14,8 @@ use Dompdf\Dompdf;
 
 class CarrerasController extends Controller
 {
-    public function mostrarCarreras()
+    
+    public function mostrarCarreras(Request $request)
     {
         if (!session()->has('admin_id') || !session()->has('admin_name')) {
             return redirect()->route('loginAdmin')->with('ERROR', 'Debes iniciar sesión primero');
@@ -22,9 +23,19 @@ class CarrerasController extends Controller
 
         $adminId = session('admin_id');
         $adminName = session('admin_name');
-        $carreras = Carrera::all();
+        $query = $request->input('query');
+
+        if ($query) {
+            // Realizar la búsqueda en la base de datos según la consulta
+            $carreras = Carrera::where('nombre', 'like', '%' . $query . '%')->get();
+        } else {
+            // Obtener todas las carreras si no hay consulta de búsqueda
+            $carreras = Carrera::all();
+        }
+
         return view('admin.AdminCarreras', compact('carreras', 'adminId', 'adminName'));
     }
+    
 
     public function index2()
     {
@@ -484,7 +495,6 @@ class CarrerasController extends Controller
             return view('Buscadores.BuscaHome', compact('carreras'));
         }
     }
-
     public function buscarCarrerasJ(Request $request)
     {
         $nombreCarrera = $request->input('BcarreraHome');

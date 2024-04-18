@@ -161,4 +161,16 @@ class JineteController extends Controller
             return redirect()->back()->withErrors(['password' => 'La contraseña es incorrecta']);
         }
     }
+
+    public function buscar(Request $request) {
+        $search = $request->input('buscar');
+
+        $jinetes = Jinete::where('nombre', 'LIKE', "%$search%")
+                        ->orWhere('id_jinete', 'LIKE', "%$search%")
+                        // ->orWhere('correo', 'LIKE', "%$search%")
+                        ->get();
+
+        return view('admin.adminJinetes', compact('jinetes'));
+    }
+
 }

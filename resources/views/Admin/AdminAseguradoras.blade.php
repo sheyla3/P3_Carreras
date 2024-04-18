@@ -1,10 +1,3 @@
-<?php
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AseguradoraController;
-
-//<td><a href="{{ route('editar.aseguradora', $aseguradora->id_aseguradora) }}">Editar</a></td>
-
-?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -36,7 +29,7 @@ use App\Http\Controllers\AseguradoraController;
                 </form>
             </li>
             <li class="float-right">
-                <form>
+                <form action="{{ route('buscarAseguradora') }}" method="GET">
                     @csrf
                     <div class="form-group row">
                         <button type="submit" class="btn btn-white">
@@ -56,11 +49,11 @@ use App\Http\Controllers\AseguradoraController;
                 <tr>
                     <th>Id</th>
                     <th>CIF</th>
-                    <th>nombre</th>
-                    <th>calle</th>
-                    <th>precio</th>
-                    <th>activo</th>
-                    <th>Ediar</th>
+                    <th>Nombre</th>
+                    <th>Calle</th>
+                    <th>Precio</th>
+                    <th>Activo</th>
+                    <th>Editar</th>
                 </tr>
             </thead>
             <tbody>

@@ -20,18 +20,17 @@
                 <h1>Fotos</h1>
             </li>
             <li class="float-right">
-                <form>
-                    @csrf
-                    <div class="form-group row">
-                        <button type="submit" class="btn btn-white">
-                            <img src="{{ asset('img/lupa.svg') }}" alt="Buscar" width="20" height="20">
-                        </button>
-                        <div>
-                            <input type="text" id="buscar" name="buscar" placeholder="Buscar"
-                                class="form-control">
-                        </div>
+            <form action="{{ route('buscarFoto') }}" method="GET">
+                @csrf
+                <div class="form-group row">
+                    <button type="submit" class="btn btn-white">
+                        <img src="{{ asset('img/lupa.svg') }}" alt="Buscar" width="20" height="20">
+                    </button>
+                    <div>
+                        <input type="text" id="buscar" name="buscar" placeholder="Buscar por nombre de carrera" class="form-control">
                     </div>
-                </form>
+                </div>
+            </form>
             </li>
         </ul>
         <br><br>

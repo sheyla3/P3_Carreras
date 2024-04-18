@@ -73,4 +73,17 @@ class FotosController extends Controller
 
         return redirect()->route('verFotos', $id);
     }
+
+    public function buscarFoto(Request $request) {
+        $search = $request->input('buscar');
+    
+        // Buscar carreras que coincidan con el término de búsqueda
+        $carreras = Carrera::where('nombre', 'LIKE', "%$search%")->get();
+    
+        // Retornar la vista con las carreras encontradas
+        return view('admin.adminFotos', compact('carreras'));
+    }
+    
+    
+    
 }

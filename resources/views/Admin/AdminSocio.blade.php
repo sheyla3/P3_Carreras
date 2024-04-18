@@ -31,7 +31,7 @@ use App\Http\Controllers\SocioController;
                 </form>
             </li>
             <li class="float-right">
-                <form>
+                <form action="{{ route('buscarSocios') }}" method="GET">
                     @csrf
                     <div class="form-group row">
                         <button type="submit" class="btn btn-white">

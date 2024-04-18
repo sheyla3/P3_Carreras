@@ -40,6 +40,18 @@ class SponsorController extends Controller
             return redirect()->back()->withErrors(['ERROR' => 'Hubo un problema al procesar la solicitud']);
         }
     }
+
+    public function buscarSponsor(Request $request)    {
+
+        $search = $request->input('buscar');
+
+        $sponsors = Sponsor::where('nombre', 'LIKE', "%$search%")
+                        ->orWhere('CIF', 'LIKE', "%$search%")
+                        ->get();
+
+        return view('admin.adminSponsors', compact('sponsors'));
+    }
+
     public function formularioSponsor()
     {
         if (!session()->has('admin_id') || !session()->has('admin_name')) {

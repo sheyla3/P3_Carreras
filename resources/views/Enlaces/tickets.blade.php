@@ -48,7 +48,13 @@
                         </p>
                     </div>
                     <div>
-                        <h3 class="text-break">{{ $carrera->precio }} €</h3>
+                        @if (isset($socioId))
+                            <h3 class="text-break">{{ $carrera->precio * 0.95 }} €</h3>
+                        @elseif (isset($jineteId))
+                            <h3 class="text-break">{{ $carrera->precio * 0.8 }} €</h3>
+                        @else
+                            <h3 class="text-break">{{ $carrera->precio }} €</h3>
+                        @endif
                     </div>
                 </div>
 
@@ -57,9 +63,9 @@
                 </div>
 
                 <div class="clasificacion">
-                    <button class="buy-btn" data-title="{{ $carrera->nombre }}"
-                        data-description="{{ $carrera->descripcion }}" data-id="{{ $carrera->id_carrera }}"
-                        data-price="{{ $carrera->precio }}">Comprar</button>
+                <button class="buy-btn" data-title="{{ $carrera->nombre }}"
+                    data-description="{{ $carrera->descripcion }}" data-id="{{ $carrera->id_carrera }}"
+                    data-price="{{ $carrera->precio }}" onclick="showDetailsModal('{{ $carrera->nombre }}', '{{ $carrera->descripcion }}', '{{ $carrera->precio }}')">Comprar</button>
                 </div>
             </div>
         @endforeach
@@ -125,28 +131,31 @@
             modal.style.display = "block";
             document.getElementById("modal-title").innerText = title;
             document.getElementById("modal-description").innerText = description;
-            document.getElementById("modal-price").innerText = price + " €";
+
+            // Aplicar descuento según el tipo de usuario
+            var discountedPrice = calculateDiscountedPrice(price);
+            document.getElementById("modal-price").innerText = discountedPrice.toFixed(2) + " €";
             calculateTotalPrice();
-        }
+        } 
 
-        // Función para mostrar el modal de pago realizado y construir la URL de la factura PDF
-        function showPaymentSuccessModal() {
-            var detailsModal = document.getElementById("myModal");
-            detailsModal.style.display = "none";
-            var paymentModal = document.getElementById("paymentSuccessModal");
-            paymentModal.style.display = "block";
+    // Función para mostrar el modal de pago realizado y construir la URL de la factura PDF
+    function showPaymentSuccessModal() {
+        var detailsModal = document.getElementById("myModal");
+        detailsModal.style.display = "none";
+        var paymentModal = document.getElementById("paymentSuccessModal");
+        paymentModal.style.display = "block";
 
-            // Obtener los datos del modal de detalles
-            var title = document.getElementById("modal-title").innerText;
-            var description = document.getElementById("modal-description").innerText;
-            var price = document.getElementById("modal-price").innerText;
+        // Obtener los datos del modal de detalles
+        var title = document.getElementById("modal-title").innerText;
+        var description = document.getElementById("modal-description").innerText;
+        var price = document.getElementById("modal-price").innerText;
 
-            // Mostrar los detalles de la compra en el div de purchaseDetails
-            var purchaseDetailsDiv = document.getElementById("purchaseDetails");
-            purchaseDetailsDiv.innerHTML = "<p><strong>Título:</strong> " + title + "</p>" +
-                "<p><strong>Descripción:</strong> " + description + "</p>" +
-                "<p><strong>Precio:</strong> " + price + "</p>";
-        }
+        // Mostrar los detalles de la compra en el div de purchaseDetails
+        var purchaseDetailsDiv = document.getElementById("purchaseDetails");
+        purchaseDetailsDiv.innerHTML = "<p><strong>Título:</strong> " + title + "</p>" +
+            "<p><strong>Descripción:</strong> " + description + "</p>" +
+            "<p><strong>Precio:</strong> " + price + "</p>";
+    }
 
         function generateInvoiceUrl() {
             var invoiceUrl =
@@ -202,6 +211,16 @@
             PrecioTotal = totalPrice;
             cantidad = quantity;
         }
+
+        function calculateDiscountedPrice(price) {
+        if (isSocio) {
+            return price * 0.95;
+        } else if (isJinete) {
+            return price * 0.8;
+        } else {
+            return price;
+        }
+    }
 
         // Guardar datos de la carrera y factura
         var carreraId, PrecioTotal, cantidad;

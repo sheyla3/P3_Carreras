@@ -54,8 +54,6 @@
                 @if (isset($jineteId) && $carrera->participantes()->where('id_jinete', $jineteId)->exists())
     <div class="clasificacion2">
         <a href="{{ route('desinscribirse', ['id_carrera' => $carrera->id_carrera, 'id_jinete' => $jineteId]) }}"><button>Inscrito</button></a>
-        <!-- Modificar el botón QR -->
-        <button class="btn btn-secondary btn-show-qr" data-toggle="modal" data-target="#qrModal{{ $carrera->id_carrera }}" data-id-carrera="{{ $carrera->id_carrera }}">QR</button>
     </div>
 @else
     <div class="clasificacion">
@@ -161,40 +159,7 @@
             });
         </script>
     @endif
-<!-- Modal QR -->
-<div class="modal fade" id="qrModal{{ $carrera->id_carrera }}" tabindex="-1" role="dialog" aria-labelledby="qrModalLabel{{ $carrera->id_carrera }}" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="qrModalLabel{{ $carrera->id_carrera }}">Mi Código QR</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Mostrar el código QR correspondiente a la carrera -->
-                <?php
-                $jinete = App\Models\Jinete::find($carrera->id_jinete);
-                ?>
-                @if ($jinete)
-                    <img src="{{ route('qr', ['id_carrera' => $carrera->id, 'id_jinete' => $jinete->id, 'dorsal' => $dorsal, 'fechaHora' => $fechaHora]) }}" alt="Código QR">
-                @else
-                    <p>No se encontró información del jinete para esta carrera.</p>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Script para mostrar el modal QR automáticamente al hacer clic en el botón QR -->
-<script>
-    $(document).ready(function() {
-        $('.btn-show-qr').click(function() {
-            var carreraId = $(this).data('id-carrera');
-            $('#qrModal' + carreraId).modal('show');
-        }).click(); // Esta línea desencadena el clic automáticamente al cargar la página
-    });
-</script>
 </body>
 @include('layouts.footer')
 

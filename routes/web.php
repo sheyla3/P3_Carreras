@@ -65,6 +65,7 @@ Route::get('/desinscribirse/{id_carrera}/{id_jinete}', [CarrerasController::clas
 
 // QR
 Route::get('qr/{id_carrera}/{id_jinete}/{dorsal}/{fechaHora}', 'QRController@generarQR');
+Route::get('/finalizar-carrera/{id_participante}', [CarrerasController::class, 'finalizarCarrera'])->name('finalizarCarrera');
 
 
 

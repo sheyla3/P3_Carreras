@@ -42,6 +42,7 @@ class UsuarioController extends Controller
             'contrasena' => 'required',
         ]);
 
+        // Crea un nuevo usuario
         $usuario = new Usuario;
         $usuario->nombre = $request->nombre;
         $usuario->apellido = $request->apellido;
@@ -49,10 +50,11 @@ class UsuarioController extends Controller
         $usuario->dni = $request->dni;
         $usuario->edad = $request->edad;
         $usuario->correo = $request->correo;
-        $usuario->contrasena = Hash::make($request->contrasena);
+        $usuario->contrasena = Hash::make($request->id_usuario);
         $usuario->save();
 
-        Auth::login($usuario);
+        // Autentica al usuario
+        Auth::loginUsingId($usuario->correo);
 
         return redirect()->route('/');
     }

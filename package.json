@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "bootstrap": "^5.3.3",
+        "docker-compose": "^0.24.8",
         "slick-carousel": "^1.8.1"
     }
 }

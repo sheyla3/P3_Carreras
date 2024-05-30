@@ -6,11 +6,14 @@ use App\Models\Carrera;
 use App\Models\Sponsor;
 use App\Models\Participante;
 use App\Models\Foto;
+use App\Models\Jinete;
 use App\Models\SponsorCarrera;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Dompdf\Dompdf;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CarrerasController extends Controller
 {
@@ -36,7 +39,6 @@ class CarrerasController extends Controller
         return view('admin.AdminCarreras', compact('carreras', 'adminId', 'adminName'));
     }
     
-
     public function index2()
     {
         $sponsorsDestacados = Sponsor::where('destacado', true)->where('activo', true)->get();
@@ -277,26 +279,38 @@ class CarrerasController extends Controller
 
             return view('Enlaces.carreras', compact('carreras', 'participantesActuales', 'jineteId', 'jineteName'));
         } else {
-            return view('Enlaces.carreras', compact('carreras'));
+            return redirect()->route('/');
         }
     }
 
     public function inscribirse($id_carrera, $id_jinete)
     {
         $carrera = Carrera::findOrFail($id_carrera);
+        $jineteP = Jinete::findOrFail($id_jinete);
         $maxParticipantes = $carrera->max_participantes;
         $participantes_actuales = Participante::where('id_carrera', $id_carrera)->count();
 
         try {
-            if ($participantes_actuales <= $maxParticipantes) {
+            if ($participantes_actuales < $maxParticipantes) {
                 $num_participante = $participantes_actuales + 1;
 
                 $nuevo = new Participante([
                     'id_carrera' => $id_carrera,
                     'id_jinete' => $id_jinete,
                     'num_partcipante' => $num_participante,
+                    'dorsal' => $jineteP->dorsal
                 ]);
 
+                $nuevo->save();
+
+                // Generar el código QR después de guardar el participante para obtener el id_participante
+                $qrContent = route('finalizarCarrera', ['id_participante' => $nuevo->id_participante]);
+                $qrCode = QrCode::format('png')->size(300)->generate($qrContent);
+                $qrPath = 'QR/' . uniqid() . '.png';
+                Storage::put('public/' . $qrPath, $qrCode);
+
+                // Actualizar el registro con la ruta del QR
+                $nuevo->qr = $qrPath;
                 $nuevo->save();
 
                 return redirect()->route('carreras')->with('Inscrito', 'Te has inscrito exitosamente en la carrera.');
@@ -319,6 +333,20 @@ class CarrerasController extends Controller
             return redirect()->route('carreras')->with('ERROR', 'Hubo un problema al procesar la solicitud.');
         }
     }
+
+    public function finalizarCarrera($id_participante)
+    {
+        try {
+            $participante = Participante::findOrFail($id_participante);
+            $participante->tiempo = now();
+            $participante->save();
+    
+            return redirect()->route('/')->with('Tiempo', 'Tiempo registrado exitosamente.');
+        } catch (\Exception $e) {
+            return redirect()->route('/')->with('ERROR', 'Hubo un problema al registrar el tiempo: ' . $e->getMessage());
+        }
+    }
+    
 
     public function listaJinetes($id)
     {

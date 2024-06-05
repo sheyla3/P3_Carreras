@@ -27,24 +27,25 @@ RUN docker-php-ext-install zip pdo pdo_mysql
 RUN pecl install imagick && \
     docker-php-ext-enable imagick
 
-# Copia el contenido del proyecto al contenedor
-COPY . /var/www/html
-
-# Actualiza la configuración de Apache
-RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Configura permisos
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Copia el contenido del proyecto al contenedor
+COPY . /var/www/html
 
 # Establece la variable de entorno para permitir ejecutar composer como root
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Instala dependencias de PHP con Composer
-RUN composer install --optimize-autoloader --no-dev
+RUN composer install --no-scripts --no-autoloader && \
+    composer dump-autoload --optimize
+
+# Configura permisos
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Actualiza la configuración de Apache
+RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Habilita módulos de Apache necesarios
 RUN a2enmod rewrite

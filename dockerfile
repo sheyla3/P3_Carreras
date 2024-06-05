@@ -38,8 +38,8 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Instala dependencias de PHP con Composer
 WORKDIR /var/www/html
-RUN composer install --no-scripts --no-autoloader && \
-    composer dump-autoload --optimize
+#RUN composer install --no-scripts --no-autoloader && \
+#    composer dump-autoload --optimize
 
 # Copia el contenido del proyecto al contenedor
 COPY . /var/www/html

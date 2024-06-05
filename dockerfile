@@ -30,15 +30,19 @@ RUN pecl install imagick && \
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copia el contenido del proyecto al contenedor
-COPY . /var/www/html
+# Copia el archivo composer.json y composer.lock primero para caché de Docker
+COPY composer.json composer.lock /var/www/html/
 
 # Establece la variable de entorno para permitir ejecutar composer como root
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Instala dependencias de PHP con Composer
+WORKDIR /var/www/html
 RUN composer install --no-scripts --no-autoloader && \
     composer dump-autoload --optimize
+
+# Copia el contenido del proyecto al contenedor
+COPY . /var/www/html
 
 # Configura permisos
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
